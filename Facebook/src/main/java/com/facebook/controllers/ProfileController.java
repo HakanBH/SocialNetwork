@@ -15,7 +15,7 @@ import static com.facebook.controllers.MainPage.*;
 public class ProfileController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String mainController(Model model, HttpServletRequest request) {
-		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		User currentUser = (User) request.getSession().getAttribute("currentUser ");
 		
 		prepareSuggestions(model, currentUser);
 		

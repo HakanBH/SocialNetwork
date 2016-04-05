@@ -39,7 +39,7 @@ public class MainPage {
 		String userToAddId = request.getParameter("userToAdd");
 		int id = Integer.parseInt(userToAddId);
 		User userToAdd = IUserDAO.getUserDAO().getUserById(id);
-		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		User currentUser = (User) request.getSession().getAttribute("currentUser ");
 		
 		IUserDAO.getUserDAO().addFriend(currentUser, userToAdd);
 		return "redirect:/main";
