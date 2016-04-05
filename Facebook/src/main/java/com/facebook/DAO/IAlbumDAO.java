@@ -13,10 +13,12 @@ public interface IAlbumDAO {
 	void insertAlbum(Album a);
 	void deleteAlbum(int albumId);
 	
-	void addPicturesToAlbum(Album a, Set<Picture> pics);
+	void uploadImage(Picture pic, Album album);
 	void removePicture(int pictureId);
 
 	Album getAlbumById(int id);
 
+	Album getAlbum(int userId, String title);
 
+	Picture getPicById(int id);
 }

@@ -16,8 +16,9 @@ public class Album extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "owner")
 	private User owner;
-
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 		@JoinColumn(name = "album_id")
 	private Set<Picture> pictures;
 
@@ -49,5 +50,10 @@ public class Album extends BaseEntity {
 
 	public User getOwner() {
 		return owner;
+	}
+
+	@Override
+	public String toString() {
+		return "Album [title=" + title + ", owner=" + owner + ", pictures=" + pictures + "]";
 	}
 }

@@ -2,10 +2,12 @@ package com.facebook.DAO;
 
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.facebook.POJO.Album;
 import com.facebook.POJO.Picture;
+import com.facebook.POJO.User;
 
 public class AlbumDAO implements IAlbumDAO {
 
@@ -30,10 +32,10 @@ public class AlbumDAO implements IAlbumDAO {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-			
+
 			Album a = (Album) session.get(Album.class, albumId);
 			session.delete(a);
-			
+
 			session.getTransaction().commit();
 		} finally {
 			if (session != null) {
@@ -43,35 +45,35 @@ public class AlbumDAO implements IAlbumDAO {
 	}
 
 	@Override
-	public void addPicturesToAlbum(Album a, Set<Picture> pictures) {
+	public void uploadImage(Picture pic, Album album) {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-
-			for(Picture p:pictures){
-				System.out.println(p);
-				a.addPicture(p);
-			}
-			System.out.println(a);
-			session.update(a);
 			
+			album.addPicture(pic);
+			pic.setAlbum(album);
+			session.save(album);
+			
+			session.persist(pic);
+
 			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
-			if (session != null) {
-				session.close();
-			}
+			session.close();
 		}
 	}
-
+	
 	@Override
 	public void removePicture(int pictureId) {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-			
+
 			Picture pic = (Picture) session.get(Picture.class, pictureId);
-			session.delete(pic);
 			
+			session.delete(pic);
+
 			session.getTransaction().commit();
 		} finally {
 			if (session != null) {
@@ -99,6 +101,42 @@ public class AlbumDAO implements IAlbumDAO {
 		return album;
 	}
 
+	@Override
+	public Album getAlbum(int userId, String title) {
+		Session session = null;
+		Album album = null;
+		try {
+			session = SessionDispatcher.getSession();
 
+			Query query = session.createQuery("from Album where title= :albumTitle and owner = :userId");
+			query.setString("albumTitle", title);
+			query.setInteger("userId", userId);
 
+			album = (Album) query.uniqueResult();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return album;
+	}
+
+	@Override
+	public Picture getPicById(int id) {
+		Session session = null;
+		Picture pic = null;
+		try {
+			session = SessionDispatcher.getSession();
+			session.beginTransaction();
+
+			pic = (Picture) session.get(Picture.class, id);
+
+			session.getTransaction().commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return pic;
+	}
 }

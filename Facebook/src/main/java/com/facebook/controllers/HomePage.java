@@ -1,5 +1,7 @@
 package com.facebook.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,11 @@ import com.facebook.POJO.UserLogin;
 @RequestMapping(value="/index")
 public class HomePage {
 	@RequestMapping(method = RequestMethod.GET)		
-	public String getMethod(Model model) {
+	public String getMethod(Model model, HttpServletRequest request) {
+		if(request.getSession().getAttribute("currentUser") != null){
+			return "redirect:/main";
+		}
+		
 		User user = new User();
 		UserLogin userLogin = new UserLogin();
 	

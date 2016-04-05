@@ -8,14 +8,10 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Error page</title>
-<link
-	href="<c:url value="http://fonts.googleapis.com/css?family=Roboto:400,300,100,500" />"
-	rel="stylesheet">
-<link
-	href="<c:url value="https://fonts.googleapis.com/css?family=Montserrat:400,700" />"
-	rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/bootstrap.css">
+<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,100,500" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<link href="./css/bootstrap.css" rel="stylesheet">
 
 </head>
 <body>
@@ -45,8 +41,5 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="http://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
-<script src="./js/validation.js"></script>
-<script src="./js/bg-changer.js"></script>
 
 </html>

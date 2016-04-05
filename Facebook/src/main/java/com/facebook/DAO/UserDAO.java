@@ -1,11 +1,18 @@
 package com.facebook.DAO;
 
-import java.io.File; 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.io.FileDeleteStrategy;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 
+import com.facebook.POJO.Album;
 import com.facebook.POJO.Picture;
 import com.facebook.POJO.User;
 import com.facebook.POJO.UserInfo;
@@ -13,27 +20,31 @@ import com.facebook.POJO.UserInfo;
 public class UserDAO implements IUserDAO {
 	private static final String EMAIL_CHECK_QUERY = "from User U where U.email = :email";
 
+	@Override
 	public void insertUser(User user) throws Exception {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
 
-			//insert extra info column
+			// insert extra info column
 			UserInfo details = new UserInfo();
 			user.setUserInfo(details);
 			details.setUser(user);
-			
-			//encrypt password
+
+			// encrypt password
 			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 			String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
 			user.setPassword(encryptedPassword);
-			
-			//set default picture
+
+			// set default picture
+			Album a = new Album("ProfilePictures", user);
+			session.persist(a);
 			Picture pic = (Picture) session.get(Picture.class, 1);
 			user.setProfilePicture(pic);
 			session.persist(user);
-	
-			new File(User.STORAGE_PATH + File.separator + user.getEmail()).mkdirs();
+
+			new File(User.STORAGE_PATH + user.getEmail() + File.separator + a.getTitle()).mkdirs();
+				
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();
@@ -42,36 +53,110 @@ public class UserDAO implements IUserDAO {
 			session.close();
 		}
 	}
-
+	
+	@Override
 	public boolean deleteUser(int id) throws Exception {
-		Session session = SessionDispatcher.getSession();
+		Session session = null;
 		try {
+			session = SessionDispatcher.getSession();
 			session.beginTransaction();
 			User u = (User) session.get(User.class, id);
-
-			File userDir = new File(User.STORAGE_PATH + File.separator + u.getEmail() + File.separator);
-			System.out.println(userDir);
-
-			String[] entries = userDir.list();
-			for (String s : entries) {
-				System.out.println(s);
-				File currentFile = new File(userDir.getPath(), s);
-				currentFile.delete();
-			}
-			userDir.delete();
-
+			UserInfo info = (UserInfo) session.get(UserInfo.class, id);
+			session.delete(info);
 			session.delete(u);
 
 			session.getTransaction().commit();
+			
+			File userDir = new File(User.STORAGE_PATH + File.separator + u.getEmail() + File.separator);
+			
+			FileDeleteStrategy.FORCE.delete(userDir);
+			userDir.delete();
+		
 			return true;
 		} catch (Exception e) {
-			session.getTransaction().rollback();
 			throw new Exception(e);
 		} finally {
 			session.close();
 		}
 	}
+	
+	@Override
+	public void updateUserInfo(User user, UserInfo info) {
+		Session session = null;
+		try {
+			session = SessionDispatcher.getSession();
 
+			int userId = user.getId();
+			User userToUpdate = (User) session.get(User.class, userId);
+			UserInfo infoToUpdate = (UserInfo) session.get(UserInfo.class, userId);
+
+			userToUpdate.copy(user);
+			infoToUpdate.copy(info);
+
+			session.update(userToUpdate);
+			session.update(infoToUpdate);
+
+			session.beginTransaction();
+			session.getTransaction().commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	@Override
+	public List<User> getAllUsers() {
+		Session session = SessionDispatcher.getSession();
+		try {
+			session.beginTransaction();
+			
+			List<User> result = session.createCriteria(User.class).list();
+
+			session.getTransaction().commit();
+
+			return result;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
+	@Override
+	public User getUserById(int id) {
+		Session session = null;
+		User user = null;
+		try {
+			session = SessionDispatcher.getSession();
+			session.beginTransaction();
+
+			user = (User) session.get(User.class, id);
+
+			session.getTransaction().commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return user;
+	} 
+	
+	@Override
+	public boolean isEmailTaken(String email) throws Exception {
+		Session session = SessionDispatcher.getSession();
+		try {
+			Query query = session.createQuery(EMAIL_CHECK_QUERY);
+			query.setString("email", email);
+
+			return (query.uniqueResult() != null);
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			session.close();
+		}
+	}
+	
 	/**
 	 * @param email
 	 *            - a string which is the email to be searched for.
@@ -89,12 +174,12 @@ public class UserDAO implements IUserDAO {
 			Query query = session.createQuery(EMAIL_CHECK_QUERY);
 			query.setString("email", email);
 			User user = (User) query.uniqueResult();
-			
+
 			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-			
-			if(passwordEncryptor.checkPassword(pass, user.getPassword())){
+
+			if (passwordEncryptor.checkPassword(pass, user.getPassword())) {
 				return user;
-			} else{
+			} else {
 				return null;
 			}
 		} catch (Exception e) {
@@ -105,27 +190,13 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public boolean isEmailTaken(String email) throws Exception {
-		Session session = SessionDispatcher.getSession();
-		try {
-			Query query = session.createQuery(EMAIL_CHECK_QUERY);
-			query.setString("email", email);
-
-			return(query.uniqueResult() != null); 
-		} catch (Exception e) {
-			throw new Exception(e);
-		} finally {
-			session.close();
-		}
-	}
-
-	@Override
-	public void addProfileImage(int userId, Picture imagePath) {
+	public void setProfilePicture(Picture pic , User user) {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-			User user = (User) session.load(User.class, userId);
-			user.setProfilePicture(imagePath);
+			
+			user.setProfilePicture(pic);
+			
 			session.update(user);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -143,7 +214,7 @@ public class UserDAO implements IUserDAO {
 
 			if (!u.getFriends().contains(friend)) {
 				u.addFriend(friend);
-				session.merge(u);
+				session.update(u);
 			} else {
 				return;
 			}
@@ -163,7 +234,6 @@ public class UserDAO implements IUserDAO {
 			session.beginTransaction();
 
 			user.removeFriend(friend);
-
 			session.merge(user);
 
 			session.getTransaction().commit();
@@ -174,46 +244,5 @@ public class UserDAO implements IUserDAO {
 		}
 	}
 
-	@Override
-	public void updateUserInfo(User user, UserInfo info) {
-		Session session = null;
-		try {
-			session = SessionDispatcher.getSession();
 
-			int userId = user.getId();
-			User userToUpdate = (User) session.get(User.class, userId);
-			UserInfo infoToUpdate = (UserInfo) session.get(UserInfo.class, userId);
-
-			userToUpdate.copy(user);
-			infoToUpdate.copy(info);
-			
-			session.update(userToUpdate);
-			session.update(infoToUpdate);
-			
-			session.beginTransaction();
-			session.getTransaction().commit();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-	}
-
-	public User getUserById(int id) {
-		Session session = null;
-		User user = null;
-		try {
-			session = SessionDispatcher.getSession();
-			session.beginTransaction();
-
-			user = (User) session.get(User.class, id);
-
-			session.getTransaction().commit();
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return user;
-	}
 }

@@ -6,6 +6,8 @@
 
 <%@ page session="false"%>
 
+<link rel="stylesheet" href="css/registerForm.css">
+
 <form:form action="login" id="loginForm" commandName="userLogin" method="post" style="display: none;" >
 	<div class="form-group">
 		<spring:message code="user.email" var="userEmail"/>
@@ -33,8 +35,7 @@
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
 				<input type="submit" name="login-submit" id="login-submit"
-					class="form-control btn btn-login" style="font-size: 20px"
-					value="Log In">
+					class="form-control btn btn-login" value="Log In">
 			</div>
 		</div>
 	</div>
@@ -86,8 +87,7 @@
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
 				<input type="submit" name="register-submit" id="register-submit"
-					style="font-size: 20px" class="form-control btn btn-register"
-					value="Register Now">
+					class="form-control btn btn-register" value="Register Now">
 			</div>
 		</div>
 	</div>
@@ -108,11 +108,10 @@
 			<div
 				class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
 				<input type="submit" name="recover-submit" id="recover-submit"
-					class="form-control btn btn-warning" style="font-size: 18px"
+					class="form-control btn btn-warning"
 					value="Recover Account">
 			</div>
 		</div>
 	</div>
-	<div class="" style="display: none;"></div>
 </form>
 

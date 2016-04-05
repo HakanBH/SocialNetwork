@@ -21,11 +21,11 @@
 		<property name="hibernate.c3p0.idle_test_period">3000</property>
 	
 		<mapping class="com.facebook.POJO.User"></mapping>
+		<mapping class="com.facebook.POJO.UserInfo"></mapping>
 		<mapping class="com.facebook.POJO.Post"></mapping>
 		<mapping class="com.facebook.POJO.Comment"></mapping>
 		<mapping class="com.facebook.POJO.Album"></mapping>
 		<mapping class="com.facebook.POJO.Picture"></mapping>
-		<mapping class="com.facebook.POJO.UserInfo"></mapping>
 											
 	</session-factory>
 </hibernate-configuration>

@@ -1,4 +1,6 @@
-$(document).on('click', '#close-preview', function(){ 
+/**
+ * 
+ */$(document).on('click', '#close-preview', function(){ 
     $('.image-preview').popover('hide');
     // Hover befor close the preview
     $('.image-preview').hover(

@@ -20,8 +20,8 @@ public class LoginController {
 		try {
 			User user = IUserDAO.getUserDAO().login(userLogin.getEmail(), userLogin.getPassword());
 			if (user != null) {
-				model.addAttribute(user);
-				return "main";
+				request.getSession().setAttribute("currentUser", user);
+				return "redirect:/main";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

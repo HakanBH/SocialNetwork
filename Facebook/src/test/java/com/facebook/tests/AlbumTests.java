@@ -22,23 +22,32 @@ public class AlbumTests {
 //		IAlbumDAO.getAlbumDAO().insertAlbum(a);
 //	}
 
-	
-	@Test 
-	public void addPicturesTest (){
-		Set<Picture> pics = new HashSet<Picture>(Arrays.asList(new Picture("pic12.jpg"),
-				new Picture("pic32.jpg")));
-		Album album = IAlbumDAO.getAlbumDAO().getAlbumById(6);
-
-		IAlbumDAO.getAlbumDAO().addPicturesToAlbum(album,pics);
-	}
+//	
+//	@Test 
+//	public void addPicturesTest () throws InterruptedException{
+//		Album album = IAlbumDAO.getAlbumDAO().getAlbumById(1);
+//		IAlbumDAO.getAlbumDAO().uploadImage(new Picture("pic1.jpg"), album);
+//		IAlbumDAO.getAlbumDAO().uploadImage(new Picture("pic2.jpg"), album);
+//	}
 	
 //	@Test
 //	public void removePictureTest(){
-//		IAlbumDAO.getAlbumDAO().removePicture(1);
+//		IAlbumDAO.getAlbumDAO().removePicture(8);
+//		IAlbumDAO.getAlbumDAO().removePicture(9);
 //	}
 	
 //	@Test
 //	public void deleteAlbumTest(){
 //		IAlbumDAO.getAlbumDAO().deleteAlbum(6);
+//	}
+	
+//	@Test
+//	public void getAlbum(){
+//		System.out.println(IAlbumDAO.getAlbumDAO().getAlbum(25, "profilePics"));
+//	}
+	
+//	@Test
+//	public void getPictureTest(){
+//		System.out.println(IAlbumDAO.getAlbumDAO().getPicById(1));
 //	}
 }

@@ -5,22 +5,43 @@ import java.sql.Date;
 
 import org.junit.Test;
 
+import com.facebook.DAO.IAlbumDAO;
 import com.facebook.DAO.IUserDAO;
+import com.facebook.POJO.Picture;
 import com.facebook.POJO.User;
 
 public class UserTests {
-//
+	IUserDAO userDAO = IUserDAO.getUserDAO();
+//	@Test 
+//	public void getAllUsersTest(){
+//		for(User u : IUserDAO.getUserDAO().getAllUsers()){
+//			System.out.println(u);
+//		}
+//	}
+
+//	@Test
+//	public void setProfilePictureTest(){
+//		Picture pic = IAlbumDAO.getAlbumDAO().getPicById(2);
+//		User user = IUserDAO.getUserDAO().getUserById(1);
+//		
+//		IUserDAO.getUserDAO().setProfilePicture(pic, user);
+//	}
+//	
+
 //	@Test
 //	public void userInsertion() throws Exception {
-//		User user = new User("hakan.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
-//		User user1 = new User("deniz.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
-//		User user2 = new User("sevim.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
+//		User user = new User("martin.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
+//		User user1 = new User("bojo.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
+//		User user2 = new User("angel.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
+//		User user3 = new User("svetlio.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
 //
-//		IUserDAO.getUserDAO().insertUser(user);
-//		IUserDAO.getUserDAO().insertUser(user1);
-//		IUserDAO.getUserDAO().insertUser(user2);
+//		userDAO.insertUser(user);
+//		userDAO.insertUser(user1);
+//		userDAO.insertUser(user2);
+//		userDAO.insertUser(user3);
 //	} 
 
+//	
 //	@Test
 //	public void updateUserInfo(){
 //		User user = IUserDAO.getUserDAO().getUserById(35);
@@ -34,6 +55,14 @@ public class UserTests {
 //	public void deleteUserById() throws Exception  {
 //		boolean wasDeleted = IUserDAO.getUserDAO().deleteUser(1);
 //		System.out.println(wasDeleted);
+//	}
+	
+//	@Test
+//	public void deleteAllUsers() throws Exception{
+//		for(User u: IUserDAO.getUserDAO().getAllUsers()){
+//			System.err.println(u);
+//			IUserDAO.getUserDAO().deleteUser(u.getId());
+//		}
 //	}
 
 //	@Test

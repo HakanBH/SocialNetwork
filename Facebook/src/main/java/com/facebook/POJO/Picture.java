@@ -3,32 +3,28 @@ package com.facebook.POJO;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pictures", uniqueConstraints = @UniqueConstraint(columnNames = { "path" }) )
+@Table(name = "pictures")
 
 public class Picture extends BaseEntity {
-	@Column(name = "path", columnDefinition = "VARCHAR(100)", nullable = false)
-	private String path;
-
-	@Column(name = "name", columnDefinition = "VARCHAR(50)")
+	@Column(name = "name", columnDefinition = "VARCHAR(255)")
 	private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "album_id", referencedColumnName="id")
 	private Album album;
 
-	public Picture() {
+	public Picture() {}
+
+	public Picture(String name) {
+		setName(name);
 	}
 
-	public Picture(String path) {
-		setPath(path);
+	public void setAlbum(Album album) {
+		this.album = album;
 	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String picturePath) {
-		this.path = picturePath;
+	
+	public Album getAlbum() {
+		return album;
 	}
 
 	public String getName() {

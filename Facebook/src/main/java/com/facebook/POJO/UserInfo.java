@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "user_info")
@@ -38,11 +39,12 @@ public class UserInfo {
 	@Column(columnDefinition="VARCHAR(50)")
 	private String address;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 
-	@Column(columnDefinition="CHAR")
+	@Column(columnDefinition="VARCHAR(10)")
 	private String gender;
 
 	@Column(columnDefinition="VARCHAR(12)")
@@ -51,19 +53,16 @@ public class UserInfo {
 	@Column
 	private String relationshipStatus;
 
-	@Column(columnDefinition="VARCHAR(255)")
-	private String extraInfo;
-
 	public UserInfo() {
 	}
 
 	public UserInfo(UserInfo ud){
 		this(ud.getCountry(), ud.getCity(), ud.getAddress(), ud.getBirthday(), ud.getGender(),
-				ud.getMobilePhone(), ud.getRelationshipStatus(), ud.getExtraInfo());
+				ud.getMobilePhone(), ud.getRelationshipStatus());
 	}
 	
 	public UserInfo(String country, String city, String address, Date birthday, String gender, String mobilePhone,
-			String inRelationship, String extraInfo) {
+			String inRelationship) {
 		setCountry(country);
 		setCity(city);
 		setAddress(address);
@@ -71,7 +70,6 @@ public class UserInfo {
 		setGender(gender);
 		setMobilePhone(mobilePhone);
 		setRelationshipStatus(inRelationship);
-		setExtraInfo(extraInfo);
 	}
 
 	public void setUser(User user) {
@@ -106,10 +104,6 @@ public class UserInfo {
 		return relationshipStatus;
 	}
 
-	public String getExtraInfo() {
-		return extraInfo;
-	}
-
 	public void setCountry(String country) {
 		this.country = country;
 	}
@@ -136,10 +130,6 @@ public class UserInfo {
 
 	public void setRelationshipStatus(String relationshipStatus) {
 		this.relationshipStatus = relationshipStatus;
-	}
-
-	public void setExtraInfo(String extraInfo) {
-		this.extraInfo = extraInfo;
 	}
 
 	public void copy(UserInfo other){

@@ -9,32 +9,32 @@
 
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 
 <title>Asocialen.com</title>
 
 </head>
 <body>
-
-	<jsp:include page="navbar.jsp"></jsp:include>		
+	
+	<jsp:include page="navbar.jsp"></jsp:include>	
 	<div id="wrap">
-		<img class="bgfade"	src="images/background-2.jpg">
-		<img class="bgfade"	src="images/background-1.jpg">
-		<img class="bgfade"	src="images/background-3.jpg">		
-		<img class="bgfade"	src="images/background-4.jpg">
-		<img class="bgfade"	src="images/background-5.jpg">
+		<img class="bgfade"	src="images/backgrounds/background-2.jpg">
+		<img class="bgfade"	src="images/backgrounds/background-1.jpg">
+		<img class="bgfade"	src="images/backgrounds/background-3.jpg">		
+		<img class="bgfade"	src="images/backgrounds/background-4.jpg">
+		<img class="bgfade"	src="images/backgrounds/background-5.jpg">
 	</div>
 	
-	<div class="container" style="margin-top: 200px">
+	<div class="container" style="margin-top: 150px">
 		<div class="row">
-			<div class="col-md-7" style="margin-top:50px">			
-				<h1 class="main-font" style="font-size:45px"> Welcome to Asocialen.com</h1>
-				<h3 class="main-font" style="font-size:30px">Connect with your friends — and other
+			<div class="col-md-offset-1 col-md-5" style="margin-top:50px">			
+				<h1 class="main-font" style="font-size:35px"> Welcome to Asocialen.com</h1>
+				<h3 class="main-font" style="font-size:20px">Connect with your friends — and other
 					fascinating people. Get in-the-moment updates on the things that
 					interest you. And watch events unfold, in real time, from every
 					angle.</h3>
 			</div>
-			<div class=" col-md-5">
+			<div class="col-md-offset-1 col-md-4" >
 				<div class="panel panel-login">
 					<div class="panel-heading">
 						<div class="row">
