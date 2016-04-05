@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" href="css/registerForm.css">
 
-<form:form action="login" id="loginForm" commandName="userLogin" method="post" style="display: none;" >
+<form:form action="login" id="loginForm" commandName="userLogin" method="post" style="display: block;" >
 	<div class="form-group">
 		<spring:message code="user.email" var="userEmail"/>
 		<form:input type="email" path="email" id="email"
@@ -51,7 +51,7 @@
 	</div>
 </form:form>
 
-<form:form action="register" id="registerForm" commandName="user" method="post">
+<form:form action="register" id="registerForm" commandName="user" method="post" style="display:none;">
 	<div class="row form-group">
 		<div class="col-md-6" style="padding-right: 2px">
 			<input type="text" name="firstName" id="firstName"

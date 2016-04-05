@@ -10,7 +10,8 @@
 
 <title>Home page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
 	rel='stylesheet' type='text/css'>
@@ -29,194 +30,168 @@
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 
+
+
 	<div id="main_container">
 		<div id="left_col">
-			<div id="first_left">
-				<div id="image_space">
-					
-					<img id="prof_pici" src="${currentUser.profilePath}"
-								align="left">
-					
+			<div class="panel panel-white panel-shadow">
+				<div class="panel-heading" style="padding-bottom: 30px">
+					<div id="image_space">
+						<img id="prof_pici" src="${currentUser.profilePath}" align="left">
+					</div>
+					<div id="left_name">
+						<p>
+							<a class="name_left_new" href="#">&nbsp;${currentUser.firstName} ${currentUser.lastName}</a>
+						</p>
+					</div>
 				</div>
-				<div id="left_name">
-					<p>
-						<a class="name_left_new" href="#">&nbsp;${currentUser.firstName}
-							${currentUser.lastName}</a>
-					</p>
-				</div>
-
-				<br>
-				<div style="float: none; margin-top: 20px;">
+				<div class="panel-body">
 					<ul class="left-list">
-
 						<li>
 							<div class="link_container">
-								<a href="./profile"><img id="prof_pic_post" src="images/prof.png"
-									align="left"></a><a class="name_left2" href="./profile">
-									&nbsp; Profile</a>
+								<a href="./profile"><img id="prof_pic_post"
+									src="images/prof.png" align="left"></a><a class="name_left2"
+									href="./profile"> &nbsp; Profile</a>
 							</div>
 						</li>
 
 						<li>
 							<div class="link_container">
-								<a href="./friends"><img id="prof_pic_post" src="images/friends.png"
-									align="left"></a><a class="name_left2" href="./friends">
-									&nbsp;Friends</a>
+								<a href="./friends"><img id="prof_pic_post"
+									src="images/friends.png" align="left"></a><a
+									class="name_left2" href="./friends"> &nbsp;Friends</a>
 							</div>
 						</li>
 
 						<li>
 							<div class="link_container">
-								<a href="./album"><img id="prof_pic_post" src="images/pic.png"
-									align="left"></a><a class="name_left2" href="./album">
-									&nbsp;Albums</a>
+								<a href="./album"><img id="prof_pic_post"
+									src="images/pic.png" align="left"></a><a class="name_left2"
+									href="./album"> &nbsp;Albums</a>
 							</div>
 						</li>
 
 						<li>
 							<div class="link_container">
-								<a href="./settings"><img id="prof_pic_post" src="images/set.png"
-									align="left"></a><a class="name_left2" href="./settings">
-									&nbsp;Settings</a>
+								<a href="./settings"><img id="prof_pic_post"
+									src="images/set.png" align="left"></a><a class="name_left2"
+									href="./settings"> &nbsp;Settings</a>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
-		
+
 		<div id="center_col">
-			<div id="create_post">
-				<div id="image_space">
-					<a href="#"> <img id="prof_pic_post"
-						src="${currentUser.profilePath}"
-						align="left">
-					</a>
+			<div class="panel panel-white panel-shadow">
+				<div class="panel-heading" style="padding-bottom: 60px">
+					<div id="image_space">
+						<a href="#"> <img id="prof_pic_post"
+							src="${currentUser.profilePath}" align="left">
+						</a>
+						<a href="#"><img class="face_icon" src="images/pic.png"
+							align="right"></img></a>
+					</div>
 				</div>
-				<div id="post_content">
-					<form method="post" action="/post" id="post_text_box" 
-						style="">
-						<textarea rows="4" cols="63" class="form-control" name="info"
-							id="info" style="resize: none" placeholder="What's on your mind?"></textarea>
-					</form>
-				</div>
-				<div id="panel">
-					<a href="#"><img class="face_icon" src="images/pic.png"
-						align="left"></img></a>
-					<button id="post_button" type="submit" >Post</button>
+				<div class="panel-body">
+					<div id="post_content">
+						<form method="post" action="/post" id="post_text_box" style="">
+							<textarea maxlength="255" rows="4" cols="63" class="form-control"
+								name="info" id="info" style="resize: none"
+								placeholder="What's on your mind?"></textarea>
+						</form>
+					</div>
+					<div id="panel">
+						<button id="post_button" type="submit">Post</button>
+					</div>
 				</div>
 			</div>
-				 	<!-- posts -->
+			<!-- posts -->
 			<c:forEach var="post" items="${posts}">
-				<div id="new_post">
-					<div id="post_content">
-						<div id="image_space">
-							<a href="#"><img id="prof_pic_post"
-								src=${currentUser.firstName } align="left"> </a>
-							<p id="post_info">
-								<a href="#">${currentUser.firstName} ${currentUser.lastName}</a>
-								<br> ${post.created}
-							</p>
+				<div class="panel panel-white post panel-shadow">
+					<div class="post-heading">
+						<div class="pull-left image">
+							<a href="#"><img src="${post.owner.profilePath}"
+								class="img-circle avatar" alt="user profile image"></a>
 						</div>
-						<p id="post_text">
-							${post.text}
-						</p>
-						<img id="post_img" src="images/image.png" align="middle">
-						<div class="row">
-							<div class="col-md-offset-1 col-md-8">
-								<div class="icon_div">
-									<a href="#"><span class="glyphicon glyphicon-thumbs-up"></span>
-										Likes</a>
-								</div>
-								<div class="icon_div">
-									<a href="#"><span class="glyphicon glyphicon-comment"></span>
-										Comment</a>
-								</div>
-								<div class="icon_div">
-									<a href="#"><span class="glyphicon glyphicon-share"></span>
-										Share</a>
-								</div>
+						<div class="pull-left meta">
+							<div class="title h5">
+								<a href="#"><b>${post.owner.firstName}
+										${post.owner.lastName}</b></a> made a post.
 							</div>
-						</div>
-						<div id="input-group">
-							<img id="prof_pic_post" src="images/default.png" align="left">
-							<input class="form-comment" placeholder="Add a comment"
-								type="text">
+							<h6 class="text-muted time">${post.created}</h6>
 						</div>
 					</div>
-
-					<ul class="comments-list">
-						<li class="comment">
-							<div id="post_content2">
-								<div id="image_space">
-									<a href="#"><img id="prof_pic_post"
-										src="images/default.png" align="left"> </a>
-									<p id="post_info">
-										<a href="#">User Name Here</a>  Time Here!
-									</p>
-								</div>
-								<p id="post_text">Ius id vidit volumus mandamus, vide
-									veritus democritum te nec, ei eos debet libris consulatu. No
-									mei ferri graeco dicunt, ad cum veri accommodare. Sed at malis
-									omnesque delicata, usu et iusto zzril meliore. Dicunt maiorum
-									eloquentiam cum cu, sit summo dolor essent te. Ne quodsi
-									nusquam legendos has, ea dicit voluptua eloquentiam pro, ad sit
-									quas qualisque. Eos vocibus deserunt quaestio ei.</p>
-								<img id="post_img" src="images/background-1.jpg" align="middle">
-								<div id="panel">
-									<div class="icon_div">
-										<a href="#"><img class="face_icon" src="images/like.png"
-											align="left" alt="Alt text">Likes</a>
+					<div class="post-description">
+						<p>${post.text}</p>
+						<div class="stats">
+							<a href="#" class="btn btn-default stat-item"> <i
+								class="fa fa-thumbs-up icon"></i>2
+							</a> <a href="#" class="btn btn-default stat-item"> <i
+								class="fa fa-share icon"></i>12
+							</a>
+						</div>
+					</div>
+					<div class="post-footer">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								placeholder="Add a comment"> <span
+								class="input-group-addon"> <a href="#"><i
+									class="fa fa-edit"></i></a>
+							</span>
+						</div>
+						<ul class="comments-list">
+							<li class="comment"><a class="pull-left" href="#"> <img
+									class="avatar" src="http://bootdey.com/img/Content/user_1.jpg"
+									alt="avatar">
+							</a>
+								<div class="comment-body">
+									<div class="comment-heading">
+										<h4 class="user">Gavino Free</h4>
+										<h5 class="time">5 minutes ago</h5>
 									</div>
-									<div class="icon_div">
-										<a href="#"><img class="face_icon"
-											src="images/Comment.png" align="left">Comment</a>
-									</div>
-									<div class="icon_div">
-										<a href="#"><img class="face_icon" src="images/share.png"
-											align="left">Share</a>
-									</div>
+									<p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
 								</div>
-							</div>
-							<p>
-								<br>&nbsp;<br>
-							</p>
-						</li>
-						<li class="comment">
-							<div id="post_content2">
-								<div id="image_space">
-									<a href="#"><img id="prof_pic_post"
-										src="images/default.png" align="left"> </a>
-									<p id="post_info">
-										<a href="#">User Name Here</a> <br> Time Here!
-									</p>
-								</div>
-								<p id="post_text">Ius id vidit volumus mandamus, vide
-									veritus democritum te nec, ei eos debet libris consulatu. No
-									mei ferri graeco dicunt, ad cum veri accommodare. Sed at malis
-									omnesque delicata, usu et iusto zzril meliore. Dicunt maiorum
-									eloquentiam cum cu, sit summo dolor essent te. Ne quodsi
-									nusquam legendos has, ea dicit voluptua eloquentiam pro, ad sit
-									quas qualisque. Eos vocibus deserunt quaestio ei.</p>
-							</div>
-							<p>
-								<br>&nbsp;<br>
-							</p>
-						</li>
-					</ul>
+								<ul class="comments-list">
+									<li class="comment"><a class="pull-left" href="#"> <img
+											class="avatar"
+											src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar">
+									</a>
+										<div class="comment-body">
+											<div class="comment-heading">
+												<h4 class="user">Ryan Haywood</h4>
+												<h5 class="time">3 minutes ago</h5>
+											</div>
+											<p>Relax my friend</p>
+										</div></li>
+									<li class="comment"><a class="pull-left" href="#"> <img
+											class="avatar"
+											src="http://bootdey.com/img/Content/user_2.jpg" alt="avatar">
+									</a>
+										<div class="comment-body">
+											<div class="comment-heading">
+												<h4 class="user">Gavino Free</h4>
+												<h5 class="time">3 minutes ago</h5>
+											</div>
+											<p>Ok, cool.</p>
+										</div></li>
+								</ul></li>
+						</ul>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
-
-
 
 		<div id="right_col">
 			<jsp:include page="may-know.jsp"></jsp:include>
 		</div>
 	</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

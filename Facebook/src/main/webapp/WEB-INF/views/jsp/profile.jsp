@@ -12,7 +12,7 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
 	rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/post.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/customStyle.css">
 
@@ -262,7 +262,6 @@
 		</div>
 
 
-	</div>
 	</div>
 
 	<script
