@@ -4,21 +4,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" href="css/style.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
+	rel='stylesheet' type='text/css'>
+
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/post.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/customStyle.css">
       <title>Asocialen.com</title>
    </head>
    <body>
       <jsp:include page="navbar.jsp"></jsp:include>
       <div id="main_container">
-	   <div id ="user_prof" style="background-image:url('images/background-2.jpg');">
-	  <div id="pic_name_block">
-	  	<a href="#"><img id="profpicturemain" src="images/test.jpg" align="left" > </img></a>
-		<p id="user_name">Default User</p>
-		</div>
-	  </div>
+	<jsp:include page="prof-pics.jsp"></jsp:include>
 	  
 	   <div id="album_title">
 	  <div id="image_space">
@@ -27,7 +30,7 @@
 				<h1 class="text_title">FRIENDS</h1>
 	  </div>
 	  
-	  <div class="pic_container">
+	  <div class="pic_container1">
 	  
 	  
 	  <div class="friend_container">

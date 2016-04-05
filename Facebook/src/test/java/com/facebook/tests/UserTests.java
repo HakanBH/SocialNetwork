@@ -30,10 +30,10 @@ public class UserTests {
 
 //	@Test
 //	public void userInsertion() throws Exception {
-//		User user = new User("martin.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
-//		User user1 = new User("bojo.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
-//		User user2 = new User("angel.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
-//		User user3 = new User("svetlio.hyusein@gmail.com", "1234", "Hakan", "Hyusein");
+//		User user = new User("martin@gmail.com", "1234", "Martin", "Fanev");
+//		User user1 = new User("bojo@gmail.com", "1234", "Bojil", "Bojilov");
+//		User user2 = new User("angel@gmail.com", "1234", "Angel", "Angelov");
+//		User user3 = new User("svetlio@gmail.com", "1234", "Svetoslav", "Brumchev");
 //
 //		userDAO.insertUser(user);
 //		userDAO.insertUser(user1);
@@ -41,7 +41,7 @@ public class UserTests {
 //		userDAO.insertUser(user3);
 //	} 
 
-//	
+	
 //	@Test
 //	public void updateUserInfo(){
 //		User user = IUserDAO.getUserDAO().getUserById(35);

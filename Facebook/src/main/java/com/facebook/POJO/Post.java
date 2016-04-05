@@ -33,6 +33,7 @@ public class Post extends BaseEntity {
 	public void addComment(Comment c){
 		postComments.add(c);
 	}
+	
 	public void removeComment(Comment c){
 		postComments.remove(c);
 	}

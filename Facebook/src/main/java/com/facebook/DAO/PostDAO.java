@@ -7,13 +7,14 @@ import com.facebook.POJO.Post;
 import com.facebook.POJO.User;
 
 public class PostDAO implements IPostDAO {
+	
 	@Override
 	public void insertPost(Post post) {
 		Session session = null;
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
-
+			
 			session.persist(post);
 
 			session.getTransaction().commit();

@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileDeleteStrategy;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 
 import com.facebook.POJO.Album;
 import com.facebook.POJO.Picture;
+import com.facebook.POJO.Post;
 import com.facebook.POJO.User;
 import com.facebook.POJO.UserInfo;
 
@@ -130,9 +132,12 @@ public class UserDAO implements IUserDAO {
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
-
+			
 			user = (User) session.get(User.class, id);
-
+			for(Post p : user.getOwnedPosts()){
+			   Hibernate.initialize(p);
+			}
+				
 			session.getTransaction().commit();
 		} finally {
 			if (session != null) {
