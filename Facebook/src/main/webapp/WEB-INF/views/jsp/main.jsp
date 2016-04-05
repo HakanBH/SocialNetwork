@@ -45,7 +45,7 @@
 					</p>
 				</div>
 
-				</br>
+				<br>
 				<div style="float: none; margin-top: 20px;">
 					<ul class="left-list">
 
@@ -53,7 +53,7 @@
 							<div class="link_container">
 								<a href="./profile"><img id="prof_pic_post" src="images/prof.png"
 									align="left"></a><a class="name_left2" href="./profile">
-									&nbspProfile</a>
+									&nbsp; Profile</a>
 							</div>
 						</li>
 
@@ -94,7 +94,7 @@
 					</a>
 				</div>
 				<div id="post_content">
-					<form method="post" action="/post" id="post_text_box" align="left"
+					<form method="post" action="/post" id="post_text_box" 
 						style="">
 						<textarea rows="4" cols="63" class="form-control" name="info"
 							id="info" style="resize: none" placeholder="What's on your mind?"></textarea>
@@ -103,25 +103,25 @@
 				<div id="panel">
 					<a href="#"><img class="face_icon" src="images/pic.png"
 						align="left"></img></a>
-					<button id="post_button" type="submit" align="right">Post</button>
+					<button id="post_button" type="submit" >Post</button>
 				</div>
 			</div>
-					<!-- posts -->
+				 	<!-- posts -->
 			<c:forEach var="post" items="${posts}">
 				<div id="new_post">
 					<div id="post_content">
 						<div id="image_space">
 							<a href="#"><img id="prof_pic_post"
-								src=${currentUser.firstName } align="left"> </img></a>
+								src=${currentUser.firstName } align="left"> </a>
 							<p id="post_info">
 								<a href="#">${currentUser.firstName} ${currentUser.lastName}</a>
-								</br> ${post.created}
+								<br> ${post.created}
 							</p>
 						</div>
 						<p id="post_text">
 							${post.text}
 						</p>
-						<img id="post_img" src="images/image.png" align="center">
+						<img id="post_img" src="images/image.png" align="middle">
 						<div class="row">
 							<div class="col-md-offset-1 col-md-8">
 								<div class="icon_div">
@@ -150,9 +150,9 @@
 							<div id="post_content2">
 								<div id="image_space">
 									<a href="#"><img id="prof_pic_post"
-										src="images/default.png" align="left"> </img></a>
+										src="images/default.png" align="left"> </a>
 									<p id="post_info">
-										<a href="#">User Name Here</a> </br> Time Here!
+										<a href="#">User Name Here</a>  Time Here!
 									</p>
 								</div>
 								<p id="post_text">Ius id vidit volumus mandamus, vide
@@ -162,7 +162,7 @@
 									eloquentiam cum cu, sit summo dolor essent te. Ne quodsi
 									nusquam legendos has, ea dicit voluptua eloquentiam pro, ad sit
 									quas qualisque. Eos vocibus deserunt quaestio ei.</p>
-								<img id="post_img" src="images/background-1.jpg" align="center">
+								<img id="post_img" src="images/background-1.jpg" align="middle">
 								<div id="panel">
 									<div class="icon_div">
 										<a href="#"><img class="face_icon" src="images/like.png"
@@ -179,16 +179,16 @@
 								</div>
 							</div>
 							<p>
-								</br>&nbsp;</br>
+								<br>&nbsp;<br>
 							</p>
 						</li>
 						<li class="comment">
 							<div id="post_content2">
 								<div id="image_space">
 									<a href="#"><img id="prof_pic_post"
-										src="images/default.png" align="left"> </img></a>
+										src="images/default.png" align="left"> </a>
 									<p id="post_info">
-										<a href="#">User Name Here</a> </br> Time Here!
+										<a href="#">User Name Here</a> <br> Time Here!
 									</p>
 								</div>
 								<p id="post_text">Ius id vidit volumus mandamus, vide
@@ -200,7 +200,7 @@
 									quas qualisque. Eos vocibus deserunt quaestio ei.</p>
 							</div>
 							<p>
-								</br>&nbsp;</br>
+								<br>&nbsp;<br>
 							</p>
 						</li>
 					</ul>
@@ -211,9 +211,7 @@
 
 
 		<div id="right_col">
-			
 			<jsp:include page="may-know.jsp"></jsp:include>
-			
 		</div>
 	</div>
 

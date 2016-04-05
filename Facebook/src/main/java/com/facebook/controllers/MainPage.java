@@ -40,7 +40,6 @@ public class MainPage {
 		if(!posts.isEmpty()){
 			model.addAttribute("posts",posts);
 		}
-		
 		return "main";
 	}
 }

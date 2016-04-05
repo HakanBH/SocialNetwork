@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Asocialen.com</title>
-<link rel="stylesheet" href="css/customStyle.css">
 </head>
 <body>
 <div id="first_right">
