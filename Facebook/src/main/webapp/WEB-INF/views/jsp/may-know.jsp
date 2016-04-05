@@ -28,7 +28,7 @@
 				<a href="" id="nickname_info1"><b> ${suggestion.firstName}
 						${suggestion.lastName} </b></a>
 				<form action="main/addFriend" method="GET">
-					<input name="userToAdd" type="hidden" value="${suggestion}"> 
+					<input name="userToAdd" type="hidden" value="${suggestion.id}"> 
 					<input type="submit" id="post_button2" value="Follow">
 				</form>
 			</div>

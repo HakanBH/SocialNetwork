@@ -25,19 +25,8 @@ public class MainPage {
 	public String mainController(Model model, HttpServletRequest request) {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		
-		if(currentUser.getFriends().isEmpty()){
-			List<User> allUsers = IUserDAO.getUserDAO().getAllUsers();
-			Collections.shuffle(allUsers);
-			if(allUsers.size()>4){
-				model.addAttribute("friendSuggestions", allUsers.subList(0, 4));
-			} else {
-				model.addAttribute("friendSuggestions", allUsers);
-			}
-		} else{
-			List<User> friendsOfFriends = currentUser.getFriendsOfFriends();
-			model.addAttribute("friendSuggestions", friendsOfFriends);
-		}
-
+		prepareSuggestions(model, currentUser);
+		
 		Collection<Post> posts = currentUser.getPosts();
 		if(!posts.isEmpty()){
 			model.addAttribute("posts",posts);
@@ -47,12 +36,28 @@ public class MainPage {
 
 	@RequestMapping(value="/addFriend", method = RequestMethod.GET)
 	public String addFriend(HttpServletRequest request){
-		
-		String userToAdd = request.getParameter("userToAdd");
+		String userToAddId = request.getParameter("userToAdd");
+		int id = Integer.parseInt(userToAddId);
+		User userToAdd = IUserDAO.getUserDAO().getUserById(id);
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
-		System.out.println(userToAdd);
-		System.out.println(request.getSession().getAttribute("currentUser"));
 		
+		IUserDAO.getUserDAO().addFriend(currentUser, userToAdd);
 		return "redirect:/main";
+	}
+	
+	public static void prepareSuggestions(Model model, User currentUser){
+		if (currentUser.getFriends().isEmpty()) {
+			List<User> allUsers = IUserDAO.getUserDAO().getAllUsers();
+			Collections.shuffle(allUsers);
+			allUsers.remove(currentUser);
+			if (allUsers.size() > 4) {
+				model.addAttribute("friendSuggestions", allUsers.subList(0, 4));
+			} else {
+				model.addAttribute("friendSuggestions", allUsers);
+			}
+		} else {
+			List<User> friendsOfFriends = currentUser.getFriendsOfFriends();
+			model.addAttribute("friendSuggestions", friendsOfFriends);
+		}
 	}
 }
