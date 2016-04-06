@@ -38,8 +38,7 @@ public class MainPage {
 		String userToAddId = request.getParameter("userToAdd");
 		int id = Integer.parseInt(userToAddId);
 		User userToAdd = IUserDAO.getUserDAO().getUserById(id);
-		User currentUser = (User) request.getSession().getAttribute("currentUser ");
-		
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		IUserDAO.getUserDAO().addFriend(currentUser, userToAdd);
 		return "redirect:/main";
 	}
@@ -47,6 +46,7 @@ public class MainPage {
 	public static void prepareSuggestions(Model model, User currentUser){
 		if (currentUser.getFriends().isEmpty()) {
 			List<User> allUsers = IUserDAO.getUserDAO().getAllUsers();
+			System.out.println(allUsers);
 			Collections.shuffle(allUsers);
 			allUsers.remove(currentUser);
 			if (allUsers.size() > User.NUMBER_OF_FRIEND_SUGGESTIONS) {
@@ -55,6 +55,7 @@ public class MainPage {
 				model.addAttribute("friendSuggestions", allUsers);
 			}
 		} else {
+			System.out.println("Bbbb");
 			List<User> friendsOfFriends = currentUser.getFriendsOfFriends();
 			model.addAttribute("friendSuggestions", friendsOfFriends);
 		}

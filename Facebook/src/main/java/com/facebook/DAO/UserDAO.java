@@ -112,9 +112,10 @@ public class UserDAO implements IUserDAO {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-			
-			List<User> result = session.createCriteria(User.class).list();
 
+			Query query = session.createQuery("from User");
+			List<User> result = query.list();
+			
 			session.getTransaction().commit();
 
 			return result;
