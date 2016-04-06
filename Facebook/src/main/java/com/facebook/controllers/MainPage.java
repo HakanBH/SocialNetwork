@@ -44,7 +44,7 @@ public class MainPage {
 	}
 	
 	public static void prepareSuggestions(Model model, User currentUser){
-		if (currentUser.getFriends().isEmpty()) {
+		if (currentUser.getFriends().isEmpty() || currentUser.getFriendsOfFriends().size() < User.NUMBER_OF_FRIEND_SUGGESTIONS) {
 			List<User> allUsers = IUserDAO.getUserDAO().getAllUsers();
 			System.out.println(allUsers);
 			Collections.shuffle(allUsers);

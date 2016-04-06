@@ -44,7 +44,7 @@
 									data-toggle="dropdown"><span> Settings <span
 											class="border"></span></span></a>
 									<ul class="dropdown-menu">
-										<li><a href="#">Settings</a></li>
+										<li><a href="./settings">Settings</a></li>
 										<li><a href="./logout">Log Out</a></li>
 									</ul></li>
 							</ul>
