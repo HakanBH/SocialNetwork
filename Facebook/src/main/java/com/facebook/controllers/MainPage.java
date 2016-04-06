@@ -20,7 +20,6 @@ import com.facebook.POJO.User;
 @Controller
 @RequestMapping("/main")
 public class MainPage {
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String mainController(Model model, HttpServletRequest request) {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
@@ -50,8 +49,8 @@ public class MainPage {
 			List<User> allUsers = IUserDAO.getUserDAO().getAllUsers();
 			Collections.shuffle(allUsers);
 			allUsers.remove(currentUser);
-			if (allUsers.size() > 4) {
-				model.addAttribute("friendSuggestions", allUsers.subList(0, 4));
+			if (allUsers.size() > User.NUMBER_OF_FRIEND_SUGGESTIONS) {
+				model.addAttribute("friendSuggestions", allUsers.subList(0, User.NUMBER_OF_FRIEND_SUGGESTIONS));
 			} else {
 				model.addAttribute("friendSuggestions", allUsers);
 			}

@@ -20,9 +20,10 @@ import com.facebook.DAO.SessionDispatcher;
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
 public class User extends BaseEntity {
-	private String profilePath;
 	public static final String STORAGE_PATH = "C:" + File.separator + "images" + File.separator + "users"
 			+ File.separator;
+	public static final int NUMBER_OF_FRIEND_SUGGESTIONS = 4;
+	private String profilePath;
 
 	@Column(name = "first_name", columnDefinition = "VARCHAR(32)")
 	private String firstName;
@@ -129,10 +130,10 @@ public class User extends BaseEntity {
 		}
 
 		Collections.shuffle(all);
-		if(all.size() < 4){
+		if(all.size() < NUMBER_OF_FRIEND_SUGGESTIONS){
 			return all;
 		}
-		return all.subList(0, 4);
+		return all.subList(0, NUMBER_OF_FRIEND_SUGGESTIONS);
 	}
 	
 	
