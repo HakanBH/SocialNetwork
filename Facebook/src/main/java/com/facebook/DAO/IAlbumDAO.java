@@ -4,13 +4,14 @@ import java.util.Set;
 
 import com.facebook.POJO.Album;
 import com.facebook.POJO.Picture;
+import com.facebook.POJO.User;
 
 public interface IAlbumDAO {
 	static IAlbumDAO getAlbumDAO() {
 		return new AlbumDAO();
 	}
 
-	void insertAlbum(Album a);
+	void insertAlbum(User u, Album a);
 	void deleteAlbum(int albumId);
 	
 	void uploadImage(Picture pic, Album album);

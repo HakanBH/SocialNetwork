@@ -6,7 +6,7 @@
 
 <c:choose>
 	<c:when test="${not empty sessionScope.currentUser}">
-		<div style="margin-bottom: 100px">
+		<div style="margin-bottom: 110px">
 			<header id="fh5co-header" role="banner">
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="container-fluid" style="font-size: 15px !important">

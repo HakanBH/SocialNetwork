@@ -29,7 +29,7 @@ public class Settings {
 		UserInfo userInfo = user.getUserInfo();
 
 		model.addAttribute("userInfo", userInfo);
-		System.out.println(request.getSession().getAttribute("currentUser"));
+
 		return "redirect:/settings";
 	}
 }

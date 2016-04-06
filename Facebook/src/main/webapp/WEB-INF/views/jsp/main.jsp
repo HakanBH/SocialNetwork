@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,21 +16,20 @@
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
 	rel='stylesheet' type='text/css'>
 
-<link
-	href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
-	rel="stylesheet">
 <link rel="stylesheet" href="css/post.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/customStyle.css">
+<link rel="stylesheet" href="css/imageUpload.css">
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="js/imageUpload.js"></script>
 
-<style type="text/css">
-</style>
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
-
-
 
 	<div id="main_container">
 		<div id="left_col">
@@ -41,7 +40,8 @@
 					</div>
 					<div id="left_name">
 						<p>
-							<a class="name_left_new" href="#">&nbsp;${currentUser.firstName} ${currentUser.lastName}</a>
+							<a class="name_left_new" href="#">&nbsp;${currentUser.firstName}
+								${currentUser.lastName}</a>
 						</p>
 					</div>
 				</div>
@@ -84,29 +84,53 @@
 		</div>
 
 		<div id="center_col">
-			<div class="panel panel-white panel-shadow">
-				<div class="panel-heading" style="padding-bottom: 60px">
-					<div id="image_space">
-						<a href="#"> <img id="prof_pic_post"
-							src="${currentUser.profilePath}" align="left">
-						</a>
-						<a href="#"><img class="face_icon" src="images/pic.png"
-							align="right"></img></a>
+			<!--  POST UPLOAD -->
+			<form:form method="post" enctype="multipart/form-data"
+				action="PostUpload">
+				<div class="panel panel-white panel-shadow">
+					<div class="panel-heading">
+						<div id="image_space">
+							<a href="#"> <img id="prof_pic_post"
+								src="${currentUser.profilePath}" align="left">
+							</a>
+						</div>
+						<h4 style="margin-left: 55px; margin-top: 25px">Upload a post
+							on your timeline</h4>
 					</div>
-				</div>
-				<div class="panel-body">
-					<div id="post_content">
-						<form method="post" action="/post" id="post_text_box" style="">
+					<div class="panel-body">
+						<div id="post_content">
 							<textarea maxlength="255" rows="4" cols="63" class="form-control"
-								name="info" id="info" style="resize: none"
+								name="postText" id="postText" style="resize: none"
 								placeholder="What's on your mind?"></textarea>
-						</form>
+						</div>
+						<div class="input-group image-preview" align="right"
+							style="margin-top: 10px">
+							<span class="input-group-btn"> <!-- image-preview-clear button -->
+								<button type="button"
+									class="btn btn-default image-preview-clear"
+									style="display: none;">
+									<span class="glyphicon glyphicon-remove"></span> Clear
+								</button> <!-- image-preview-input -->
+								<div class="btn btn-default image-preview-input">
+									<span class="glyphicon glyphicon-picture"></span> <span
+										class="image-preview-input-title">Upload a picture</span> <input
+										type="file" accept="image/png, image/jpeg, image/gif"
+										name="picture" />
+									<!-- rename it -->
+								</div> <input class="btn btn-primary post image-preview-input"
+								type="submit" value="Post">
+							</span>
+						</div>
 					</div>
-					<div id="panel">
-						<button id="post_button" type="submit">Post</button>
-					</div>
+					<c:if test="${not empty imageError}">
+						<div class="form-error" align="right">
+							<c:out value="${imageError}">
+							</c:out>
+						</div>
+					</c:if>
 				</div>
-			</div>
+			</form:form>
+			<!-- END OF POST UPLOAD -->
 			<!-- posts -->
 			<c:forEach var="post" items="${posts}">
 				<div class="panel panel-white post panel-shadow">
@@ -125,6 +149,8 @@
 					</div>
 					<div class="post-description">
 						<p>${post.text}</p>
+						
+						<img id="post_img" src="${post.picturePath}" align="middle">
 						<div class="stats">
 							<a href="#" class="btn btn-default stat-item"> <i
 								class="fa fa-thumbs-up icon"></i>2
@@ -133,6 +159,7 @@
 							</a>
 						</div>
 					</div>
+
 					<div class="post-footer">
 						<div class="input-group">
 							<input type="text" class="form-control"
@@ -187,11 +214,6 @@
 			<jsp:include page="may-know.jsp"></jsp:include>
 		</div>
 	</div>
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

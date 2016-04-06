@@ -10,9 +10,9 @@ public class Picture extends BaseEntity {
 	private String name;
 
 	@ManyToOne
-	@JoinColumn(name = "album_id", referencedColumnName="id")
+	@JoinColumn(name = "album_id", nullable=false)
 	private Album album;
-
+	
 	public Picture() {}
 
 	public Picture(String name) {

@@ -23,19 +23,21 @@ public class User extends BaseEntity {
 	public static final String STORAGE_PATH = "C:" + File.separator + "images" + File.separator + "users"
 			+ File.separator;
 	public static final int NUMBER_OF_FRIEND_SUGGESTIONS = 4;
+	@Transient
 	private String profilePath;
+	@Transient
 	private String bgPath;
 
-	@Column(name = "first_name", columnDefinition = "VARCHAR(32)")
+	@Column(name = "first_name", columnDefinition = "VARCHAR(32)", nullable=false)
 	private String firstName;
 
-	@Column(name = "last_name", columnDefinition = "VARCHAR(32)")
+	@Column(name = "last_name", columnDefinition = "VARCHAR(32)", nullable=false)
 	private String lastName;
 
-	@Column(name = "email", columnDefinition = "VARCHAR(64)", unique = true)
+	@Column(name = "email", columnDefinition = "VARCHAR(64)", unique = true, nullable=false)
 	private String email;
 
-	@Column(name = "password", columnDefinition = "VARCHAR(255)")
+	@Column(name = "password", columnDefinition = "VARCHAR(255)", nullable=false)
 	private String password;
 	
 	@OneToOne
@@ -47,6 +49,9 @@ public class User extends BaseEntity {
 	private Picture bgPicture;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+	private Set<Album> albums = new HashSet<Album>();
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Post> ownedPosts=new ArrayList<Post>();
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "likes")
@@ -54,7 +59,7 @@ public class User extends BaseEntity {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "friendships", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
-	private Set<User> friends = new HashSet<User>();
+	private Set<User> friends = new TreeSet<User>();
 
 	@ManyToMany(mappedBy = "friends")
 	private Set<User> befriendedBy = new HashSet<User>();
@@ -118,10 +123,15 @@ public class User extends BaseEntity {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof User) {
-			return this.getEmail().equals(((User) obj).getEmail());
+			User temp = (User) (obj);
+			boolean flag = this.getEmail().equals(temp.getEmail());
+			System.out.println(flag);
+			return this.getEmail().equals(temp.getEmail());
 		}
 		return false;
 	}
+
+
 
 	public List<User> getFriendsOfFriends() {
 		List<User> all = new ArrayList<User>();
@@ -189,15 +199,10 @@ public class User extends BaseEntity {
 	}
 	
 	public String getProfilePath() {
-		this.getProfilePathGenerator();
-		return profilePath;
-	}
-	
-	public void getProfilePathGenerator() {
-		if (this.profilePicture.getName().equals("./images/default-pic.png") || this.profilePicture == null) {
-			this.profilePath = "./images/default-pic.png";
+		if (this.profilePicture == null || this.profilePicture.getName().equals("./images/default-pic.png")) {
+			return "./images/default-pic.png";
 		} else {
-			this.profilePath = "images/" + this.email + "/ProfilePictures/" + this.profilePicture.getName();
+			return "images/" + this.email + "/ProfilePictures/" + this.profilePicture.getName();
 		}
 	}
 		
@@ -251,15 +256,10 @@ public class User extends BaseEntity {
 	}
 	
 	public String getBgPath() {
-		this.getBgPathGenerator();
-		return profilePath;
-	}
-	
-	public void getBgPathGenerator() {
-		if (this.bgPicture.getName().equals("./images/background/background-1.jpg") || this.bgPicture == null) {
-			this.profilePath = "./images/background/background-1.jpg";
+		if (this.bgPicture == null || this.bgPicture.getName().equals("./images/backgrounds/background-1.jpg")) {
+			return "./images/backgrounds/background-1.jpg";
 		} else {
-			this.profilePath = "images/" + this.email + "/BgPictures/" + this.bgPicture.getName();
+			return "images/" + this.email + "/BgPictures/" + this.bgPicture.getName();
 		}
 	}
 }

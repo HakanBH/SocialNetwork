@@ -12,11 +12,11 @@ import com.facebook.POJO.User;
 public class AlbumDAO implements IAlbumDAO {
 
 	@Override
-	public void insertAlbum(Album a) {
+	public void insertAlbum(User u, Album a) {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-
+			
 			session.persist(a);
 
 			session.getTransaction().commit();

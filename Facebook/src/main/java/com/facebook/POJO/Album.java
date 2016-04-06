@@ -1,39 +1,43 @@
 package com.facebook.POJO;
 
-import java.util.HashSet; 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "albums")
 public class Album extends BaseEntity {
 
-	@Column(columnDefinition="VARCHAR(25)")
+	@Column(columnDefinition = "VARCHAR(25)")
 	private String title;
 
 	@ManyToOne
-	@JoinColumn(name = "owner")
+	@JoinColumn(name = "owner", nullable = false)
 	private User owner;
-	
-	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-		@JoinColumn(name = "album_id")
-	private Set<Picture> pictures;
 
-	public Album() {
-		pictures = new HashSet<Picture>();
-	}
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "album")
+	private List<Picture> pictures = new ArrayList<Picture>();
+
+	public Album() {}
 
 	public Album(String title, User owner) {
-		pictures = new HashSet<Picture>();
 		setTitle(title);
 		setOwner(owner);
 	}
 
 	public void addPicture(Picture pic) {
 		pictures.add(pic);
+	}
+
+	public List<Picture> getPictures() {
+		return Collections.unmodifiableList(pictures);
 	}
 
 	public void setTitle(String title) {

@@ -34,6 +34,7 @@ public class ImageUpload {
 		User user = (User) request.getSession().getAttribute("currentUser");
 
 		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + "ProfilePictures" + File.separator;
+		new File(filePath).mkdirs();
 		// Check that we have a file upload request
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 

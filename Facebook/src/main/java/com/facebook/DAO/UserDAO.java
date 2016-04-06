@@ -38,14 +38,6 @@ public class UserDAO implements IUserDAO {
 			String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
 			user.setPassword(encryptedPassword);
 			session.persist(user);
-
-			// set default picture
-			Album a = new Album("ProfilePictures", user);
-			session.persist(a);
-			Picture pic = (Picture) session.get(Picture.class, 1);
-			user.setProfilePicture(pic);
-
-			new File(User.STORAGE_PATH + user.getEmail() + File.separator + a.getTitle()).mkdirs();
 				
 			session.getTransaction().commit();
 		} catch (Exception e) {

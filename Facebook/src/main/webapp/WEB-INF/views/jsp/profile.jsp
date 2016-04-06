@@ -24,8 +24,6 @@
 	<div id="main_container">
 		<jsp:include page="prof-pics.jsp"></jsp:include>
 
-
-
 		<div id="left_col">
 			<div id="first_left">
 				<div id="image_space">

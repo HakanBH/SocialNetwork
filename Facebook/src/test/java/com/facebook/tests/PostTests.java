@@ -11,18 +11,18 @@ import com.facebook.POJO.*;
 public class PostTests {
 	IPostDAO postDao = IPostDAO.getPostDAO();
 //	
-	@Test
-	public void postInsertionTest() throws Exception {
-		User user = IUserDAO.getUserDAO().getUserById(1);
-		
-		Post p1 = new Post(user, "image path", "Post 1. Some text here.");
-		Post p2 = new Post(user, "image path", "Post 2. Some text here.");
-		Post p3 = new Post(user, "image path", "Post 3. Some text here.");
-		
-		postDao.insertPost(p1);
-		postDao.insertPost(p2);
-		postDao.insertPost(p3);
-	}
+//	@Test
+//	public void postInsertionTest() throws Exception {
+//		User user = IUserDAO.getUserDAO().getUserById(1);
+//		
+//		Post p1 = new Post(user, "image path", "Post 1. Some text here.");
+//		Post p2 = new Post(user, "image path", "Post 2. Some text here.");
+//		Post p3 = new Post(user, "image path", "Post 3. Some text here.");
+//		
+//		postDao.insertPost(p1);
+//		postDao.insertPost(p2);
+//		postDao.insertPost(p3);
+//	}
 
 //	@Test
 //	public void getPostsOfUser(){

@@ -3,10 +3,8 @@ package com.facebook.controllers;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,27 +35,46 @@ public class MainPage {
 	public String addFriend(HttpServletRequest request){
 		String userToAddId = request.getParameter("userToAdd");
 		int id = Integer.parseInt(userToAddId);
+		
 		User userToAdd = IUserDAO.getUserDAO().getUserById(id);
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		IUserDAO.getUserDAO().addFriend(currentUser, userToAdd);
+		
 		return "redirect:/main";
 	}
 	
 	public static void prepareSuggestions(Model model, User currentUser){
 		if (currentUser.getFriends().isEmpty() || currentUser.getFriendsOfFriends().size() < User.NUMBER_OF_FRIEND_SUGGESTIONS) {
 			List<User> allUsers = IUserDAO.getUserDAO().getAllUsers();
-			System.out.println(allUsers);
 			Collections.shuffle(allUsers);
+			//remove current user and his friends from suggestions(removeAll didn't work !?)
 			allUsers.remove(currentUser);
+			for(User u:currentUser.getFriends()){
+				allUsers.remove(u);
+			}
+
 			if (allUsers.size() > User.NUMBER_OF_FRIEND_SUGGESTIONS) {
 				model.addAttribute("friendSuggestions", allUsers.subList(0, User.NUMBER_OF_FRIEND_SUGGESTIONS));
 			} else {
 				model.addAttribute("friendSuggestions", allUsers);
 			}
 		} else {
-			System.out.println("Bbbb");
 			List<User> friendsOfFriends = currentUser.getFriendsOfFriends();
 			model.addAttribute("friendSuggestions", friendsOfFriends);
 		}
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String mainControllear(Model model, HttpServletRequest request) {
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		
+		prepareSuggestions(model, currentUser);
+		
+		Collection<Post> posts = currentUser.getPosts();
+		if(!posts.isEmpty()){
+			model.addAttribute("posts",posts);
+		}
+		return "main";
 	}
 }

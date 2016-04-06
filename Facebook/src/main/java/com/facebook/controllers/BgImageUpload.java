@@ -35,8 +35,7 @@ public class BgImageUpload {
 		User user = (User) request.getSession().getAttribute("currentUser");
 
 		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + PROFILE_PICTURES + File.separator;
-		File dummy = new File(filePath);
-		dummy.mkdirs();
+		new File(filePath).mkdirs();
 		// Check that we have a file upload request
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 

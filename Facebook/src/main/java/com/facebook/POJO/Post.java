@@ -10,13 +10,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "posts")
 public class Post extends BaseEntity {
-
-	@ManyToOne()
+	@Transient
+	private String picturePath;
+	
+	@ManyToOne
 	@JoinColumn(name = "post_owner", nullable = false)
 	private User owner;
 
-	@Column(name = "picture", columnDefinition = "VARCHAR(100)")
-	private String picture;
+	@OneToOne(orphanRemoval=true)
+	@JoinColumn(name = "picture", referencedColumnName = "id")
+	private Picture picture;
 
 	@Column(name = "text", columnDefinition = "VARCHAR(255)")
 	private String text;
@@ -30,22 +33,25 @@ public class Post extends BaseEntity {
 	@OneToMany(mappedBy = "post")
 	private List<Comment> postComments;
 	
+	public Post() {}
+
+	public Post(User owner, Picture pic, String text) {
+		likes = new HashSet<User>();
+		setOwner(owner);
+		setPicture(pic);
+		setText(text);
+	}
+	
+	public String getPicturePath() {
+		return "images/" + this.owner.getEmail() + "/PostPictures/" + this.picture.getName();
+	}
+	
 	public void addComment(Comment c){
 		postComments.add(c);
 	}
 	
 	public void removeComment(Comment c){
 		postComments.remove(c);
-	}
-	
-	public Post() {
-	}
-
-	public Post(User owner, String pic, String text) {
-		likes = new HashSet<User>();
-		setOwner(owner);
-		setPicture(pic);
-		setText(text);
 	}
 	
 	public void addLike(User u) {
@@ -64,7 +70,7 @@ public class Post extends BaseEntity {
 		return owner;
 	}
 
-	public String getPicture() {
+	public Picture getPicture() {
 		return picture;
 	}
 
@@ -76,7 +82,7 @@ public class Post extends BaseEntity {
 		this.owner = owner;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(Picture picture) {
 		this.picture = picture;
 	}
 
