@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="user_prof"
-		style="background-image: url('images/backgrounds/background-2.jpg');">
+		style="background-image: url('${currentUser.bgPath}');">
 		<div id="pic_name_block">
 			<a href="#"><img id="profpicturemain"
 				src="${currentUser.profilePath}" align="left"></a>

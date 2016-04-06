@@ -27,4 +27,6 @@ public interface IUserDAO {
 	
 	void addFriend(User u, User friend);
 	void removeFriend(User user, User friend);
+
+	void setBgPicture(Picture pic, User user);
 }

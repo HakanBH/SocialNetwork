@@ -24,6 +24,7 @@ public class User extends BaseEntity {
 			+ File.separator;
 	public static final int NUMBER_OF_FRIEND_SUGGESTIONS = 4;
 	private String profilePath;
+	private String bgPath;
 
 	@Column(name = "first_name", columnDefinition = "VARCHAR(32)")
 	private String firstName;
@@ -40,6 +41,10 @@ public class User extends BaseEntity {
 	@OneToOne
 	@JoinColumn(name = "profile_pic", referencedColumnName = "id")
 	private Picture profilePicture;
+	//Background
+	@OneToOne
+	@JoinColumn(name = "bg_pic", referencedColumnName = "id")
+	private Picture bgPicture;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Post> ownedPosts=new ArrayList<Post>();
@@ -232,6 +237,29 @@ public class User extends BaseEntity {
 	public void setProfilePicture(Picture pic) {
 		if (pic != null) {
 			this.profilePicture = pic;
+		}
+	}
+	
+	public Picture getBgPicture() {
+		return bgPicture;
+	}
+
+	public void setBgPicture(Picture bgPicture) {
+		if (bgPicture != null) {
+		this.bgPicture = bgPicture;
+		}
+	}
+	
+	public String getBgPath() {
+		this.getBgPathGenerator();
+		return profilePath;
+	}
+	
+	public void getBgPathGenerator() {
+		if (this.bgPicture.getName().equals("./images/background/background-1.jpg") || this.bgPicture == null) {
+			this.profilePath = "./images/background/background-1.jpg";
+		} else {
+			this.profilePath = "images/" + this.email + "/BgPictures/" + this.bgPicture.getName();
 		}
 	}
 }

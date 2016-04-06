@@ -24,8 +24,9 @@ import com.facebook.POJO.User;
 import com.facebook.POJO.UserInfo;
 
 @Controller
-@RequestMapping(value = "/ImageUpload")
-public class ImageUpload {
+@RequestMapping(value = "/BgImageUpload")
+public class BgImageUpload {
+	private static final String PROFILE_PICTURES = "BgPictures";
 	private static final int BUFFER_SIZE = 1024 * 1024;
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -33,7 +34,9 @@ public class ImageUpload {
 			HttpServletResponse response) {
 		User user = (User) request.getSession().getAttribute("currentUser");
 
-		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + "ProfilePictures" + File.separator;
+		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + PROFILE_PICTURES + File.separator;
+		File dummy = new File(filePath);
+		dummy.mkdirs();
 		// Check that we have a file upload request
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
@@ -50,22 +53,18 @@ public class ImageUpload {
 			String fileName;
 			try {
 				fileName = createFile(upload, filePath, request, response);
-				Picture profilePic = new Picture(fileName);
-				System.err.println(profilePic);
-				Album album = new Album("ProfilePictures", user);
+				Picture bgPic = new Picture(fileName);
+				System.err.println(bgPic);
+				Album album = new Album("BgPictures", user);
 				System.err.println(album);
-				IAlbumDAO.getAlbumDAO().uploadImage(profilePic, album);
-				IUserDAO.getUserDAO().setProfilePicture(profilePic, user);
+				IAlbumDAO.getAlbumDAO().uploadImage(bgPic, album);
+				IUserDAO.getUserDAO().setBgPicture(bgPic, user);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		System.out.println(request.getSession().getAttribute("currentUser"));
-		if(request.getHeader("referer").contains("register")){
-		return "redirect:/extraInfo";
-		}else{
-			return "redirect:/settings";
-		}
+		return "redirect:/settings";
 	}
 
 	public String createFile(ServletFileUpload upload, String filePath, HttpServletRequest request,
@@ -88,11 +87,11 @@ public class ImageUpload {
 				if (!isImage || fi.getSize() > BUFFER_SIZE) {
 					request.setAttribute("imageError",
 							"File must be an image with size less than " + BUFFER_SIZE + " bytes.");
-					return "forward:/extraInfo";
+					return "forward:/settings";
 				}
 				// Write the file
 
-				file = new File(filePath + "profile_pic." + extension);
+				file = new File(filePath + "background_pic." + extension);
 				fi.write(file);
 			}
 		}

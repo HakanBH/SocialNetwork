@@ -211,6 +211,20 @@ public class UserDAO implements IUserDAO {
 			session.close();
 		}
 	}
+	@Override
+	public void setBgPicture(Picture pic , User user) {
+		Session session = SessionDispatcher.getSession();
+		try {
+			session.beginTransaction();
+			user.setBgPicture(pic);;
+			session.update(user);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
 
 	@Override
 	public void addFriend(User u, User friend) {
