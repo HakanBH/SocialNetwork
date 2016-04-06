@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="panel-body">
-
+	<!--  -->
 		<c:forEach var="suggestion" items="${friendSuggestions}">
 			<div class="whoToAdd">
 				<div id="profpicknow">
