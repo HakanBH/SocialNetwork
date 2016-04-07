@@ -1,5 +1,6 @@
 package com.facebook.DAO;
 
+import com.facebook.POJO.Comment;
 import com.facebook.POJO.Post;
 import com.facebook.POJO.User;
 
@@ -17,6 +18,6 @@ public interface IPostDAO {
 	void unlikePost(int postId, int userId);
 
 
-	void commentPost(int postId, int userId, String str);
+	void commentPost(Post commentedPost, User currentUser, Comment comment);
 	void removeComment(int commentId);
 }

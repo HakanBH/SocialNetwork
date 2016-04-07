@@ -3,12 +3,14 @@
 <%@ page errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 
-<title>Home page</title>
+<title>Asocialen.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
@@ -20,6 +22,8 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/customStyle.css">
 <link rel="stylesheet" href="css/imageUpload.css">
+<link rel="stylesheet" type="text/css"
+	href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -123,15 +127,13 @@
 						</div>
 					</div>
 					<c:if test="${not empty imageError}">
-						<div class="form-error" align="right">
-							<c:out value="${imageError}">
-							</c:out>
-						</div>
+						<div class="form-error" align="right">${imageError}</div>
 					</c:if>
 				</div>
 			</form:form>
 			<!-- END OF POST UPLOAD -->
 			<!-- posts -->
+			
 			<c:forEach var="post" items="${posts}">
 				<div class="panel panel-white post panel-shadow">
 					<div class="post-heading">
@@ -149,64 +151,58 @@
 					</div>
 					<div class="post-description">
 						<p>${post.text}</p>
-						
-						<c:choose>						
-							<c:when test="${not empty post.picture.name}">
-								<img id="post_img" src="${post.picturePath}" align="middle">
-							</c:when>
-						</c:choose>
-						
+						<c:if test="${not empty post.picture.name}">
+							<img id="post_img" src="${post.picturePath}" align="middle">
+						</c:if>
+
 						<div class="stats">
-							<a href="#" class="btn btn-default stat-item"> <i
-								class="fa fa-thumbs-up icon"></i>2
-							</a> <a href="#" class="btn btn-default stat-item"> <i
-								class="fa fa-share icon"></i>12
-							</a>
+							<form method="post" action="./likePost">
+								<input name="likedPost" type="hidden" value="${post.id}">
+								<div id="${post.id}"
+									class="${cssClass} btn btn-default stat-item">
+									<span class="fa fa-thumbs-up icon">
+										${fn:length(post.likes)}</span> <input type="submit"
+										style="opacity: 0; position: absolute;">
+								</div>
+							</form>
+							<form:form method="post" action="./sharePost">
+								<input type="hidden" name="sharedPost" value="${post.id}">
+								<div class="btn btn-default stat-item">
+									<span class="fa fa-share icon"> 12</span> <input type="submit"
+										style="opacity: 0; position: absolute;">
+								</div>
+							</form:form>
 						</div>
 					</div>
 
 					<div class="post-footer">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Add a comment"> <span
-								class="input-group-addon"> <a href="#"><i class="fa fa-edit"></i></a>
-							</span>
-						</div>
+						<form action="commentPost" method="post">
+							<div class="input-group"  style="width: 100% !important">
+								<input type="hidden" name="commentedPost" value="${post.id}">
+									<input type="text" name="commentText" required maxlength="60" placeholder="Add a comment" class="form-control">
+									<span class="input-group-btn">
+										<div class="btn commentButton">
+											<span>Comment</span>
+											<input type="submit" class="commentForm"/>
+										</div>
+									</span>
+							</div>
+						</form>
 						<ul class="comments-list">
-							<li class="comment"><a class="pull-left" href="#"> <img
-									class="avatar" src="http://bootdey.com/img/Content/user_1.jpg"
-									alt="avatar">
-							</a>
-								<div class="comment-body">
-									<div class="comment-heading">
-										<h4 class="user">Gavino Free</h4>
-										<h5 class="time">5 minutes ago</h5>
+	
+						<c:forEach var="postComment" items="${post.comments}">
+								<li class="comment"><a class="pull-left" href="#"> 
+									<img class="avatar" src="${postComment.owner.profilePath}" alt="avatar">
+								</a>
+									<div class="comment-body">
+										<div class="comment-heading">
+											<h4 class="user">${postComment.owner.firstName} ${postComment.owner.firstName}</h4>
+											<h5 class="time">${postComment.created}</h5>
+										</div>
+										<p>${postComment.text}</p>
 									</div>
-									<p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
-								</div>
-								<ul class="comments-list">
-									<li class="comment"><a class="pull-left" href="#"> <img
-											class="avatar"
-											src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar">
-									</a>
-										<div class="comment-body">
-											<div class="comment-heading">
-												<h4 class="user">Ryan Haywood</h4>
-												<h5 class="time">3 minutes ago</h5>
-											</div>
-											<p>Relax my friend</p>
-										</div></li>
-									<li class="comment"><a class="pull-left" href="#"> <img
-											class="avatar"
-											src="http://bootdey.com/img/Content/user_2.jpg" alt="avatar">
-									</a>
-										<div class="comment-body">
-											<div class="comment-heading">
-												<h4 class="user">Gavino Free</h4>
-												<h5 class="time">3 minutes ago</h5>
-											</div>
-											<p>Ok, cool.</p>
-										</div></li>
-								</ul></li>
+								</li>
+						</c:forEach>
 						</ul>
 					</div>
 				</div>

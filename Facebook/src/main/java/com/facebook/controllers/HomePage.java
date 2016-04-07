@@ -31,7 +31,7 @@ public class HomePage {
 	public String postMethod(Model model) {
 		User user = new User();
 		UserLogin userLogin = new UserLogin();
-	
+
 		model.addAttribute("user", user);
 		model.addAttribute("userLogin", userLogin);
 		return "index";

@@ -8,7 +8,7 @@
 	<c:when test="${not empty sessionScope.currentUser}">
 		<div style="margin-bottom: 110px">
 			<header id="fh5co-header" role="banner">
-				<nav class="navbar navbar-default" role="navigation">
+				<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 					<div class="container-fluid" style="font-size: 15px !important">
 						<div class="navbar-header">
 							<!-- Mobile Toggle Menu Button -->
@@ -26,8 +26,6 @@
 								</a></li>
 
 								<c:set var="uri" value="${request.requestURI}" />
-
-
 
 								<li
 									<c:if test="${fn:contains(uri, 'main')}">class="active"</c:if>><a

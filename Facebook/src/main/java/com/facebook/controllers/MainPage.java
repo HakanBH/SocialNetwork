@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.facebook.DAO.IPostDAO;
 import com.facebook.DAO.IUserDAO;
 import com.facebook.POJO.Post;
 import com.facebook.POJO.User;
@@ -18,7 +19,22 @@ import com.facebook.POJO.User;
 @Controller
 @RequestMapping("/main")
 public class MainPage {
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/likePost", method = RequestMethod.POST)
+	public String likePost(HttpServletRequest request) {
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		String likedPostId = (String) request.getParameter("likedPost");
+		int id = Integer.parseInt(likedPostId);
+		
+		Post likedPost = IPostDAO.getPostDAO().getPostById(id);
+		likedPost.addLike(currentUser);
+		currentUser.likePost(likedPost);
+
+		IPostDAO.getPostDAO().likePost(likedPost, currentUser);
+		
+		return "redirect:/main";
+	}
+	
+	@RequestMapping(method = {RequestMethod.GET,RequestMethod.POST})
 	public String mainController(Model model, HttpServletRequest request) {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		
@@ -27,6 +43,11 @@ public class MainPage {
 		Collection<Post> posts = currentUser.getPosts();
 		if(!posts.isEmpty()){
 			model.addAttribute("posts",posts);
+		}
+		
+		for(Post p : posts){
+			System.err.println(p);
+			System.err.println(p.getComments().get(0).getText());
 		}
 		return "main";
 	}
@@ -42,6 +63,8 @@ public class MainPage {
 		
 		return "redirect:/main";
 	}
+	
+
 	
 	public static void prepareSuggestions(Model model, User currentUser){
 		if (currentUser.getFriends().isEmpty() || currentUser.getFriendsOfFriends().size() < User.NUMBER_OF_FRIEND_SUGGESTIONS) {
@@ -62,19 +85,5 @@ public class MainPage {
 			List<User> friendsOfFriends = currentUser.getFriendsOfFriends();
 			model.addAttribute("friendSuggestions", friendsOfFriends);
 		}
-	}
-	
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public String mainControllear(Model model, HttpServletRequest request) {
-		User currentUser = (User) request.getSession().getAttribute("currentUser");
-		
-		prepareSuggestions(model, currentUser);
-		
-		Collection<Post> posts = currentUser.getPosts();
-		if(!posts.isEmpty()){
-			model.addAttribute("posts",posts);
-		}
-		return "main";
 	}
 }

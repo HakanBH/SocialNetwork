@@ -84,17 +84,14 @@ public class PostDAO implements IPostDAO {
 	}
 
 	@Override
-	public void commentPost(int postId, int userId, String str) {
+	public void commentPost(Post post, User user, Comment c) {
 		Session session = null;
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
 			
-			Post p = (Post) session.get(Post.class, postId);
-			User u = (User) session.get(User.class, userId);
-			
-			Comment c = new Comment(u, p, str);
-			
+			c.setOwner(user);
+			c.setPost(post);
 			session.save(c);
 			
 			session.getTransaction().commit();

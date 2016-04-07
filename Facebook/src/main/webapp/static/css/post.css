@@ -64,6 +64,9 @@
 
 .post .post-description .stats {
 	margin-top: 20px;
+	margin-left: 20px;
+	display: flex;
+	word-spacing:5px;
 }
 
 .post .post-description .stats .stat-item {
@@ -71,9 +74,6 @@
 	margin-right: 15px;
 }
 
-.post .post-description .stats .stat-item .icon {
-	margin-right: 8px;
-}
 
 .post .post-footer {
 	border-top: 1px solid #ddd;

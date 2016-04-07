@@ -1,5 +1,6 @@
 package com.facebook.POJO;
 
+import java.util.ArrayList;
 import java.util.Collections; 
 import java.util.HashSet;
 import java.util.List;
@@ -30,8 +31,8 @@ public class Post extends BaseEntity {
 			inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false) )
 	private Set<User> likes;
 	
-	@OneToMany(mappedBy = "post")
-	private List<Comment> postComments;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "post")
+	private List<Comment> comments = new ArrayList<Comment>();
 	
 	public Post() {}
 
@@ -42,16 +43,24 @@ public class Post extends BaseEntity {
 		setText(text);
 	}
 	
+	public List<Comment> getComments() {
+		return Collections.unmodifiableList(comments);
+	}
+	
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	public String getPicturePath() {
 		return "images/" + this.owner.getEmail() + "/PostPictures/" + this.picture.getName();
 	}
 	
 	public void addComment(Comment c){
-		postComments.add(c);
+		comments.add(c);
 	}
 	
 	public void removeComment(Comment c){
-		postComments.remove(c);
+		comments.remove(c);
 	}
 	
 	public void addLike(User u) {

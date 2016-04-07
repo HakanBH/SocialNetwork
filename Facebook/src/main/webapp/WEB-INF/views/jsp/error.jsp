@@ -12,9 +12,10 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 <link href="./css/style.css" rel="stylesheet">
 <link href="./css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="css/customStyle.css">
 
 </head>
-<body>
+<body style="color: white">
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<div class="container" style="margin-top: 100px">
 		<div class="col-md-2" style="margin-top: 20px">
@@ -30,7 +31,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h1>
-					<a href="./index"> Return to main page. </a>
+					<a style="color:white" href="./index"> Return to main page. </a>
 				</h1>
 			</div>
 		</div>

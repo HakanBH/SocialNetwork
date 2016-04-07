@@ -51,10 +51,6 @@ public class User extends BaseEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private Set<Album> albums = new HashSet<Album>();
-<<<<<<< HEAD
-=======
-	
->>>>>>> 4055b0252c2f795b078d60cd7cb2b469140c9add
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Post> ownedPosts = new ArrayList<Post>();
@@ -69,14 +65,13 @@ public class User extends BaseEntity {
 	@ManyToMany(mappedBy = "friends")
 	private Set<User> befriendedBy = new HashSet<User>();
 
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "owner")
 	private List<Comment> userComments;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private UserInfo userInfo;
 
-	public User() {
-	}
+	public User() {}
 
 	public User(User u) {
 		this(u.getEmail(), u.getPassword(), u.getFirstName(), u.getLastName());
@@ -117,6 +112,18 @@ public class User extends BaseEntity {
 		albums.add(a);
 	}
 
+	public void removePost(Album a){
+		albums.remove(a);
+	}
+	
+	public void likePost(Post p){
+		likedPosts.add(p);
+	}
+	
+	public void unlikePost(Post p){
+		likedPosts.remove(p);
+	}
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + getId() + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
@@ -200,10 +207,6 @@ public class User extends BaseEntity {
 		return this.profilePicture;
 	}
 
-	public Set<Album> getAlbums() {
-		return Collections.unmodifiableSet(this.albums);
-	}
-	
 	public String getProfilePath() {
 		if (this.profilePicture == null || this.profilePicture.getName().equals("./images/default-pic.png")) {
 			return "./images/default-pic.png";

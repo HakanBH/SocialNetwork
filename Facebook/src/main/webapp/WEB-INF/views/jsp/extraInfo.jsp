@@ -85,6 +85,7 @@
 						</c:out>
 					</div>
 				</c:if>
+			
 				
 				<form:form action="uploadInfo" id="uploadInfo"
 					commandName="userInfo">

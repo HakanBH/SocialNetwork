@@ -42,6 +42,7 @@ public class BgImageUpload {
 			try {
 				Album album = IAlbumDAO.getAlbumDAO().getAlbum(user, PICTURES_FOLDER);
 				if (album == null) {
+					album = new Album(PICTURES_FOLDER, user);
 					IAlbumDAO.getAlbumDAO().insertAlbum(user,album);
 				}
 

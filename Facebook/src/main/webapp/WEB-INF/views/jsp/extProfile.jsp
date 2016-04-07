@@ -43,7 +43,6 @@
 						<a class="name_left" href="./settings">&nbsp;Personal Information</a>
 					</p>
 
-
 					</br>
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship status: ${userInfo.relationshipStatus}</p> 
 					</br>
