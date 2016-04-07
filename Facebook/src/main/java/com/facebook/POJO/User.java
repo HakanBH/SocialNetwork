@@ -197,9 +197,9 @@ public class User extends BaseEntity {
 	}
 
 	public Set<Album> getAlbums() {
-		return albums;
+		return Collections.unmodifiableSet(this.albums);
 	}
-
+	
 	public String getProfilePath() {
 		if (this.profilePicture == null || this.profilePicture.getName().equals("./images/default-pic.png")) {
 			return "./images/default-pic.png";
