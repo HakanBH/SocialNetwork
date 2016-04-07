@@ -51,6 +51,10 @@ public class User extends BaseEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private Set<Album> albums = new HashSet<Album>();
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 4055b0252c2f795b078d60cd7cb2b469140c9add
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Post> ownedPosts = new ArrayList<Post>();
@@ -267,5 +271,9 @@ public class User extends BaseEntity {
 		} else {
 			return "images/" + this.email + "/BgPictures/" + this.bgPicture.getName();
 		}
+	}
+	
+	public Set<Album> getAlbums() {
+		return Collections.unmodifiableSet(this.albums);
 	}
 }
