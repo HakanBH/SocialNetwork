@@ -45,13 +45,13 @@
 
 					</br>
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship status: ${userInfo.relationshipStatus}</p> 
-					</br>
+					
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday: ${userInfo.birthday	}</p> 
-					</br>
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender: ${userInfo.gender}</p> ${userInfo.gender}
-					</br>
+					
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender: ${userInfo.gender}</p> 
+					
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">City: ${userInfo.city}</p> 
-					</br>
+					
 				</div>
 			</div>
 
