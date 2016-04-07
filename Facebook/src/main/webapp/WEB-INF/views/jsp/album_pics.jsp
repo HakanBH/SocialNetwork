@@ -11,6 +11,7 @@
       	  <link href="css/lightbox.css" rel="stylesheet">
 	  <link rel="stylesheet" href="css/bootstrap.css">
       <link rel="stylesheet" href="css/customStyle.css">
+       <link rel="stylesheet" href="css/imageUpload.css">
       <title>Asocialen.com</title>
    </head>
    <body>
@@ -100,12 +101,25 @@
 </div>
 
 <div id="upload_pic"> 
-<form class="upload_form" method="post" action="./FileUpload" name="file" enctype="multipart/form-data">
-<h3 style="font-weight:bold;">Upload a new picture</h3>
-  <input type="file" name="newPic" accept="image/png, image/jpeg, image/gif">
-  <input type="hidden" value="currentAlbum" name="currentAlbum">
- <button id="post_button2" type="submit">Upload!</button>
-</form>
+<h3 style="font-weight:bold; margin-left: 20px;">Upload a picture</h3>
+<div class="input-group image-preview" align="left"
+							style="margin-top: 20px; margin-left: 22px;">
+							<span class="input-group-btn"> <!-- image-preview-clear button -->
+								<button type="button"
+									class="btn btn-default image-preview-clear"
+									style="display: none;">
+									<span class="glyphicon glyphicon-remove"></span> Clear
+								</button> <!-- image-preview-input -->
+								<div class="btn btn-default image-preview-input">
+									<span class="glyphicon glyphicon-picture"></span> <span
+										class="image-preview-input-title">Upload a picture</span> <input
+										type="file" accept="image/png, image/jpeg, image/gif"
+										name="picture" />
+									<!-- rename it -->
+								</div> <input class="btn btn-primary post image-preview-input"
+								type="submit" value="Upload">
+							</span>
+						</div>
 
 <form class="upload_form" method="post" action="./ChangeName" name="albumName" style="margin-top:50px;">
 <h3 style="font-weight:bold;">Rename your album</h3>
