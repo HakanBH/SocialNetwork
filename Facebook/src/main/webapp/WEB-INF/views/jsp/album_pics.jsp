@@ -24,78 +24,21 @@
 	  <div id="image_space">
                <a href="#"><img id="prof_pic_post" src="images/pic.png" align="left" > </a>
 			    </div>
-				<h1 class="text_title">MY ALBUM TITLE</h1>
+				<h1 class="text_title">${selectedAlbum.title}</h1>
 	  </div>
 	  <div class="pic_container2">
-	  
+	   <c:forEach  var="pic" items="${selectedAlbum.pictures}">
 		<div class="responsive">
+		<h1>${selectedAlbum.pictures[0].name}</h1>
   <div class="img">
     <a href="images/backgrounds/background-1.jpg" data-lightbox="album"  style="text-decoration:none; color:black;">
       <img class="album_pic" src="images/backgrounds/background-1.jpg" alt="Trolltunga Norway" width="300" height="200">
-    <div class="desc"> Title a very very very very very very long title + number of likes 0<a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span></a></div>
+    <div class="desc"><a href="#"><span class="glyphicon glyphicon-thumbs-up"> </span></a></div>
 	</a>
   </div>
 </div>
-	  
-	  			  
-			<div class="responsive">
-  <div class="img">
-    <a href="images/backgrounds/background-1.jpg" data-lightbox="album"  style="text-decoration:none; color:black;">
-      <img class="album_pic" src="images/backgrounds/background-1.jpg" alt="Trolltunga Norway" width="300" height="200">
-    <div class="desc"> Title a very very very very very very long title + number of likes 0<a href="#"><img class="face_icon" src="images/like.png" align="right" alt="Alt text"></a></div>
-	</a>
-  </div>
-</div>
-	 	  
-	  			  
-			<div class="responsive">
-  <div class="img">
-    <a href="images/backgrounds/background-1.jpg" data-lightbox="album"  style="text-decoration:none; color:black;">
-      <img class="album_pic" src="images/backgrounds/background-1.jpg" alt="Trolltunga Norway" width="300" height="200">
-    <div class="desc"> Title a very very very very very very long title + number of likes 0<a href="#"><img class="face_icon" src="images/like.png" align="right" alt="Alt text"></a></div>
-	</a>
-  </div>
-</div>
-	  	  
-	  			  
-			<div class="responsive">
-  <div class="img">
-    <a href="images/backgrounds/background-1.jpg" data-lightbox="album"  style="text-decoration:none; color:black;">
-      <img class="album_pic" src="images/backgrounds/background-1.jpg" alt="Trolltunga Norway" width="300" height="200">
-    <div class="desc"> Title a very very very very very very long title + number of likes 0<a href="#"><img class="face_icon" src="images/like.png" align="right" alt="Alt text"></a></div>
-	</a>
-  </div>
-</div>
-	  	  
-	  			  
-			<div class="responsive">
-  <div class="img">
-    <a href="images/backgrounds/background-1.jpg" data-lightbox="album"  style="text-decoration:none; color:black;">
-      <img class="album_pic" src="images/backgrounds/background-1.jpg" alt="Trolltunga Norway" width="300" height="200">
-    <div class="desc"> Title a very very very very very very long title + number of likes 0<a href="#"><img class="face_icon" src="images/like.png" align="right" alt="Alt text"></a></div>
-	</a>
-  </div>
-</div>
-	  	  
-	  			  
-			<div class="responsive">
-  <div class="img">
-    <a href="images/backgrounds/background-1.jpg" data-lightbox="album"  style="text-decoration:none; color:black;">
-      <img class="album_pic" src="images/backgrounds/background-1.jpg" alt="Trolltunga Norway" width="300" height="200">
-    <div class="desc"> Title a very very very very very very long title + number of likes 0<a href="#"><img class="face_icon" src="images/like.png" align="right" alt="Alt text"></a></div>
-	</a>
-  </div>
-</div>
-	  	  
-	  			  
-			<div class="responsive">
-  <div class="img">
-    <a href="images/backgrounds/background-1.jpg" data-lightbox="album"  style="text-decoration:none; color:black;">
-      <img class="album_pic" src="images/backgrounds/background-1.jpg" alt="Trolltunga Norway" width="300" height="200">
-    <div class="desc"> Title a very very very very very very long title + number of likes 0<a href="#"><img class="face_icon" src="images/like.png" align="right" alt="Alt text"></a></div>
-	</a>
-  </div>
-</div>
+</c:forEach>
+	  			 
 	   
 
 </div>
