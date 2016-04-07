@@ -1,6 +1,6 @@
-package com.facebook.controllers;
+package com.facebook.controllers.imageUploads;
 
-import java.io.File;  
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,9 +26,9 @@ public class PostUpload {
 	private static final int BUFFER_SIZE = 1024 * 1024;
 	private static final String PICTURE_FOLDER = "PostPictures";
 	private String postText;
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public String uploadPost(Model model, HttpServletRequest request, HttpServletResponse response){
+	public String uploadPost(Model model, HttpServletRequest request) {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		String filePath = User.STORAGE_PATH + currentUser.getEmail() + File.separator + PICTURE_FOLDER + File.separator;
 		new File(filePath).mkdirs();
@@ -36,21 +36,33 @@ public class PostUpload {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
 		if (isMultipart) {
-			Album album = new Album(PICTURE_FOLDER, currentUser);
+
+			Album album = IAlbumDAO.getAlbumDAO().getAlbum(currentUser, PICTURE_FOLDER);
+			if (album == null) {
+				album = new Album(PICTURE_FOLDER, currentUser);
+				IAlbumDAO.getAlbumDAO().insertAlbum(currentUser, album);
+			}
+			
 			String picName;
 			try {
-				picName = uploadPic(request, filePath,album);
+				picName = uploadPic(request, filePath, album);
 			} catch (Exception e) {
 				return "forward:/main";
 			}
+			
 			Picture postPicture = new Picture(picName);
 			album.addPicture(postPicture);
 			IAlbumDAO.getAlbumDAO().uploadImage(postPicture, album);
-			
-			Post p = new Post(currentUser, postPicture , this.postText);
+
+			Post p = new Post(currentUser, postPicture, this.postText);
+			currentUser.addPost(p);
 			IPostDAO.getPostDAO().insertPost(p);
 		}
-		model.addAttribute("posts",currentUser.getPosts());
+		
+		System.out.println(currentUser.getPosts());
+		
+		model.addAttribute("posts", currentUser.getPosts());
+		
 		return "redirect:/main";
 	}
 
@@ -77,17 +89,18 @@ public class PostUpload {
 				String extension = FilenameUtils.getExtension(fileName);
 
 				boolean isImage = extension.equals("gif") || extension.equals("jpg") || extension.equals("png");
-				if (item != null && (!isImage || item.getSize() > BUFFER_SIZE)) {
+				if(item.getSize()==0){
+					return null;
+				}
+				if (!isImage || item.getSize() > BUFFER_SIZE) {
 					request.setAttribute("imageError", "File must be an image with size less than 1 MB.");
 					throw new Exception();
 				}
 				// Write the file
-				System.err.println(album.getTitle());
-				System.err.println(album.getPictures());
-				file = new File(filePath + "post-pic" + (album.getPictures().size()+1) + "." + extension);
+				file = new File(filePath + "post-pic" + (album.getPictures().size() + 1) + "." + extension);
 				item.write(file);
 			} else {
-				this.postText=item.getString();
+				this.postText = item.getString();
 			}
 		}
 		return file.getName();

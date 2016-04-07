@@ -25,7 +25,8 @@ public class Album extends BaseEntity {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "album")
 	private List<Picture> pictures = new ArrayList<Picture>();
 
-	public Album() {}
+	public Album() {
+	}
 
 	public Album(String title, User owner) {
 		setTitle(title);
@@ -38,6 +39,10 @@ public class Album extends BaseEntity {
 
 	public List<Picture> getPictures() {
 		return Collections.unmodifiableList(pictures);
+	}
+
+	public void setPictures(List<Picture> pictures) {
+		this.pictures = pictures;
 	}
 
 	public void setTitle(String title) {

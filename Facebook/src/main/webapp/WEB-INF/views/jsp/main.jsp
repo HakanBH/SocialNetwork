@@ -150,7 +150,12 @@
 					<div class="post-description">
 						<p>${post.text}</p>
 						
-						<img id="post_img" src="${post.picturePath}" align="middle">
+						<c:choose>						
+							<c:when test="${not empty post.picture.name}">
+								<img id="post_img" src="${post.picturePath}" align="middle">
+							</c:when>
+						</c:choose>
+						
 						<div class="stats">
 							<a href="#" class="btn btn-default stat-item"> <i
 								class="fa fa-thumbs-up icon"></i>2
@@ -162,10 +167,8 @@
 
 					<div class="post-footer">
 						<div class="input-group">
-							<input type="text" class="form-control"
-								placeholder="Add a comment"> <span
-								class="input-group-addon"> <a href="#"><i
-									class="fa fa-edit"></i></a>
+							<input type="text" class="form-control" placeholder="Add a comment"> <span
+								class="input-group-addon"> <a href="#"><i class="fa fa-edit"></i></a>
 							</span>
 						</div>
 						<ul class="comments-list">
