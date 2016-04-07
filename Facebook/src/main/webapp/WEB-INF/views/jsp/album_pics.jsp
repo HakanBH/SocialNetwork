@@ -20,13 +20,13 @@
 
 	<jsp:include page="prof-pics.jsp"></jsp:include>
 
-	  <div id="album_title">
+	  <div class="panel panel-white panel-shadow" style="width:100%; padding-left: 20px;">
 	  <div id="image_space">
                <a href="#"><img id="prof_pic_post" src="images/pic.png" align="left" > </a>
 			    </div>
 				<h1 class="text_title">${selectedAlbum.title}</h1>
 	  </div>
-	  <div class="pic_container2">
+	  <div class="pic_container2 panel panel-white panel-shadow"">
 	   <c:forEach  var="pic" items="${selectedAlbum.pictures}">
 		<div class="responsive">
 		<h1>${selectedAlbum.pictures[0].name}</h1>
@@ -43,7 +43,7 @@
 
 </div>
 
-<div id="upload_pic"> 
+<div id="upload_pic" class="panel panel-white panel-shadow"> 
 <h3 style="font-weight:bold; margin-left: 20px;">Upload a picture</h3>
 <div class="input-group image-preview" align="left"
 							style="margin-top: 20px; margin-left: 22px;">

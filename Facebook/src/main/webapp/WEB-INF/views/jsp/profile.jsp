@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html>
 <head>
@@ -15,6 +17,7 @@
 <link rel="stylesheet" href="css/post.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/customStyle.css">
+<link rel="stylesheet" href="css/imageUpload.css">
 
 <title>Asocialen.com</title>
 </head>
@@ -25,7 +28,7 @@
 		<jsp:include page="prof-pics.jsp"></jsp:include>
 
 		<div id="left_col">
-			<div id="first_left">
+			<div class="panel panel-white panel-shadow">
 				<div id="image_space">
 					<a href="./settings"><img id="prof_pic_post1" src="images/prof.png"
 						align="left"> </a>
@@ -50,7 +53,7 @@
 				</div>
 			</div>
 
-			<div id="first_left">
+			<div class="panel panel-white panel-shadow">
 				<div id="image_space">
 					<a href="./album"><img id="prof_pic_post1" src="images/pic.png"
 						align="left"> </a>
@@ -77,7 +80,7 @@
 				</p>
 			</div>
 
-			<div id="first_left">
+			<div class="panel panel-white panel-shadow">
 				<div id="image_space">
 					<a href="./friends"><img id="prof_pic_post" src="images/friends.png"
 						align="left"> </a>
@@ -102,155 +105,126 @@
 
 		</div>
 		<div id="center_col">
-			<div id="create_post">
-				<div id="image_space">
-					<a href="#"><img id="prof_pic_post"
-						src="${currentUser.profilePath}" align="left"> </img></a>
-				</div>
-				<div id="post_content">
-					<form method="post" action="/post" id="post_text_box" align="left"
-						style="">
-						<input class="post_text" name="post" type="text"
-							placeholder="What´s happening..." />
-					</form>
-				</div>
-				<div id="panel">
-					<a href="#"><img class="face_icon" src="images/pic.png"
-						align="left"></img></a>
-					<button id="post_button" type="submit" align="right">Post</button>
-				</div>
-			</div>
-			<div id="new_post">
-				<div id="post_content">
-					<div id="image_space">
-						<a href="#"><img id="prof_pic_post" src="images/default.png"
-							align="left"> </img></a>
-						<p id="post_info">
-							<a href="#">User Name Here</a> </br> Time Here!
-						</p>
+			<!--  POST UPLOAD -->
+			<form:form method="post" enctype="multipart/form-data" action="PostUpload">
+				<div class="panel panel-white panel-shadow">
+					<div class="panel-heading">
+						<div id="image_space">
+							<a href="#"> <img id="prof_pic_post"
+								src="${currentUser.profilePath}" align="left">
+							</a>
+						</div>
+						<h4 style="margin-left: 55px; margin-top: 25px">Upload a post
+							on your timeline</h4>
 					</div>
-					<p id="post_text">Ius id vidit volumus mandamus, vide veritus
-						democritum te nec, ei eos debet libris consulatu. No mei ferri
-						graeco dicunt, ad cum veri accommodare. Sed at malis omnesque
-						delicata, usu et iusto zzril meliore. Dicunt maiorum eloquentiam
-						cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos has,
-						ea dicit voluptua eloquentiam pro, ad sit quas qualisque. Eos
-						vocibus deserunt quaestio ei. Blandit incorrupte quaerendum in
-						quo, nibh impedit id vis, vel no nullam semper audiam. Ei populo
-						graeci consulatu mei, has ea stet modus phaedrum. Inani oblique ne
-						has, duo et veritus detraxit. Tota ludus oratio ea mel, offendit
-						persequeris ei vim. Eos dicat oratio partem ut, id cum ignota
-						senserit intellegat. Sit inani ubique graecis ad, quando graecis
-						liberavisse et cum, dicit option eruditi at duo. Homero salutatus
-						suscipiantur eum id, tamquam voluptaria expetendis ad sed, nobis
-						feugiat similique usu ex. Eum hinc argumentum te, no sit percipit
-						adversarium, ne qui feugiat persecuti. Odio omnes scripserit ad
-						est, ut vidit lorem maiestatis his, putent mandamus gloriatur ne
-						pro. Oratio iriure rationibus ne his, ad est corrumpit splendide.
-						Ad duo appareat moderatius, ei falli tollit denique eos. Dicant
-						evertitur mei in, ne his deserunt perpetua sententiae, ea sea
-						omnes similique vituperatoribus. Ex mel errem intellegebat
-						comprehensam, vel ad tantas antiopam delicatissimi, tota ferri
-						affert eu nec. Legere expetenda pertinacia ne pro, et pro impetus
-						persius assueverit.</p>
-					<img id="post_img" src="images/default3.png" align="center">
-					<div id="panel">
-						<div class="icon_div">
-							<a href="#"><img class="face_icon" src="images/like.png"
-								align="left" alt="Alt text">Likes</a>
+					<div class="panel-body">
+						<div id="post_content">
+							<textarea maxlength="255" rows="4" cols="63" class="form-control"
+								name="postText" id="postText" style="resize: none"
+								placeholder="What's on your mind?"></textarea>
 						</div>
-						<div class="icon_div">
-							<a href="#"><img class="face_icon" src="images/Comment.png"
-								align="left">Comment</a>
-						</div>
-						<div class="icon_div">
-							<a href="#"><img class="face_icon" src="images/share.png"
-								align="left">Share</a>
+						<div class="input-group image-preview" align="right"
+							style="margin-top: 10px">
+							<span class="input-group-btn"> <!-- image-preview-clear button -->
+								<button type="button"
+									class="btn btn-default image-preview-clear"
+									style="display: none;">
+									<span class="glyphicon glyphicon-remove"></span> Clear
+								</button> <!-- image-preview-input -->
+								<div class="btn btn-default image-preview-input">
+									<span class="glyphicon glyphicon-picture"></span> <span
+										class="image-preview-input-title">Upload a picture</span> <input
+										type="file" accept="image/png, image/jpeg, image/gif"
+										name="picture" />
+									<!-- rename it -->
+								</div> <input class="btn btn-primary post image-preview-input"
+								type="submit" value="Post">
+							</span>
 						</div>
 					</div>
-					<div id="input-group">
-						<img id="prof_pic_post" src="images/default.png" align="left">
-						<input class="form-comment" placeholder="Add a comment"
-							type="text">
-					</div>
+					<c:if test="${not empty imageError}">
+						<div class="form-error" align="right">${imageError}</div>
+					</c:if>
 				</div>
+			</form:form>
+			<!-- END OF POST UPLOAD -->
+			
+			<!-- posts -->
+			<c:forEach var="post" items="${posts}">
+				<div class="panel panel-white post panel-shadow">
+					<div class="post-heading">
+						<div class="pull-left image">
+							<a href="#"><img src="${post.owner.profilePath}"
+								class="img-circle avatar" alt="user profile image"></a>
+						</div>
+						<div class="pull-left meta">
+							<div class="title h5">
+								<a href="#"><b>${post.owner.firstName}
+										${post.owner.lastName}</b></a> made a post.
+							</div>
+							<h6 class="text-muted time">${post.created}</h6>
+						</div>
+					</div>
+					<div class="post-description">
+						<p>${post.text}</p>
+						<c:if test="${not empty post.picture.name}">
+							<img id="post_img" src="${post.picturePath}" align="middle">
+						</c:if>
 
-				<ul class="comments-list">
-					<li class="comment">
-						<div id="post_content2">
-							<div id="image_space">
-								<a href="#"><img id="prof_pic_post" src="images/default.png"
-									align="left"> </img></a>
-								<p id="post_info">
-									<a href="#">User Name Here</a> </br> Time Here!
-								</p>
-							</div>
-							<p id="post_text">Ius id vidit volumus mandamus, vide veritus
-								democritum te nec, ei eos debet libris consulatu. No mei ferri
-								graeco dicunt, ad cum veri accommodare. Sed at malis omnesque
-								delicata, usu et iusto zzril meliore. Dicunt maiorum eloquentiam
-								cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos
-								has, ea dicit voluptua eloquentiam pro, ad sit quas qualisque.
-								Eos vocibus deserunt quaestio ei.</p>
-							<img id="post_img" src="images/background-1.jpg" align="center">
-							<div id="panel">
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/like.png"
-										align="left" alt="Alt text">Likes</a>
+						<div class="stats">
+							<form method="post" action="./likePost">
+								<input name="likedPost" type="hidden" value="${post.id}">
+								<div id="${post.id}"
+									class="${cssClass} btn btn-default stat-item">
+									<span class="fa fa-thumbs-up icon">
+										${fn:length(post.likes)}</span> <input type="submit"
+										style="opacity: 0; position: absolute;">
 								</div>
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/Comment.png"
-										align="left">Comment</a>
+							</form>
+							<form:form method="post" action="./sharePost">
+								<input type="hidden" name="sharedPost" value="${post.id}">
+								<div class="btn btn-default stat-item">
+									<span class="fa fa-share icon"> 12</span> <input type="submit"
+										style="opacity: 0; position: absolute;">
 								</div>
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/share.png"
-										align="left">Share</a>
-								</div>
-							</div>
+							</form:form>
 						</div>
-						<p>
-							</br>&nbsp;</br>
-						</p>
-					</li>
-					<li class="comment">
-						<div id="post_content2">
-							<div id="image_space">
-								<a href="#"><img id="prof_pic_post" src="images/default.png"
-									align="left"> </img></a>
-								<p id="post_info">
-									<a href="#">User Name Here</a> </br> Time Here!
-								</p>
+					</div>
+
+					<div class="post-footer">
+						<form action="commentPost" method="post">
+							<div class="input-group"  style="width: 100% !important">
+								<input type="hidden" name="commentedPost" value="${post.id}">
+									<input type="text" name="commentText" required maxlength="60" placeholder="Add a comment" class="form-control">
+									<span class="input-group-btn">
+										<div class="btn commentButton">
+											<span>Comment</span>
+											<input type="submit" class="commentForm"/>
+										</div>
+									</span>
 							</div>
-							<p id="post_text">Ius id vidit volumus mandamus, vide veritus
-								democritum te nec, ei eos debet libris consulatu. No mei ferri
-								graeco dicunt, ad cum veri accommodare. Sed at malis omnesque
-								delicata, usu et iusto zzril meliore. Dicunt maiorum eloquentiam
-								cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos
-								has, ea dicit voluptua eloquentiam pro, ad sit quas qualisque.
-								Eos vocibus deserunt quaestio ei.</p>
-							<div id="panel">
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/like.png"
-										align="left" alt="Alt text">Likes</a>
-								</div>
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/Comment.png"
-										align="left">Comment</a>
-								</div>
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/share.png"
-										align="left">Share</a>
-								</div>
-							</div>
-						</div>
-						<p>
-							</br>&nbsp;</br>
-						</p>
-					</li>
-				</ul>
-			</div>
+						</form>
+						<ul class="comments-list">
+	
+						<c:forEach var="postComment" items="${post.comments}">
+								<li class="comment"><a class="pull-left" href="#"> 
+									<img class="avatar" src="${postComment.owner.profilePath}" alt="avatar">
+								</a>
+									<div class="comment-body">
+										<div class="comment-heading">
+											<h4 class="user">${postComment.owner.firstName} ${postComment.owner.firstName}</h4>
+											<h5 class="time">${postComment.created}</h5>
+										</div>
+										<p>${postComment.text}</p>
+									</div>
+								</li>
+						</c:forEach>
+						</ul>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
-
+		
 		<div id="right_col">
 
 			<jsp:include page="may-know.jsp"></jsp:include>

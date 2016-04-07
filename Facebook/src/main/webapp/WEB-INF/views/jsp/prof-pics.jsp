@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Asocialen.com</title>
-<link rel="stylesheet" href="css/customStyle.css">
 </head>
 <body>
 	<div id="user_prof"

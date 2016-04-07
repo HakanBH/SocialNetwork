@@ -15,14 +15,73 @@ body {
 	border-color: #ccc;
 }
 
-.commentButton:focus,
-.commentButton.focus,
-{
-	color: #333;
-	background-color: #e6e6e6;
-	border-color: #8c8c8c;
-}
+.commentButton
 
+
+
+
+:focus
+,
+.commentButton
+
+
+
+
+.focus
+,
+{
+color
+
+
+
+
+:
+
+
+ 
+
+
+#333
+
+
+
+
+;
+background-color
+
+
+
+
+:
+
+
+ 
+
+
+#e6e6e6
+
+
+
+
+;
+border-color
+
+
+
+
+:
+
+
+ 
+
+
+#8c8c8c
+
+
+
+
+;
+}
 .commentButton:hover {
 	color: #333;
 	background-color: #e6e6e6;
@@ -50,7 +109,6 @@ form.upload_form {
 	height: 300px;
 	word-wrap: break-word;
 	border: 1px solid black;
-	border-radius: 10px;
 	background-color: white;
 	float: left;
 	margin-top: 10px;
@@ -62,7 +120,6 @@ form.upload_form {
 	height: 300px;
 	word-wrap: break-word;
 	border: 1px solid black;
-	border-radius: 10px;
 	background-color: white;
 	float: left;
 	margin-top: 10px;
@@ -191,21 +248,23 @@ div.corte {
 }
 
 div.pic_container1 {
-	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 80%;
 	border: 1px solid black;
 	margin-top: 10px;
-	border-radius: 10px;
 	background-color: #FFFFFF;
 	height: auto;
 	overflow: auto;
 	float: left;
+	padding-bottom: 20px;
+	width: 80%;
 }
 
 div.pic_container {
 	width: 68%;
 	border: 1px solid black;
 	margin-top: 10px;
-	border-radius: 10px;
 	background-color: #FFFFFF;
 	height: auto;
 	overflow: auto;
@@ -216,7 +275,6 @@ div.pic_container2 {
 	width: 70%;
 	border: 1px solid black;
 	margin-top: 10px;
-	border-radius: 10px;
 	background-color: #FFFFFF;
 	height: auto;
 	overflow: auto;
@@ -374,6 +432,7 @@ img.album_pic {
 	background-position: center;
 	background-size: cover;
 	border-radius: 10px;
+	margin-bottom: 10px;
 }
 
 #photo_container {
@@ -383,8 +442,8 @@ img.album_pic {
 
 #pictures_min {
 	border-radius: 10px;
-	width: 100px;
-	height: 100px;
+	width: 96px;
+	height: 96px;
 	margin: 10px;
 	position: relative;
 }

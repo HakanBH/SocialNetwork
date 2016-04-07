@@ -18,12 +18,11 @@
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<script src="js/imageUpload.js"></script>
 
-<link rel="stylesheet" href="css/customStyle.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/imageUpload.css">
 <link rel="stylesheet" href="css/post.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/customStyle.css">
+<link rel="stylesheet" href="css/imageUpload.css">
 
 <title>Asocialen.com</title>
 </head>
@@ -32,7 +31,7 @@
 	<div id="main_container">
 		<jsp:include page="prof-pics.jsp"></jsp:include>
 
-		<div id="album_title">
+		<div class="panel panel-white panel-shadow" style="padding-left: 20px; width:100%">
 			<div id="image_space">
 				<a href="#"><img id="prof_pic_post" src="images/set.png"
 					align="left"> </a>
@@ -40,16 +39,10 @@
 			<h1 class="text_title">SETTINGS</h1>
 		</div>
 
-		<div class="pic_container1">
-
+		<div class="container pic_container1 panel panel-white panel-shadow"  >
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8">
-
-
-
 					<div class="form-group2">
-
-
 						<h4>
 							<label> Upload a new background picture.</label>
 						</h4>
@@ -81,12 +74,7 @@
 						</div>
 					</div>
 
-
-
-
 					<div class="form-group2">
-
-
 						<h4>
 							<label> Upload a new picture.</label>
 						</h4>
@@ -125,10 +113,7 @@
 						</div>
 					</c:if>
 
-					<form:form action="modifyInfo" id="modifyInfo"
-						commandName="userInfo">
-
-
+					<form:form action="modifyInfo" id="modifyInfo" commandName="userInfo">
 						<div class="row">
 							<div class="col-md-5">
 								<div class="form-group2">
@@ -227,15 +212,14 @@
 				</div>
 				<div class="col-md-offset-2"></div>
 			</div>
-
-
 		</div>
 	</div>
-
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script
 		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="js/imageUpload.js"></script>
+
 </body>
 </html>
