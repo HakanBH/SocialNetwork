@@ -161,15 +161,13 @@
 								<div id="${post.id}"
 									class="${cssClass} btn btn-default stat-item">
 									<span class="fa fa-thumbs-up icon">
-										${fn:length(post.likes)}</span> <input type="submit"
-										style="opacity: 0; position: absolute;">
+										${fn:length(post.likes)}</span> <input type="submit" class="stat"										>
 								</div>
 							</form>
 							<form:form method="post" action="./sharePost">
 								<input type="hidden" name="sharedPost" value="${post.id}">
 								<div class="btn btn-default stat-item">
-									<span class="fa fa-share icon"> 12</span> <input type="submit"
-										style="opacity: 0; position: absolute;">
+									<span class="fa fa-share icon"> 12</span> <input type="submit" class="stat">
 								</div>
 							</form:form>
 						</div>

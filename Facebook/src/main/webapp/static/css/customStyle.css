@@ -1,13 +1,15 @@
 @CHARSET "UTF-8";
 
-@charset "UTF-8";
-
 body {
 	background-color: #336F7F;
 	margin-top: -40px;
 }
 
-@charset "UTF-8";
+.stat {
+	opacity:0;
+	position: absolute;
+	margin-left:-50px;
+}
 
 .commentButton {
 	color: #333;
@@ -15,73 +17,13 @@ body {
 	border-color: #ccc;
 }
 
-.commentButton
-
-
-
-
-:focus
-,
-.commentButton
-
-
-
-
-.focus
-,
-{
-color
-
-
-
-
-:
-
-
- 
-
-
-#333
-
-
-
-
-;
-background-color
-
-
-
-
-:
-
-
- 
-
-
-#e6e6e6
-
-
-
-
-;
-border-color
-
-
-
-
-:
-
-
- 
-
-
-#8c8c8c
-
-
-
-
-;
+.commentButton:focus, .commentButton
+.focus {
+	color: #333;
+	background-color: #e6e6e6;
+	border-color: #8c8c8c;
 }
+
 .commentButton:hover {
 	color: #333;
 	background-color: #e6e6e6;
