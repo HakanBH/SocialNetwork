@@ -22,7 +22,15 @@
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<div id="main_container">
-		<jsp:include page="prof-pics.jsp"></jsp:include>
+		<div id="user_prof"
+		style="background-image: url('${extUser.bgPath}');">
+		<div id="pic_name_block">
+			<a href="#"><img id="profpicturemain"
+				src="${extUser.profilePath}" align="left"></a>
+			<p id="user_name">${extUser.firstName}
+				${extUser.lastName}</p>
+		</div>
+	</div>
 
 		<div id="left_col">
 			<div id="first_left">
@@ -37,16 +45,13 @@
 
 
 					</br>
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship status: ${userInfo.relationshipStatus}</p> 
-					</br>
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday: ${userInfo.birthday	}</p> 
-					</br>
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender: ${userInfo.gender}</p> ${userInfo.gender}
-					</br>
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">City: ${userInfo.city}</p> 
-					</br>
-					
-					
+					<p id="post_text">Ius id vidit volumus mandamus, vide veritus
+						democritum te nec, ei eos debet libris consulatu. No mei ferri
+						graeco dicunt, ad cum veri accommodare. Sed at malis omnesque
+						delicata, usu et iusto zzril meliore. Dicunt maiorum eloquentiam
+						cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos has,
+						ea dicit voluptua eloquentiam pro, ad sit quas qualisque. Eos
+						vocibus deserunt quaestio ei. Blandit incorrupte</p>
 				</div>
 			</div>
 
@@ -102,24 +107,6 @@
 
 		</div>
 		<div id="center_col">
-			<div id="create_post">
-				<div id="image_space">
-					<a href="#"><img id="prof_pic_post"
-						src="${currentUser.profilePath}" align="left"> </img></a>
-				</div>
-				<div id="post_content">
-					<form method="post" action="/post" id="post_text_box" align="left"
-						style="">
-						<input class="post_text" name="post" type="text"
-							placeholder="What´s happening..." />
-					</form>
-				</div>
-				<div id="panel">
-					<a href="#"><img class="face_icon" src="images/pic.png"
-						align="left"></img></a>
-					<button id="post_button" type="submit" align="right">Post</button>
-				</div>
-			</div>
 			<div id="new_post">
 				<div id="post_content">
 					<div id="image_space">

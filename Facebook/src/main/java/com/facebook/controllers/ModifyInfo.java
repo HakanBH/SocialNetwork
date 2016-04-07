@@ -29,7 +29,7 @@ public class ModifyInfo{
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	public String uploadInfo(HttpServletRequest request, @ModelAttribute("modifyInfo") 
-			UserInfo userInfo){
+			UserInfo userInfo, @ModelAttribute("modifyInfoUser") User modifiedUser){
 		
 		User user = (User) request.getSession().getAttribute("currentUser");
 		IUserDAO.getUserDAO().updateUserInfo(user, userInfo);	
