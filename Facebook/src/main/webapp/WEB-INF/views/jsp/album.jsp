@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <head>
@@ -28,93 +30,18 @@
 	  </div>
 	  
 	  <div class="pic_container">
+	  <c:forEach  var="album" items="${currentUser.albums}">
 	  <div class="polaroid" align="left">
 	  <a href="./pictures" style="text-decoration:none; color:black;">
 	<img class="album" src="images/backgrounds/background-1.jpg" alt="Norway">
 	
 	<div class="desc">
-	
-		<p style="text-decoration:none;">The Troll's tongue in Hardanger, Norway</p>
+		<p style="text-decoration:none;">${album.title}</p>
 	</div>
 	</a>
 	</div>
+	</c:forEach>
 	
-	 <div class="polaroid" align="left">
-	  <a href="#" style="text-decoration:none; color:black;">
-	<img class="album" src="images/backgrounds/background-1.jpg" alt="Norway">
-	
-	<div class="desc">
-	
-		<p style="text-decoration:none;">The Troll's tongue in Hardanger, Norway</p>
-	</div>
-	</a>
-	</div>
-	
-	 <div class="polaroid" align="left">
-	  <a href="#" style="text-decoration:none; color:black;">
-	<img class="album" src="images/backgrounds/background-1.jpg" alt="Norway">
-	
-	<div class="desc">
-	
-		<p style="text-decoration:none;">The Troll's tongue in Hardanger, Norway</p>
-	</div>
-	</a>
-	</div>
-	
-	 <div class="polaroid" align="left">
-	  <a href="#" style="text-decoration:none; color:black;">
-	<img class="album" src="images/backgrounds/background-1.jpg" alt="Norway">
-	
-	<div class="desc">
-	
-		<p style="text-decoration:none;">The Troll's tongue in Hardanger, Norway</p>
-	</div>
-	</a>
-	</div>
-	
-	 <div class="polaroid" align="left">
-	  <a href="#" style="text-decoration:none; color:black;">
-	<img class="album" src="images/backgrounds/background-1.jpg" alt="Norway">
-	
-	<div class="desc">
-	
-		<p style="text-decoration:none;">The Troll's tongue in Hardanger, Norway</p>
-	</div>
-	</a>
-	</div>
-	
-	 <div class="polaroid" align="left">
-	  <a href="#" style="text-decoration:none; color:black;">
-	<img class="album" src="images/backgrounds/background-1.jpg" alt="Norway">
-	
-	<div class="desc">
-	
-		<p style="text-decoration:none;">The Troll's tongue in Hardanger, Norway</p>
-	</div>
-	</a>
-	</div>
-	
-	 <div class="polaroid" align="left">
-	  <a href="#" style="text-decoration:none; color:black;">
-	<img class="album" src="images/backgrounds/background-1.jpg" alt="Norway">
-	
-	<div class="desc">
-	
-		<p style="text-decoration:none;">The Troll's tongue in Hardanger, Norway</p>
-	</div>
-	</a>
-	</div>
-	
-	 <div class="polaroid" align="left">
-	  <a href="#" style="text-decoration:none; color:black;">
-	<img class="album" src="images/backgrounds/background-1.jpg" alt="Norway">
-	
-	<div class="desc">
-	
-		<p style="text-decoration:none;">The Troll's tongue in Hardanger, Norway</p>
-	</div>
-	</a>
-	</div>
 	  
 </div>
 
