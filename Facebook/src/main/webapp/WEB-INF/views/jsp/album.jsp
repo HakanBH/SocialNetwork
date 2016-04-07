@@ -32,7 +32,7 @@
 	  <div class="pic_container">
 	  <c:forEach  var="album" items="${currentUser.albums}">
 	  <div class="polaroid" align="left">
-	  <a href="./pictures" style="text-decoration:none; color:black;">
+	  <a href="./pictures/${album.id}" style="text-decoration:none; color:black;">
 	  
 	<img class="album" src="images/${currentUser.email}/${album.title}/${album.pictures[0].name}" alt="${album.title}">
 	
