@@ -22,7 +22,7 @@ public class Picture extends BaseEntity {
 	public void setAlbum(Album album) {
 		this.album = album;
 	}
-	
+
 	public Album getAlbum() {
 		return album;
 	}

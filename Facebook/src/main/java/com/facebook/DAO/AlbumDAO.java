@@ -13,6 +13,7 @@ public class AlbumDAO implements IAlbumDAO {
 
 	@Override
 	public void insertAlbum(User u, Album a) {
+		
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
@@ -52,8 +53,7 @@ public class AlbumDAO implements IAlbumDAO {
 			
 			album.addPicture(pic);
 			pic.setAlbum(album);
-			session.save(album);
-			
+	
 			session.persist(pic);
 
 			session.getTransaction().commit();
@@ -102,7 +102,7 @@ public class AlbumDAO implements IAlbumDAO {
 	}
 
 	@Override
-	public Album getAlbum(int userId, String title) {
+	public Album getAlbum(User u, String title) {
 		Session session = null;
 		Album album = null;
 		try {
@@ -110,7 +110,7 @@ public class AlbumDAO implements IAlbumDAO {
 
 			Query query = session.createQuery("from Album where title= :albumTitle and owner = :userId");
 			query.setString("albumTitle", title);
-			query.setInteger("userId", userId);
+			query.setInteger("userId", u.getId());
 
 			album = (Album) query.uniqueResult();
 		} finally {

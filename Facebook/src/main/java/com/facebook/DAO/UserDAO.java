@@ -192,6 +192,7 @@ public class UserDAO implements IUserDAO {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
+			session.update(pic);
 			
 			user.setProfilePicture(pic);
 			

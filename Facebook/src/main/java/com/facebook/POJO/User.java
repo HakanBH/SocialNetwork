@@ -23,54 +23,56 @@ public class User extends BaseEntity {
 	public static final String STORAGE_PATH = "C:" + File.separator + "images" + File.separator + "users"
 			+ File.separator;
 	public static final int NUMBER_OF_FRIEND_SUGGESTIONS = 4;
+
 	@Transient
 	private String profilePath;
 	@Transient
 	private String bgPath;
 
-	@Column(name = "first_name", columnDefinition = "VARCHAR(32)", nullable=false)
+	@Column(name = "first_name", columnDefinition = "VARCHAR(32)", nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name", columnDefinition = "VARCHAR(32)", nullable=false)
+	@Column(name = "last_name", columnDefinition = "VARCHAR(32)", nullable = false)
 	private String lastName;
 
-	@Column(name = "email", columnDefinition = "VARCHAR(64)", unique = true, nullable=false)
+	@Column(name = "email", columnDefinition = "VARCHAR(64)", unique = true, nullable = false)
 	private String email;
 
-	@Column(name = "password", columnDefinition = "VARCHAR(255)", nullable=false)
+	@Column(name = "password", columnDefinition = "VARCHAR(255)", nullable = false)
 	private String password;
-	
+
 	@OneToOne
 	@JoinColumn(name = "profile_pic", referencedColumnName = "id")
 	private Picture profilePicture;
-	//Background
+	// Background
 	@OneToOne
 	@JoinColumn(name = "bg_pic", referencedColumnName = "id")
 	private Picture bgPicture;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private Set<Album> albums = new HashSet<Album>();
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
-	private List<Post> ownedPosts=new ArrayList<Post>();
+	private List<Post> ownedPosts = new ArrayList<Post>();
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "likes")
 	private Set<Post> likedPosts = new HashSet<Post>();
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "friendships", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
 	private Set<User> friends = new TreeSet<User>();
 
 	@ManyToMany(mappedBy = "friends")
 	private Set<User> befriendedBy = new HashSet<User>();
-	
-	@OneToMany(mappedBy = "owner", cascade = { CascadeType.REFRESH })
+
+	@OneToMany(mappedBy = "owner")
 	private List<Comment> userComments;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private UserInfo userInfo;
 
-	public User() {}
+	public User() {
+	}
 
 	public User(User u) {
 		this(u.getEmail(), u.getPassword(), u.getFirstName(), u.getLastName());
@@ -83,7 +85,6 @@ public class User extends BaseEntity {
 		setEmail(email);
 	}
 
-	
 	public void addFriend(User friend) {
 		friends.add(friend);
 	}
@@ -99,16 +100,19 @@ public class User extends BaseEntity {
 	public void removeComment(Comment c) {
 		userComments.remove(c);
 	}
-	
+
 	public void addPost(Post p) {
 		ownedPosts.add(p);
 	}
-	
+
 	public void removePost(Post p) {
 		ownedPosts.remove(p);
 	}
-	
-	
+
+	public void addAlbum(Album a) {
+		albums.add(a);
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + getId() + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
@@ -124,18 +128,13 @@ public class User extends BaseEntity {
 	public boolean equals(Object obj) {
 		if (obj instanceof User) {
 			User temp = (User) (obj);
-			boolean flag = this.getEmail().equals(temp.getEmail());
-			System.out.println(flag);
 			return this.getEmail().equals(temp.getEmail());
 		}
 		return false;
 	}
 
-
-
 	public List<User> getFriendsOfFriends() {
 		List<User> all = new ArrayList<User>();
-
 		for (User friend : friends) {
 			for (User friendOfFriend : friend.getFriends()) {
 				if (!friends.contains(friendOfFriend) && !all.contains(friendOfFriend)) {
@@ -145,27 +144,26 @@ public class User extends BaseEntity {
 		}
 
 		Collections.shuffle(all);
-		if(all.size() < NUMBER_OF_FRIEND_SUGGESTIONS){
+		if (all.size() < NUMBER_OF_FRIEND_SUGGESTIONS) {
 			return all;
 		}
 		return all.subList(0, NUMBER_OF_FRIEND_SUGGESTIONS);
 	}
-	
-	
-	public Collection<Post> getPosts(){
-		Set<Post> result = new TreeSet<Post>((o1,o2)->{
+
+	public Collection<Post> getPosts() {
+		Set<Post> result = new TreeSet<Post>((o1, o2) -> {
 			return o2.getCreated().compareTo(o1.getCreated());
 		});
-		
-		for(User u: friends){
+
+		for (User u : friends) {
 			result.addAll(u.getOwnedPosts());
 		}
-		
+
 		result.addAll(ownedPosts);
 		return result;
 	}
-	
-	//getters
+
+	// getters
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -181,23 +179,27 @@ public class User extends BaseEntity {
 	public String getPassword() {
 		return this.password;
 	}
-	
+
 	public Set<User> getFriends() {
 		return Collections.unmodifiableSet(friends);
 	}
-	
+
 	public Set<Post> getLikedPosts() {
 		return Collections.unmodifiableSet(likedPosts);
 	}
-	
+
 	public List<Post> getOwnedPosts() {
 		return Collections.unmodifiableList(ownedPosts);
 	}
-	
+
 	public Picture getProfilePicture() {
 		return this.profilePicture;
 	}
-	
+
+	public Set<Album> getAlbums() {
+		return albums;
+	}
+
 	public String getProfilePath() {
 		if (this.profilePicture == null || this.profilePicture.getName().equals("./images/default-pic.png")) {
 			return "./images/default-pic.png";
@@ -205,8 +207,8 @@ public class User extends BaseEntity {
 			return "images/" + this.email + "/ProfilePictures/" + this.profilePicture.getName();
 		}
 	}
-		
-	//setters
+
+	// setters
 	public void setFirstName(String firstName) {
 		if (firstName != null && !firstName.isEmpty()) {
 			this.firstName = firstName;
@@ -231,6 +233,10 @@ public class User extends BaseEntity {
 		}
 	}
 
+	public void setAlbums(Set<Album> albums) {
+		this.albums = albums;
+	}
+
 	public UserInfo getUserInfo() {
 		return userInfo;
 	}
@@ -238,23 +244,23 @@ public class User extends BaseEntity {
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
-	
+
 	public void setProfilePicture(Picture pic) {
 		if (pic != null) {
 			this.profilePicture = pic;
 		}
 	}
-	
+
 	public Picture getBgPicture() {
 		return bgPicture;
 	}
 
 	public void setBgPicture(Picture bgPicture) {
 		if (bgPicture != null) {
-		this.bgPicture = bgPicture;
+			this.bgPicture = bgPicture;
 		}
 	}
-	
+
 	public String getBgPath() {
 		if (this.bgPicture == null || this.bgPicture.getName().equals("./images/backgrounds/background-1.jpg")) {
 			return "./images/backgrounds/background-1.jpg";

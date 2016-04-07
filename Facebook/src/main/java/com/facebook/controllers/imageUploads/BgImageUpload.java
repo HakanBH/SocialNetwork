@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.imageUploads;
 
 import java.io.File;
 import java.util.Iterator;
@@ -26,48 +26,48 @@ import com.facebook.POJO.UserInfo;
 @Controller
 @RequestMapping(value = "/BgImageUpload")
 public class BgImageUpload {
-	private static final String PROFILE_PICTURES = "BgPictures";
+	private static final String PICTURES_FOLDER = "BgPictures";
 	private static final int BUFFER_SIZE = 1024 * 1024;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String uploadImage(@ModelAttribute("userInfo") UserInfo userInfo, HttpServletRequest request,
-			HttpServletResponse response) {
+	public String uploadImage(HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("currentUser");
 
-		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + PROFILE_PICTURES + File.separator;
+		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + PICTURES_FOLDER + File.separator;
 		new File(filePath).mkdirs();
 		// Check that we have a file upload request
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-
 		if (isMultipart) {
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-
-			// maximum size that will be stored in memory
-			factory.setSizeThreshold(BUFFER_SIZE);
-			// Create a new file upload handler
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			// maximum file size to be uploaded.
-			upload.setSizeMax(BUFFER_SIZE);
-
 			String fileName;
 			try {
-				fileName = createFile(upload, filePath, request, response);
+				Album album = IAlbumDAO.getAlbumDAO().getAlbum(user, PICTURES_FOLDER);
+				if (album == null) {
+					IAlbumDAO.getAlbumDAO().insertAlbum(user,album);
+				}
+
+				fileName = createFile(request, filePath, album);
 				Picture bgPic = new Picture(fileName);
-				System.err.println(bgPic);
-				Album album = new Album("BgPictures", user);
-				System.err.println(album);
 				IAlbumDAO.getAlbumDAO().uploadImage(bgPic, album);
 				IUserDAO.getUserDAO().setBgPicture(bgPic, user);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(request.getSession().getAttribute("currentUser"));
+
 		return "redirect:/settings";
+
 	}
 
-	public String createFile(ServletFileUpload upload, String filePath, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String createFile(HttpServletRequest request, String filePath, Album album) throws Exception {
+
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// maximum size that will be stored in memory
+		factory.setSizeThreshold(BUFFER_SIZE);
+		// Create a new file upload handler
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		// maximum file size to be uploaded.
+		upload.setSizeMax(BUFFER_SIZE);
+
 		// Parse the request to get file items.
 		List fileItems = upload.parseRequest(request);
 		// Process the uploaded file items
@@ -86,11 +86,10 @@ public class BgImageUpload {
 				if (!isImage || fi.getSize() > BUFFER_SIZE) {
 					request.setAttribute("imageError",
 							"File must be an image with size less than " + BUFFER_SIZE + " bytes.");
-					return "forward:/settings";
+					return "forward:/extraInfo";
 				}
 				// Write the file
-
-				file = new File(filePath + "background_pic." + extension);
+				file = new File(filePath + "background-pic." + (album.getPictures().size() + 1) + "." + extension);
 				fi.write(file);
 			}
 		}

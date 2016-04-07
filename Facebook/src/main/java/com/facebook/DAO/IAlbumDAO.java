@@ -19,7 +19,8 @@ public interface IAlbumDAO {
 
 	Album getAlbumById(int id);
 
-	Album getAlbum(int userId, String title);
+	Album getAlbum(User userId, String title);
 
 	Picture getPicById(int id);
+
 }
