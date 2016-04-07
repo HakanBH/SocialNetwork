@@ -45,13 +45,14 @@
 
 
 					</br>
-					<p id="post_text">Ius id vidit volumus mandamus, vide veritus
-						democritum te nec, ei eos debet libris consulatu. No mei ferri
-						graeco dicunt, ad cum veri accommodare. Sed at malis omnesque
-						delicata, usu et iusto zzril meliore. Dicunt maiorum eloquentiam
-						cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos has,
-						ea dicit voluptua eloquentiam pro, ad sit quas qualisque. Eos
-						vocibus deserunt quaestio ei. Blandit incorrupte</p>
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship status: ${userInfo.relationshipStatus}</p> 
+					</br>
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday: ${userInfo.birthday	}</p> 
+					</br>
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender: ${userInfo.gender}</p> ${userInfo.gender}
+					</br>
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">City: ${userInfo.city}</p> 
+					</br>
 				</div>
 			</div>
 
