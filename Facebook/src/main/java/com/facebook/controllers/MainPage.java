@@ -19,21 +19,6 @@ import com.facebook.POJO.User;
 @Controller
 @RequestMapping("/main")
 public class MainPage {
-	@RequestMapping(value = "/likePost", method = RequestMethod.POST)
-	public String likePost(HttpServletRequest request) {
-		User currentUser = (User) request.getSession().getAttribute("currentUser");
-		String likedPostId = (String) request.getParameter("likedPost");
-		int id = Integer.parseInt(likedPostId);
-		
-		Post likedPost = IPostDAO.getPostDAO().getPostById(id);
-		likedPost.addLike(currentUser);
-		currentUser.likePost(likedPost);
-
-		IPostDAO.getPostDAO().likePost(likedPost, currentUser);
-		
-		return "redirect:/main";
-	}
-	
 	@RequestMapping(method = {RequestMethod.GET,RequestMethod.POST})
 	public String mainController(Model model, HttpServletRequest request) {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
@@ -44,11 +29,7 @@ public class MainPage {
 		if(!posts.isEmpty()){
 			model.addAttribute("posts",posts);
 		}
-		
-		for(Post p : posts){
-			System.err.println(p);
-			System.err.println(p.getComments().get(0).getText());
-		}
+
 		return "main";
 	}
 

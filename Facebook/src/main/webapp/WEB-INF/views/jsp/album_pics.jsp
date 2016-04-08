@@ -36,16 +36,14 @@
 		<div class="pic_container2 panel panel-white panel-shadow"">
 			<c:forEach var="pic" items="${selectedAlbum.pictures}">
 				<div class="responsive">
-					<h1>${selectedAlbum.pictures[0].name}</h1>
 					<div class="img">
-						<a href="images/backgrounds/background-1.jpg"
+						<a href= "images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
 							data-lightbox="album"
 							style="text-decoration: none; color: black;"> <img
-							class="album_pic" src="images/backgrounds/background-1.jpg"
-							alt="Trolltunga Norway" width="300" height="200">
+							class="album_pic" src= "images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
+							alt="${pic.name} Pic Not Found" width="300" height="200">
 							<div class="desc">
-								<a href="#"><span class="glyphicon glyphicon-thumbs-up">
-								</span></a>
+								${pic.name}
 							</div>
 						</a>
 					</div>

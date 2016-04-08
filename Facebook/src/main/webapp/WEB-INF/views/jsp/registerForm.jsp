@@ -26,11 +26,6 @@
 		</div>
 	</c:if>
 
-	<div class="form-group text-center">
-		<input type="checkbox" name="remember" id="remember"> <label
-			for="remember"> Remember Me </label>
-	</div>
-
 	<div class="form-group">
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
