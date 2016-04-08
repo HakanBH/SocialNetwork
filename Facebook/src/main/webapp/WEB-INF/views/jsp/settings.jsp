@@ -39,7 +39,7 @@
 			<h1 class="text_title">SETTINGS</h1>
 		</div>
 
-		<div class="container pic_container1 panel panel-white panel-shadow"  >
+		<div class="container pic_container3 panel panel-white panel-shadow"  >
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8">
 					<div class="form-group2">

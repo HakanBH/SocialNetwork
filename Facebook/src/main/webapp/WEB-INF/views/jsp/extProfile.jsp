@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page errorPage="error.jsp"%>
+<%-- <%@ page errorPage="error.jsp"%> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -13,9 +13,14 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
 	rel='stylesheet' type='text/css'>
+
 <link rel="stylesheet" href="css/post.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/customStyle.css">
+<link rel="stylesheet" href="css/imageUpload.css">
+<link rel="stylesheet" type="text/css"
+	href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
 
 <title>Asocialen.com</title>
 </head>
@@ -114,7 +119,7 @@
 
 		<div id="center_col">
 			<!-- posts -->
-			<c:forEach var="post" items="${posts}">
+			<c:forEach var="post" items="${extUser.ownedPosts}">
 				<div class="panel panel-white post panel-shadow" style="width: 95%">
 					<div class="post-heading">
 						<div class="pull-left image">

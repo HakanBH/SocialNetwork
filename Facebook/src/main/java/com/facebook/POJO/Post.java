@@ -105,4 +105,22 @@ public class Post extends BaseEntity {
 				+ ", picture=" + picture + ", text=" + text + "]");
 		return result.append("\nLikes: " + likes).toString();
 	}
+	
+	 @Override
+	    public boolean equals(Object o1) {
+
+
+	        if( Integer.valueOf(this.getId()).equals( Integer.valueOf(((Post)o1).getId()))){
+	                return true;
+	        }
+	        return false;
+	    }
+
+
+	    @Override
+	    public int hashCode() {
+
+	        
+	        return Integer.valueOf(this.getId());
+	    }
 }

@@ -20,7 +20,7 @@
 		<c:forEach var="suggestion" items="${friendSuggestions}">
 			<div class="whoToAdd">
 				<div id="profpicknow">
-					<a href=""> <img id="profpicture60"
+					<a href="extProfile/${suggestion.id}"> <img id="profpicture60"
 						src="${suggestion.profilePath}" align="right">
 					</a>
 				</div>

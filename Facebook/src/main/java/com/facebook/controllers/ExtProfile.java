@@ -32,6 +32,7 @@ public class ExtProfile {
 		UserInfo userInfo = extUser.getUserInfo();
 		request.getSession().setAttribute("userInfo", userInfo);
 		prepareFriends(model, extUser);
+		ProfileController.preparePics(model,extUser);
 		return "/extProfile";
 	}
 	

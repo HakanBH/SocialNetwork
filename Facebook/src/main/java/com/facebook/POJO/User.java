@@ -199,8 +199,13 @@ public class User extends BaseEntity {
 		return Collections.unmodifiableSet(likedPosts);
 	}
 
-	public List<Post> getOwnedPosts() {
-		return Collections.unmodifiableList(ownedPosts);
+	public Set<Post> getOwnedPosts() {
+		Set<Post> result = new TreeSet<Post>((o1, o2) -> {
+			return o2.getCreated().compareTo(o1.getCreated());
+		});
+		result.addAll(this.ownedPosts);
+	
+		return Collections.unmodifiableSet(result);
 	}
 
 	public Picture getProfilePicture() {
