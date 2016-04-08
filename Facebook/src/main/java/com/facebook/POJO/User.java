@@ -42,11 +42,11 @@ public class User extends BaseEntity {
 	private String password;
 
 	@OneToOne
-	@JoinColumn(name = "profile_pic", referencedColumnName = "id")
+	@JoinColumn(name = "profile_pic")
 	private Picture profilePicture;
 	// Background
 	@OneToOne
-	@JoinColumn(name = "bg_pic", referencedColumnName = "id")
+	@JoinColumn(name = "bg_pic")
 	private Picture bgPicture;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
@@ -112,7 +112,7 @@ public class User extends BaseEntity {
 		albums.add(a);
 	}
 
-	public void removePost(Album a){
+	public void removeAlbum(Album a){
 		albums.remove(a);
 	}
 	
@@ -283,5 +283,9 @@ public class User extends BaseEntity {
 	
 	public Set<Album> getAlbums() {
 		return Collections.unmodifiableSet(this.albums);
+	}
+
+	public void removeLike(Post p) {
+		likedPosts.remove(p);
 	}
 }

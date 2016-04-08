@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.albumsAndPictures;
 
 import javax.servlet.http.HttpServletRequest;
 

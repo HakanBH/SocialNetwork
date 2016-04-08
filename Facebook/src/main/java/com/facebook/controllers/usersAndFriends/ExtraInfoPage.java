@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.usersAndFriends;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

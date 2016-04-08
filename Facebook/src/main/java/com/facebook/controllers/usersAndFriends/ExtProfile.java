@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.usersAndFriends;
 
 import static com.facebook.controllers.MainPage.prepareSuggestions;
 
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.facebook.DAO.IUserDAO;
 import com.facebook.POJO.User;
 import com.facebook.POJO.UserInfo;
+import com.facebook.controllers.MainPage;
 @Controller
 
 public class ExtProfile {

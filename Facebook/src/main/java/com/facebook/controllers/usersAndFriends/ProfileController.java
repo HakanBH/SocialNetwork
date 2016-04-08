@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.usersAndFriends;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-
-
 
 @Controller
 @RequestMapping("/profile")

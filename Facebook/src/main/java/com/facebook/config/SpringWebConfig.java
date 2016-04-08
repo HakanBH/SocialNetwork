@@ -1,4 +1,4 @@
-package com.facebook;
+package com.facebook.config;
 
 import java.util.Locale;
 

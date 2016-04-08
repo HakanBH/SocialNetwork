@@ -12,7 +12,7 @@ import com.facebook.POJO.UserLogin;
 
 @Controller
 @RequestMapping(value="/index")
-public class HomePage {
+public class IndexPage {
 	@RequestMapping(method = RequestMethod.GET)		
 	public String getMethod(Model model, HttpServletRequest request) {
 		if(request.getSession().getAttribute("currentUser") != null){

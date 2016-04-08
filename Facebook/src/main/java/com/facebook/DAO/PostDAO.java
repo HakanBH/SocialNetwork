@@ -1,20 +1,27 @@
 package com.facebook.DAO;
 
+import java.io.File;
+import java.util.List;
+
+import org.apache.commons.io.FileDeleteStrategy;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.facebook.POJO.Comment;
 import com.facebook.POJO.Post;
 import com.facebook.POJO.User;
+import com.facebook.POJO.UserInfo;
 
 public class PostDAO implements IPostDAO {
-	
+
 	@Override
 	public void insertPost(Post post) {
 		Session session = null;
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
-			
+
 			session.persist(post);
 
 			session.getTransaction().commit();
@@ -24,18 +31,18 @@ public class PostDAO implements IPostDAO {
 			}
 		}
 	}
-	
+
 	@Override
 	public void removePost(int postId) {
 		Session session = null;
 		try {
 			session = SessionDispatcher.getSession();
-			session.beginTransaction();
+			Transaction transaction = session.beginTransaction();
 
 			Post p = (Post) session.get(Post.class, postId);
 			session.delete(p);
-			
-			session.getTransaction().commit();
+
+			transaction.commit();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -49,18 +56,36 @@ public class PostDAO implements IPostDAO {
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
-			
+
 			post.addLike(useru);
 			session.update(post);
-			
+
 			session.getTransaction().commit();
 		} finally {
-			if(session!=null){
+			if (session != null) {
 				session.close();
 			}
 		}
 	}
 
+	@Override
+	public void unlikePost(Post post, User user) {
+		Session session = null;
+		try {
+			session = SessionDispatcher.getSession();
+			session.beginTransaction();
+
+			post.removeLike(user);
+			session.save(post);
+			
+			session.getTransaction().commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+	
 	@Override
 	public void unlikePost(int postId, int userId) {
 		Session session = null;
@@ -68,58 +93,59 @@ public class PostDAO implements IPostDAO {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
 			
-			Post p = (Post) session.get(Post.class, postId);
-			User u = (User) session.get(User.class, userId);
+			Post post = (Post) session.load(Post.class, postId);
+			User user = (User) session.load(User.class, userId);
 			
-			p.removeLike(u);
+			post.removeLike(user);
 			
-			session.update(p);
+			session.update(post);
 			
 			session.getTransaction().commit();
 		} finally {
-			if(session!=null){
+			if (session != null) {
 				session.close();
 			}
 		}
 	}
 
+	
 	@Override
 	public void commentPost(Post post, User user, Comment c) {
 		Session session = null;
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
-			
+
 			c.setOwner(user);
 			c.setPost(post);
 			session.save(c);
-			
+
 			session.getTransaction().commit();
 		} finally {
-			if(session!=null){
+			if (session != null) {
 				session.close();
 			}
 		}
 	}
-	
+
 	@Override
 	public void removeComment(int commentId) {
 		Session session = null;
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
-			
+
 			Comment c = (Comment) session.get(Comment.class, commentId);
 			session.delete(c);
-			
+
 			session.getTransaction().commit();
 		} finally {
-			if(session!=null){
+			if (session != null) {
 				session.close();
 			}
 		}
 	}
-	
+
 	@Override
 	public Post getPostById(int id) {
 		Session session = null;
@@ -139,5 +165,43 @@ public class PostDAO implements IPostDAO {
 		return post;
 	}
 
+	@Override
+	public List<Post> getAllPosts() {
+		Session session = SessionDispatcher.getSession();
+		try {
+			session.beginTransaction();
 
+			Query query = session.createQuery("from Post");
+			List<Post> result = query.list();
+			
+			session.getTransaction().commit();
+
+			return result;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	@Override
+	public boolean deletePost(User u, Post p) throws Exception {
+		Session session = null;
+		try {
+			session = SessionDispatcher.getSession();
+			session.beginTransaction();
+			
+			u.removePost(p);
+			session.update(u);
+			session.delete(p);
+
+			session.getTransaction().commit();
+		
+			return true;
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			session.close();
+		}
+	}
 }

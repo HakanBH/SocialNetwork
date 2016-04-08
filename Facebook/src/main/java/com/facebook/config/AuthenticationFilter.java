@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.config;
 
 import java.io.IOException;
 

@@ -133,7 +133,7 @@
 			</form:form>
 			<!-- END OF POST UPLOAD -->
 			<!-- posts -->
-			
+
 			<c:forEach var="post" items="${posts}">
 				<div class="panel panel-white post panel-shadow">
 					<div class="post-heading">
@@ -156,18 +156,36 @@
 						</c:if>
 
 						<div class="stats">
-							<form method="post" action="./likePost">
-								<input name="likedPost" type="hidden" value="${post.id}">
-								<div id="${post.id}"
-									class="${cssClass} btn btn-default stat-item">
-									<span class="fa fa-thumbs-up icon">
-										${fn:length(post.likes)}</span> <input type="submit" class="stat"										>
-								</div>
-							</form>
+							<c:forEach var="liked" items="${currentUser.likedPosts}">
+								<c:if test="${liked eq post}">
+									<c:set var="isLiked" value="true"></c:set>
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${isLiked eq true}">
+									<form method="post" action="./unlikePost">
+										<input name="unlikedPost" type="hidden" value="${post.id}">
+										<div class="btn btn-default stat-item" style="color: green">
+											<span class="fa fa-thumbs-up icon">
+												${fn:length(post.likes)}</span> <input type="submit" class="stat">
+										</div>
+									</form>
+								</c:when>
+								<c:otherwise>
+									<form method="post" action="./likePost">
+										<input name="likedPost" type="hidden" value="${post.id}">
+										<div class="btn btn-default stat-item">
+											<span class="fa fa-thumbs-up icon">${fn:length(post.likes)}</span>
+											<input type="submit" class="stat">
+										</div>
+									</form>
+								</c:otherwise>
+							</c:choose>
 							<form:form method="post" action="./sharePost">
 								<input type="hidden" name="sharedPost" value="${post.id}">
 								<div class="btn btn-default stat-item">
-									<span class="fa fa-share icon"> 12</span> <input type="submit" class="stat">
+									<span class="fa fa-share icon"> 12</span> <input type="submit"
+										class="stat">
 								</div>
 							</form:form>
 						</div>
@@ -175,32 +193,33 @@
 
 					<div class="post-footer">
 						<form action="commentPost" method="post">
-							<div class="input-group"  style="width: 100% !important">
+							<div class="input-group" style="width: 100% !important">
 								<input type="hidden" name="commentedPost" value="${post.id}">
-									<input type="text" name="commentText" required maxlength="60" placeholder="Add a comment" class="form-control">
-									<span class="input-group-btn">
-										<div class="btn commentButton">
-											<span>Comment</span>
-											<input type="submit" class="commentForm"/>
-										</div>
-									</span>
+								<input type="text" name="commentText" required maxlength="60"
+									placeholder="Add a comment" class="form-control"> <span
+									class="input-group-btn">
+									<div class="btn commentButton">
+										<span>Comment</span> <input type="submit" class="commentForm" />
+									</div>
+								</span>
 							</div>
 						</form>
 						<ul class="comments-list">
-	
-						<c:forEach var="postComment" items="${post.comments}">
-								<li class="comment"><a class="pull-left" href="#"> 
-									<img class="avatar" src="${postComment.owner.profilePath}" alt="avatar">
+
+							<c:forEach var="postComment" items="${post.comments}">
+								<li class="comment"><a class="pull-left" href="#"> <img
+										class="avatar" src="${postComment.owner.profilePath}"
+										alt="avatar">
 								</a>
 									<div class="comment-body">
 										<div class="comment-heading">
-											<h4 class="user">${postComment.owner.firstName} ${postComment.owner.firstName}</h4>
+											<h4 class="user">${postComment.owner.firstName}
+												${postComment.owner.firstName}</h4>
 											<h5 class="time">${postComment.created}</h5>
 										</div>
 										<p>${postComment.text}</p>
-									</div>
-								</li>
-						</c:forEach>
+									</div></li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>

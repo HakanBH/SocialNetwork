@@ -22,11 +22,10 @@ public class Album extends BaseEntity {
 	@JoinColumn(name = "owner", nullable = false)
 	private User owner;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "album")
+	@OneToMany(orphanRemoval=true, fetch = FetchType.EAGER, mappedBy = "album")
 	private List<Picture> pictures = new ArrayList<Picture>();
 
-	public Album() {
-	}
+	public Album() {}
 
 	public Album(String title, User owner) {
 		setTitle(title);
@@ -35,6 +34,10 @@ public class Album extends BaseEntity {
 
 	public void addPicture(Picture pic) {
 		pictures.add(pic);
+	}
+	
+	public void removePicture(Picture pic){
+		pictures.remove(pic);
 	}
 
 	public List<Picture> getPictures() {

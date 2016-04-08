@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.usersAndFriends;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -6,14 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.facebook.POJO.User;
-
 @Controller
-@RequestMapping("/album")
-public class Albums {
+@RequestMapping(value="/logout")
+public class LogoutController {
+	
 	@RequestMapping(method=RequestMethod.GET)
-	public String mainController(HttpServletRequest request){
-			User currentUser = (User) request.getSession().getAttribute("currentUser");
-		return "album";
+	public String logout(HttpServletRequest request){
+		request.getSession().invalidate();
+		return "redirect:/index";
 	}
 }

@@ -1,4 +1,4 @@
-package com.facebook.controllers.imageUploads;
+package com.facebook.controllers.posts;
 
 import java.io.File;
 import java.util.Iterator;
@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.facebook.DAO.IAlbumDAO;
 import com.facebook.DAO.IPostDAO;
 import com.facebook.POJO.*;
+import com.facebook.exceptions.UploadException;
 
 @Controller
 @RequestMapping(value = "/PostUpload")
@@ -42,12 +44,15 @@ public class PostUpload {
 				IAlbumDAO.getAlbumDAO().insertAlbum(currentUser, album);
 			}
 			
-			String picName;
+			String picName = null;
 			try {
 				picName = uploadPic(request, filePath, album);
+			} catch (UploadException e) {
+				return "redirect:/main";
 			} catch (Exception e) {
-				return "forward:/main";
-			}
+				request.setAttribute("imageError", "Error uploading image.");
+				return "redirect:/main";
+			} 
 			
 			Picture postPicture = new Picture(picName);
 			album.addPicture(postPicture);
@@ -65,7 +70,7 @@ public class PostUpload {
 		return "redirect:/main";
 	}
 
-	public String uploadPic(HttpServletRequest request, String filePath, Album album) throws Exception {
+	public String uploadPic(HttpServletRequest request, String filePath, Album album) throws Exception   {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// maximum size that will be stored in memory
 		factory.setSizeThreshold(BUFFER_SIZE);
@@ -93,7 +98,7 @@ public class PostUpload {
 				}
 				if (!isImage || item.getSize() > BUFFER_SIZE) {
 					request.setAttribute("imageError", "File must be an image with size less than 1 MB.");
-					throw new Exception();
+					throw new UploadException();
 				}
 				// Write the file
 				file = new File(filePath + "post-pic" + (album.getPictures().size() + 1) + "." + extension);

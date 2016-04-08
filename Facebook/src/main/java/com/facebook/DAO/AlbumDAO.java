@@ -1,5 +1,6 @@
 package com.facebook.DAO;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import org.hibernate.Query;
@@ -13,11 +14,11 @@ public class AlbumDAO implements IAlbumDAO {
 
 	@Override
 	public void insertAlbum(User u, Album a) {
-		
+
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-			
+
 			session.persist(a);
 
 			session.getTransaction().commit();
@@ -35,6 +36,7 @@ public class AlbumDAO implements IAlbumDAO {
 			session.beginTransaction();
 
 			Album a = (Album) session.get(Album.class, albumId);
+
 			session.delete(a);
 
 			session.getTransaction().commit();
@@ -50,10 +52,10 @@ public class AlbumDAO implements IAlbumDAO {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-			
+
 			album.addPicture(pic);
 			pic.setAlbum(album);
-	
+
 			session.persist(pic);
 
 			session.getTransaction().commit();
@@ -63,7 +65,7 @@ public class AlbumDAO implements IAlbumDAO {
 			session.close();
 		}
 	}
-	
+
 	@Override
 	public void removePicture(int pictureId) {
 		Session session = SessionDispatcher.getSession();
@@ -71,7 +73,7 @@ public class AlbumDAO implements IAlbumDAO {
 			session.beginTransaction();
 
 			Picture pic = (Picture) session.get(Picture.class, pictureId);
-			
+
 			session.delete(pic);
 
 			session.getTransaction().commit();

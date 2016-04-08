@@ -30,6 +30,7 @@ public class MainPage {
 		Collection<Post> posts = currentUser.getPosts();
 		if(!posts.isEmpty()){
 			model.addAttribute("posts",posts);
+			model.addAttribute("likedPosts", currentUser.getLikedPosts());
 		}
 		
 		return "main";

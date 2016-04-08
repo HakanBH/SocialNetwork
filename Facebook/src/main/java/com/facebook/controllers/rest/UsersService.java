@@ -1,4 +1,4 @@
-package com.facebook.restServices;
+package com.facebook.controllers.rest;
 
 import java.util.List;
 

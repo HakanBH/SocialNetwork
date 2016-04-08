@@ -1,4 +1,4 @@
-package com.facebook.controllers.imageUploads;
+package com.facebook.controllers.albumsAndPictures;
 
 import java.io.File;
 import java.util.Iterator;

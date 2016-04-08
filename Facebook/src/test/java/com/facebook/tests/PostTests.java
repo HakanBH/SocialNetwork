@@ -1,11 +1,14 @@
 package com.facebook.tests;
  
+import javax.persistence.Transient;
+
 import org.hibernate.Hibernate;
 import org.junit.Test;
 
 import com.facebook.DAO.IPostDAO;
 import com.facebook.DAO.IUserDAO;
 import com.facebook.DAO.PostDAO;
+import com.facebook.DAO.UserDAO;
 import com.facebook.POJO.*;
 
 public class PostTests {
@@ -46,25 +49,26 @@ public class PostTests {
 //
 //	@Test 
 //	public void likePostTest(){
-//		User user= IUserDAO.getUserDAO().getUserById(1);
-//		Post post = IPostDAO.getPostDAO().getPostById(2);
+//		User user= IUserDAO.getUserDAO().getUserById(2);
+//		Post post = IPostDAO.getPostDAO().getPostById(8);
 //		
 //		IPostDAO.getPostDAO().likePost(post, user);
-//		
 //	}
-	
+//	
 	
 //	@Test 
 //	public void unlikePostTest(){
-//		System.out.println("Likes before delete: ");
-//		IPostDAO.getPostDAO().unlikePost(1, 2);
-//		Post p = IPostDAO.getPostDAO().getPostById(1);
-//		
-//		System.out.println("Likes after delete:");
-//		System.out.println(p.getLikes());
+//		IPostDAO.getPostDAO().unlikePost(8, 2);
 //	}
 
 	
+//	@Test
+//	public void deleteAllPosts() throws Exception{
+//		for(Post p: IPostDAO.getPostDAO().getAllPosts()){
+//			System.err.println(p);
+//			IPostDAO.getPostDAO().deletePost(p.getOwner(),p);
+//		}
+//	}
 //	
 //	@Test 
 //	public void commentPostTest(){

@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.albumsAndPictures;
 
 import java.util.HashSet;
 import java.util.Set;

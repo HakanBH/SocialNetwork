@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.usersAndFriends;
 
 import javax.servlet.http.HttpServletRequest;
 

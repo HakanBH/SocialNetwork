@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.posts;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +14,7 @@ import com.facebook.POJO.Post;
 import com.facebook.POJO.User;
 
 @Controller
-public class PostController {
+public class CommentController {
 
 	@RequestMapping(value = "/commentPost", method = RequestMethod.POST)
 	public String commentPost(Model model , HttpServletRequest request) {

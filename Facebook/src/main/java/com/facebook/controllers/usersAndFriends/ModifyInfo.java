@@ -1,4 +1,4 @@
-package com.facebook.controllers;
+package com.facebook.controllers.usersAndFriends;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -18,22 +18,25 @@ import com.facebook.DAO.IUserDAO;
 import com.facebook.POJO.User;
 
 @Controller
-@RequestMapping(value = "/uploadInfo")
-public class ExtraInfo {
-
+@RequestMapping(value = "/modifyInfo")
+public class ModifyInfo{
+	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(
 	            dateFormat, false));
 	}
-	
 	@RequestMapping(method = RequestMethod.POST)
-	public String uploadInfo(HttpServletRequest request, @ModelAttribute("userInfo") 
-			UserInfo userInfo){
+	public String uploadInfo(HttpServletRequest request, @ModelAttribute("modifyInfo") 
+			UserInfo userInfo, @ModelAttribute("modifyInfoUser") User modifiedUser){
+		
 		User user = (User) request.getSession().getAttribute("currentUser");
-		user.setUserInfo(userInfo);
 		IUserDAO.getUserDAO().updateUserInfo(user, userInfo);	
-		return "redirect:/main";
+		user.setUserInfo(userInfo);	
+
+		request.getSession().setAttribute("currentUser", user);
+		
+		return "redirect:/settings";
 	}
 }

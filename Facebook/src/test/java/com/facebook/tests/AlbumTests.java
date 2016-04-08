@@ -36,10 +36,10 @@ public class AlbumTests {
 //		IAlbumDAO.getAlbumDAO().removePicture(9);
 //	}
 	
-//	@Test
-//	public void deleteAlbumTest(){
-//		IAlbumDAO.getAlbumDAO().deleteAlbum(6);
-//	}
+	@Test
+	public void deleteAlbumTest(){
+		IAlbumDAO.getAlbumDAO().deleteAlbum(3);
+	}
 	
 //	@Test
 //	public void getAlbum(){
