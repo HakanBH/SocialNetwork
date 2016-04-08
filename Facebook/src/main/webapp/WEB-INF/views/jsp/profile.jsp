@@ -64,14 +64,10 @@
 				</div>
 				
 				<div id="photo_container">
-					${pictures[0]}
-					<c:forEach begin="0" end="9" var="picture" items="${pictures}" >
-											AAAAAAAAAAAAAAA
-						
-						<img id="pictures_min" src="images/${currentUser.email}/${picture.album.title}/${picture.name}" align="left">
+					<c:forEach begin="0" end="8" var="picture" items="${pictures}" >				
+						<a href="./pictures/${picture.album.id}"><img id="pictures_min" src="images/${currentUser.email}/${picture.album.title}/${picture.name}" align="left"></a>
 					</c:forEach>
 				</div>
-				
 
 				<p>
 					</br>&nbsp;</br>
@@ -90,8 +86,8 @@
 				</div>
 				
 				<div id="photo_container">
-					<c:forEach  begin="0" end="10" var="friend" items="${friends}">
-						<img id="pictures_min" src="${friend.profilePath}" align="left">
+					<c:forEach  begin="0" end="8" var="friend" items="${friends}">
+						<a href="./extProfile/${friend.id}"><img id="pictures_min" src="${friend.profilePath}" align="left"></a>
 					</c:forEach>
 				</div>
 

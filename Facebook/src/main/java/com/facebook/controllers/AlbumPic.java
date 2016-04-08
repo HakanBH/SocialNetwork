@@ -29,7 +29,6 @@ public class AlbumPic {
 		@RequestMapping(value="/pictures", method=RequestMethod.GET)
 		public String cont(Model model, HttpServletRequest request){
 			Album selectedAlbum = (Album) request.getSession().getAttribute("selectedAlbum");
-			System.err.println(selectedAlbum.toString());
 			return "/album_pics";
 		}
 }

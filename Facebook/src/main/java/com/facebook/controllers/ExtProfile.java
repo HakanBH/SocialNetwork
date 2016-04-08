@@ -17,10 +17,11 @@ import com.facebook.POJO.UserInfo;
 
 public class ExtProfile {
 	@RequestMapping(value="/extProfile/{id}", method=RequestMethod.GET)
-	public String mainController(@PathVariable(value="id") Integer id, HttpServletRequest request){
+	public String mainController(Model model, @PathVariable(value="id") Integer id, HttpServletRequest request){
 		System.err.println(id);
 		User extUser = (User)IUserDAO.getUserDAO().getUserById(id);
 		request.getSession().setAttribute("extUser", extUser);
+		ProfileController.preparePics(model, extUser);
 		
 		return "redirect:/extProfile";
 	}
