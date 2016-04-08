@@ -38,7 +38,7 @@ public class Album extends BaseEntity {
 	}
 
 	public List<Picture> getPictures() {
-		return Collections.unmodifiableList(pictures);
+		return pictures;
 	}
 
 	public void setPictures(List<Picture> pictures) {

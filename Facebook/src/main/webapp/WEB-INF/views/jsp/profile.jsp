@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -63,17 +62,16 @@
 						<a class="name_left" href="./album">&nbsp;Pictures</a>
 					</p>
 				</div>
+				
 				<div id="photo_container">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
+					${pictures[0]}
+					<c:forEach begin="0" end="9" var="picture" items="${pictures}" >
+											AAAAAAAAAAAAAAA
+						
+						<img id="pictures_min" src="images/${currentUser.email}/${picture.album.title}/${picture.name}" align="left">
+					</c:forEach>
 				</div>
+				
 
 				<p>
 					</br>&nbsp;</br>
@@ -92,8 +90,8 @@
 				</div>
 				
 				<div id="photo_container">
-				<c:forEach  begin="0" end="10" var="friend" items="${friends}">
-					<img id="pictures_min" src="${friend.profilePath}" align="left">
+					<c:forEach  begin="0" end="10" var="friend" items="${friends}">
+						<img id="pictures_min" src="${friend.profilePath}" align="left">
 					</c:forEach>
 				</div>
 

@@ -39,20 +39,17 @@ public class ProfileController {
 	
 		Set<User> friends = (Set<User>) currentUser.getFriends() ;
 			model.addAttribute("friends", friends);
-		
 	}
 	
 	public static void preparePics(Model model, User currentUser){
-		
 		Set<Album> albums = (Set<Album>) currentUser.getAlbums();
 		List<Picture> picList = new ArrayList<Picture>();
 		for(Album album : albums){
-			picList.addAll(album.getPictures());
+			for(Picture p: album.getPictures()){
+				picList.add(p);
+			}
 		}
 		Collections.shuffle(picList);
-		
-		model.addAttribute("pictures", Collections.unmodifiableList(picList));
-		
-		
+		model.addAttribute("pictures", picList);
 	}
 }
