@@ -123,12 +123,12 @@
 				<div class="panel panel-white post panel-shadow" style="width: 95%">
 					<div class="post-heading">
 						<div class="pull-left image">
-							<a href="#"><img src="${post.owner.profilePath}"
+							<a href="./extProfile/${post.owner.id}"><img src="${post.owner.profilePath}"
 								class="img-circle avatar" alt="user profile image"></a>
 						</div>
 						<div class="pull-left meta">
 							<div class="title h5">
-								<a href="#"><b>${post.owner.firstName}
+								<a href="./extProfile/${post.owner.id}"><b>${post.owner.firstName}
 										${post.owner.lastName}</b></a> made a post.
 							</div>
 							<h6 class="text-muted time">${post.created}</h6>
@@ -176,14 +176,14 @@
 						<ul class="comments-list">
 
 							<c:forEach var="postComment" items="${post.comments}">
-								<li class="comment"><a class="pull-left" href="#"> <img
+								<li class="comment"><a class="pull-left" href="./extProfile/${postComment.owner.id}"> <img
 										class="avatar" src="${postComment.owner.profilePath}"
 										alt="avatar">
 								</a>
 									<div class="comment-body">
 										<div class="comment-heading">
-											<h4 class="user">${postComment.owner.firstName}
-												${postComment.owner.firstName}</h4>
+											<a href="./extProfile/${postComment.owner.id}"><h4 class="user">${postComment.owner.firstName}
+												${postComment.owner.firstName}</h4></a>
 											<h5 class="time">${postComment.created}</h5>
 										</div>
 										<p>${postComment.text}</p>
