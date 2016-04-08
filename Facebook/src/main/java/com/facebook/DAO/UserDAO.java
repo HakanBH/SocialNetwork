@@ -245,10 +245,9 @@ public class UserDAO implements IUserDAO {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-
 			user.removeFriend(friend);
-			session.merge(user);
-
+			session.merge(friend);
+			
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -145,8 +145,7 @@ a.name_friend {
 	display: inline-block;
 	font-weight: bold;
 	font-size: 22px;
-	margin-left: 10px;
-	margin-top: 10px;
+	margin: 10px;
 	color: black;
 	width: 130px;
 	word-wrap: break-word;
@@ -187,6 +186,20 @@ div.friend_name {
 
 div.corte {
 	clear: bloth;
+}
+
+div.pic_container3 {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 100%;
+	border: 1px solid black;
+	margin-top: 10px;
+	background-color: #FFFFFF;
+	height: auto;
+	overflow: auto;
+	float: left;
+	padding-bottom: 20px;
+	
 }
 
 div.pic_container1 {

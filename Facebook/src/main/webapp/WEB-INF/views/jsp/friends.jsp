@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page errorPage="error.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,107 +33,25 @@
 			<h1 class="text_title">FRIENDS</h1>
 		</div>
 
-		<div class="pic_container1">
+		<div class="pic_container3">
 
-
+<c:forEach var="friend" items="${currentUser.friends}">
 			<div class="friend_container">
 				<div class="friend_pic">
-					<a href="#"><img id="friend_pic_size" src="images/usr.jpg"
+					<a href="#"><img id="friend_pic_size" src="${friend.profilePath}"
 						align="left"></a>
 				</div>
 				<div class="friend_name">
-					<a href="#" class="name_friend">Default Useraaaaa Name</a>
+					<a href="#" class="name_friend">${friend.firstName} ${friend.lastName}</a>
 				</div>
 				<div class="friend_button">
-					<button id="asocial_button" type="submit" align="right">Asocialate
-						him!</button>
+					<form action="friends/removeFriend" method="GET">
+					<input name="userToRemove" type="hidden" value="${friend.id}"> 
+					<input type="submit" id="post_button2" value="Unfollow!">
+				</form>
 				</div>
 			</div>
-
-			<div class="friend_container">
-				<div class="friend_pic">
-					<a href="#"><img id="friend_pic_size" src="images/usr.jpg"
-						align="left"></a>
-				</div>
-				<div class="friend_name">
-					<a href="#" class="name_friend">Default Useraaaaa Name</a>
-				</div>
-				<div class="friend_button">
-					<button id="asocial_button" type="submit" align="right">Asocialate
-						him!</button>
-				</div>
-			</div>
-
-			<div class="friend_container">
-				<div class="friend_pic">
-					<a href="#"><img id="friend_pic_size" src="images/usr.jpg"
-						align="left"></a>
-				</div>
-				<div class="friend_name">
-					<a href="#" class="name_friend">Default Useraaaaa Name</a>
-				</div>
-				<div class="friend_button">
-					<button id="asocial_button" type="submit" align="right">Asocialate
-						him!</button>
-				</div>
-			</div>
-
-			<div class="friend_container">
-				<div class="friend_pic">
-					<a href="#"><img id="friend_pic_size" src="images/usr.jpg"
-						align="left"></a>
-				</div>
-				<div class="friend_name">
-					<a href="#" class="name_friend">Default Useraaaaa Name</a>
-				</div>
-				<div class="friend_button">
-					<button id="asocial_button" type="submit" align="right">Asocialate
-						him!</button>
-				</div>
-			</div>
-
-			<div class="friend_container">
-				<div class="friend_pic">
-					<a href="#"><img id="friend_pic_size" src="images/usr.jpg"
-						align="left"></a>
-				</div>
-				<div class="friend_name">
-					<a href="#" class="name_friend">Default Useraaaaa Name</a>
-				</div>
-				<div class="friend_button">
-					<button id="asocial_button" type="submit" align="right">Asocialate
-						him!</button>
-				</div>
-			</div>
-
-			<div class="friend_container">
-				<div class="friend_pic">
-					<a href="#"><img id="friend_pic_size" src="images/usr.jpg"
-						align="left"></a>
-				</div>
-				<div class="friend_name">
-					<a href="#" class="name_friend">Default Useraaaaa Name</a>
-				</div>
-				<div class="friend_button">
-					<button id="asocial_button" type="submit" align="right">Asocialate
-						him!</button>
-				</div>
-			</div>
-
-			<div class="friend_container">
-				<div class="friend_pic">
-					<a href="#"><img id="friend_pic_size" src="images/usr.jpg"
-						align="left"></a>
-				</div>
-				<div class="friend_name">
-					<a href="#" class="name_friend">Default Useraaaaa Name</a>
-				</div>
-				<div class="friend_button">
-					<button id="asocial_button" type="submit" align="right">Asocialate
-						him!</button>
-				</div>
-			</div>
-
+			</c:forEach>
 
 
 

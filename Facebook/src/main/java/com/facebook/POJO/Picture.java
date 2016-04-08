@@ -34,4 +34,22 @@ public class Picture extends BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	 @Override
+	    public boolean equals(Object o1) {
+
+
+	        if(this.getName().equals(((Picture) o1).getName())){
+	                return true;
+	        }
+	        return false;
+	    }
+
+
+	    @Override
+	    public int hashCode() {
+
+	        
+	        return Integer.valueOf(this.getId());
+	    }
 }

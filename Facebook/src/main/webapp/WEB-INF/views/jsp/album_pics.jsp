@@ -34,7 +34,7 @@
 			<h1 class="text_title">${selectedAlbum.title}</h1>
 		</div>
 		<div class="pic_container2 panel panel-white panel-shadow">
-			<c:forEach var="pic" items="${selectedAlbum.pictures}">
+			<c:forEach var="pic" items="${selectedPictures}">
 				<div class="responsive">
 					<div class="img">
 						<a href= "images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
