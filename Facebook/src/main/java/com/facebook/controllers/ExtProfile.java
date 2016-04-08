@@ -1,5 +1,7 @@
 package com.facebook.controllers;
 
+import static com.facebook.controllers.MainPage.prepareSuggestions;
+
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +30,12 @@ public class ExtProfile {
 	
 	@RequestMapping(value="/extProfile", method=RequestMethod.GET)
 	public String cont(Model model, HttpServletRequest request){
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		User extUser = (User) request.getSession().getAttribute("extUser");
 		UserInfo userInfo = extUser.getUserInfo();
 		request.getSession().setAttribute("userInfo", userInfo);
 		prepareFriends(model, extUser);
+		MainPage.prepareSuggestions(model, currentUser);
 		ProfileController.preparePics(model,extUser);
 		return "/extProfile";
 	}

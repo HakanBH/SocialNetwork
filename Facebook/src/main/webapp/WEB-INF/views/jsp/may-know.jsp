@@ -20,11 +20,11 @@
 		<c:forEach var="suggestion" items="${friendSuggestions}">
 			<div class="whoToAdd">
 				<div id="profpicknow">
-					<a href="extProfile/${suggestion.id}"> <img id="profpicture60"
+					<a href="./extProfile/${suggestion.id}"> <img id="profpicture60"
 						src="${suggestion.profilePath}" align="right">
 					</a>
 				</div>
-				<a href="" id="nickname_info1"><b> ${suggestion.firstName}
+				<a href="./extProfile/${suggestion.id}" id="nickname_info1"><b> ${suggestion.firstName}
 						${suggestion.lastName} </b></a>
 				<form action="main/addFriend" method="GET">
 					<input name="userToAdd" type="hidden" value="${suggestion.id}"> 
