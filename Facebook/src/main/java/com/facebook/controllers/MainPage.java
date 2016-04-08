@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.facebook.DAO.IPostDAO;
 import com.facebook.DAO.IUserDAO;
+import com.facebook.POJO.Comment;
 import com.facebook.POJO.Post;
 import com.facebook.POJO.User;
 
@@ -29,7 +31,17 @@ public class MainPage {
 		if(!posts.isEmpty()){
 			model.addAttribute("posts",posts);
 		}
-
+		
+		Integer postId = (Integer) request.getSession().getAttribute("post");
+		Comment comment = (Comment) request.getSession().getAttribute("comment");
+		
+		for(Post p: currentUser.getPosts()){
+			if(p.getId() == postId){
+				p.addComment(comment);
+			}
+		}
+		
+		
 		return "main";
 	}
 
@@ -45,7 +57,7 @@ public class MainPage {
 		return "redirect:/main";
 	}
 	
-
+	
 	
 	public static void prepareSuggestions(Model model, User currentUser){
 		if (currentUser.getFriends().isEmpty() || currentUser.getFriendsOfFriends().size() < User.NUMBER_OF_FRIEND_SUGGESTIONS) {
