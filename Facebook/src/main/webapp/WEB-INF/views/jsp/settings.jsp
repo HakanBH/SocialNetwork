@@ -10,11 +10,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
-	rel='stylesheet' type='text/css'>
 
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"

@@ -207,34 +207,21 @@
 						</form>
 						<ul class="comments-list">
 							<c:forEach var="postComment" items="${post.comments}">
-								<li class="comment"><a class="pull-left" href="#"> <img
+								<li class="comment"><a class="pull-left"
+									href="./extProfile/${postComment.owner.id}"> <img
 										class="avatar" src="${postComment.owner.profilePath}"
 										alt="avatar">
 								</a>
 									<div class="comment-body">
 										<div class="comment-heading">
-											<h4 class="user">${postComment.owner.firstName}
-												${postComment.owner.firstName}</h4>
+											<a href="./extProfile/${postComment.owner.id}">
+												<h4 class="user">${postComment.owner.firstName}
+													${postComment.owner.firstName}</h4>
+											</a>
 
-											<c:forEach var="postComment" items="${post.comments}">
-												<li class="comment"><a class="pull-left"
-													href="./extProfile/${postComment.owner.id}"> <img
-														class="avatar" src="${postComment.owner.profilePath}"
-														alt="avatar">
-												</a>
-													<div class="comment-body">
-														<div class="comment-heading">
-															<a href="./extProfile/${postComment.owner.id}">
-																<h4 class="user">${postComment.owner.firstName}
-																	${postComment.owner.firstName}</h4>
-															</a>
-
-															<h5 class="time">${postComment.created}</h5>
-														</div>
-														<p>${postComment.text}</p>
-													</div></li>
-											</c:forEach>
+											<h5 class="time">${postComment.created}</h5>
 										</div>
+										<p>${postComment.text}</p>
 									</div></li>
 							</c:forEach>
 						</ul>

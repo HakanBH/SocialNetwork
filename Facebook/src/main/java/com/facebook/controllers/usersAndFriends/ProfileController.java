@@ -34,7 +34,6 @@ public class ProfileController {
 	}
 	
 	public static void prepareFriends(Model model, User currentUser){
-	
 		Set<User> friends = (Set<User>) currentUser.getFriends() ;
 			model.addAttribute("friends", friends);
 	}

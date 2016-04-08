@@ -2,14 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page errorPage="error.jsp" %>
+<%@ page errorPage="error.jsp"%>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/searchBar.css">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
+	rel='stylesheet' type='text/css'>
 
 <c:choose>
 	<c:when test="${not empty sessionScope.currentUser}">
 		<div style="margin-bottom: 110px">
 			<header id="fh5co-header" role="banner">
-				<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<nav class="navbar navbar-default navbar-fixed-top"
+					role="navigation">
 					<div class="container-fluid" style="font-size: 15px !important">
 						<div class="navbar-header">
 							<!-- Mobile Toggle Menu Button -->
@@ -18,9 +25,19 @@
 								aria-expanded="false" aria-controls="navbar"> <i> </i>
 							</a> <a class="navbar-brand" href="./main"
 								style="font-size: 20px !important"> Asocialen.com </a>
+
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav navbar-right">
+								<li style="margin-top: 0.05cm; margin-right: 20px">
+									<div class="search">
+										<form action="./searchUsers" method="post">
+											<input type="text" class="form-control input-sm" name="searchText"
+												maxlength="24" placeholder="Search" />
+											<button type="submit" class="btn btn-search btn-primary btn-sm">Search</button>
+										</form>
+									</div>
+								</li>
 								<li><a href="./profile"> <img id="usr_pic_small"
 										src="${currentUser.profilePath}" align="left">
 

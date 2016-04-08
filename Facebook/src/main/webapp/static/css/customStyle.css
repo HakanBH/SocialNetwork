@@ -5,10 +5,17 @@ body {
 	margin-top: -40px;
 }
 
+.search-result {
+	border: solid 1px #D4D4D4;
+	background-color: #F1F1F1;
+	margin-bottom: -10px;
+	height: 140px
+}
+
 .stat {
-	opacity:0;
+	opacity: 0;
 	position: absolute;
-	margin-left:-50px;
+	margin-left: -50px;
 }
 
 .commentButton {
@@ -199,7 +206,6 @@ div.pic_container3 {
 	overflow: auto;
 	float: left;
 	padding-bottom: 20px;
-	
 }
 
 div.pic_container1 {
@@ -518,28 +524,6 @@ img.face_icon {
 
 #post_button {
 	float: right;
-	margin-right: 7px;
-	margin-top: 5px;
-	display: inline-block;
-	background: #000000;
-	border-top: 1px solid #29447e;
-	border-right: 1px solid #29447e;
-	border-bottom: 1px solid #1a356e;
-	border-left: 1px solid #29447e;
-	height: 22px;
-	padding-right: 20px;
-	padding-left: 20px;
-	font-weight: bold;
-	font-size: 12px;
-	color: white;
-	text-decoration: none;
-	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
-	line-height: 2px;
-	cursor: pointer;
-}
-
-#post_button2 {
-	float: left;
 	margin-right: 7px;
 	margin-top: 5px;
 	display: inline-block;

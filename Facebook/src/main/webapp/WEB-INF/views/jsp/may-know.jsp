@@ -29,7 +29,7 @@
 						${suggestion.lastName} </b></a>
 				<form action="main/addFriend" method="GET">
 					<input name="userToAdd" type="hidden" value="${suggestion.id}"> 
-					<input type="submit" id="post_button2" value="Follow">
+					<input type="submit" class="btn btn-primary" style="margin-top:5px; width:100px"  value="Follow">
 				</form>
 			</div>
 		</c:forEach>

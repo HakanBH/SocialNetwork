@@ -37,9 +37,9 @@ public class UserDAO implements IUserDAO {
 			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 			String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
 			user.setPassword(encryptedPassword);
-			
+
 			session.persist(user);
-				
+
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();
@@ -48,7 +48,7 @@ public class UserDAO implements IUserDAO {
 			session.close();
 		}
 	}
-	
+
 	@Override
 	public boolean deleteUser(int id) throws Exception {
 		Session session = null;
@@ -61,12 +61,12 @@ public class UserDAO implements IUserDAO {
 			session.delete(u);
 
 			session.getTransaction().commit();
-			
+
 			File userDir = new File(User.STORAGE_PATH + File.separator + u.getEmail() + File.separator);
-			
+
 			FileDeleteStrategy.FORCE.delete(userDir);
 			userDir.delete();
-		
+
 			return true;
 		} catch (Exception e) {
 			throw new Exception(e);
@@ -74,7 +74,7 @@ public class UserDAO implements IUserDAO {
 			session.close();
 		}
 	}
-	
+
 	@Override
 	public void updateUserInfo(User user, UserInfo info) {
 		Session session = null;
@@ -99,7 +99,7 @@ public class UserDAO implements IUserDAO {
 			}
 		}
 	}
-	
+
 	@Override
 	public List<User> getAllUsers() {
 		Session session = SessionDispatcher.getSession();
@@ -108,7 +108,7 @@ public class UserDAO implements IUserDAO {
 
 			Query query = session.createQuery("from User");
 			List<User> result = query.list();
-			
+
 			session.getTransaction().commit();
 
 			return result;
@@ -126,12 +126,12 @@ public class UserDAO implements IUserDAO {
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
-			
+
 			user = (User) session.get(User.class, id);
-			for(Post p : user.getOwnedPosts()){
-			   Hibernate.initialize(p);
+			for (Post p : user.getOwnedPosts()) {
+				Hibernate.initialize(p);
 			}
-				
+
 			session.getTransaction().commit();
 		} finally {
 			if (session != null) {
@@ -139,8 +139,8 @@ public class UserDAO implements IUserDAO {
 			}
 		}
 		return user;
-	} 
-	
+	}
+
 	@Override
 	public boolean isEmailTaken(String email) throws Exception {
 		Session session = SessionDispatcher.getSession();
@@ -155,7 +155,7 @@ public class UserDAO implements IUserDAO {
 			session.close();
 		}
 	}
-	
+
 	/**
 	 * @param email
 	 *            - a string which is the email to be searched for.
@@ -189,14 +189,14 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public void setProfilePicture(Picture pic , User user) {
+	public void setProfilePicture(Picture pic, User user) {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
 			session.update(pic);
-			
+
 			user.setProfilePicture(pic);
-			
+
 			session.update(user);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -205,12 +205,14 @@ public class UserDAO implements IUserDAO {
 			session.close();
 		}
 	}
+
 	@Override
-	public void setBgPicture(Picture pic , User user) {
+	public void setBgPicture(Picture pic, User user) {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-			user.setBgPicture(pic);;
+			user.setBgPicture(pic);
+			;
 			session.update(user);
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -248,14 +250,30 @@ public class UserDAO implements IUserDAO {
 			session.beginTransaction();
 			user.removeFriend(friend);
 			session.merge(friend);
-			
+
 			session.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			session.close();
 		}
 	}
 
+	@Override
+	public List<User> searchUsers(String str) {
+		Session session = null;
+		try {
+			session = SessionDispatcher.getSession();
+			session.beginTransaction();
+			
+			List<User> result = new ArrayList<User>();
+			Query query = session.createQuery("SELECT u from User u where firstName like :string");
 
+			query.setString("string", "%"+str+"%");
+			result = query.list();
+			
+			session.getTransaction().commit();
+			return result;
+		} finally {
+			session.close();
+		}
+	}
 }

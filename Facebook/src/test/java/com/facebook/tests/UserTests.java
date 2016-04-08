@@ -58,13 +58,13 @@ public class UserTests {
 //		System.out.println(wasDeleted);
 //	}
 	
-	@Test
-	public void deleteAllUsers() throws Exception{
-		for(User u: IUserDAO.getUserDAO().getAllUsers()){
-			System.err.println(u);
-			IUserDAO.getUserDAO().deleteUser(u.getId());
-		}
-	}
+//	@Test
+//	public void deleteAllUsers() throws Exception{
+//		for(User u: IUserDAO.getUserDAO().getAllUsers()){
+//			System.err.println(u);
+//			IUserDAO.getUserDAO().deleteUser(u.getId());
+//		}
+//	}
 
 //	@Test
 //	public void loginTest() throws Exception  {
@@ -81,11 +81,17 @@ public class UserTests {
 //		boolean isTaken = IUserDAO.getUserDAO().isEmailTaken("hakan.hyusein@abv.bg");
 //		System.out.println(isTaken);	
 //	}
+	
 //	@Test
 //	public void testChangeProfilePic() throws Exception{
 //		IUserDAO.getUserDAO().addProfileImage(10, "[image path]");
 //		User updateUser = IUserDAO.getUserDAO().getUserById(10);
 //		System.out.println(updateUser);
+//	}
+//	
+//	@Test
+//	public void searchUsers() {
+//		System.err.println(userDAO.searchUsers(""));
 //	}
 	
 }

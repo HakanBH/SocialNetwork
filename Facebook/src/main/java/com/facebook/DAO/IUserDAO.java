@@ -29,4 +29,6 @@ public interface IUserDAO {
 	void removeFriend(User user, User friend);
 
 	void setBgPicture(Picture pic, User user);
+
+	List<User> searchUsers(String str);
 }
