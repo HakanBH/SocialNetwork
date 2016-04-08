@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,40 +23,47 @@
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<div id="main_container">
-		<div id="user_prof"
-		style="background-image: url('${extUser.bgPath}');">
-		<div id="pic_name_block">
-			<a href="#"><img id="profpicturemain"
-				src="${extUser.profilePath}" align="left"></a>
-			<p id="user_name">${extUser.firstName}
-				${extUser.lastName}</p>
-		</div>
-	</div>
 
+		<div id="user_prof"
+			style="background-image: url('${extUser.bgPath}');">
+			<div id="pic_name_block">
+				<a href="#"><img id="profpicturemain"
+					src="${extUser.profilePath}" align="left"></a>
+				<p id="user_name">${extUser.firstName}${extUser.lastName}</p>
+			</div>
+		</div>
 		<div id="left_col">
-			<div id="first_left">
+
+			<div class="panel panel-white panel-shadow">
 				<div id="image_space">
-					<a href="./settings"><img id="prof_pic_post1" src="images/prof.png"
-						align="left"> </a>
+					<a href="./settings"><img id="prof_pic_post1"
+						src="images/prof.png" align="left"> </a>
 				</div>
 				<div id="left_name">
 					<p>
-						<a class="name_left" href="./settings">&nbsp;Personal Information</a>
+						<a class="name_left" href="./settings">&nbsp;Personal
+							Information</a>
 					</p>
 
 					</br>
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship status: ${userInfo.relationshipStatus}</p> 
-					
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday: ${userInfo.birthday	}</p> 
-					
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender: ${userInfo.gender}</p> 
-					
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">City: ${userInfo.city}</p> 
-					
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship
+						status: ${extUser.userInfo.relationshipStatus}</p>
+
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday:
+						${extUser.userInfo.birthday	}</p>
+
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender:
+						${extUser.userInfo.gender}</p>
+
+					<p id="post_text" style="font-weight: bold; font-size: 20px;">City:
+						${extUser.userInfo.city}</p>
+					</br>
+
+
 				</div>
 			</div>
 
-			<div id="first_left">
+			<div class="panel panel-white panel-shadow">
 				<div id="image_space">
 					<a href="./album"><img id="prof_pic_post1" src="images/pic.png"
 						align="left"> </a>
@@ -65,37 +73,13 @@
 						<a class="name_left" href="./album">&nbsp;Pictures</a>
 					</p>
 				</div>
-				<div id="photo_container">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-					<img id="pictures_min" src="images/default.png" align="left">
-				</div>
 
-				<p>
-					</br>&nbsp;</br>
-				</p>
-			</div>
-
-			<div id="first_left">
-				<div id="image_space">
-					<a href="./friends"><img id="prof_pic_post" src="images/friends.png"
-						align="left"> </a>
-				</div>
-				<div id="left_name">
-					<p>
-						<a class="name_left" href="./friends">&nbsp;Friends</a>
-					</p>
-				</div>
-				
 				<div id="photo_container">
-				<c:forEach  begin="0" end="10" var="friend" items="${friends}">
-					<img id="pictures_min" src="${friend.profilePath}" align="left">
+					<c:forEach begin="0" end="8" var="picture" items="${pictures}">
+						<a href="./pictures/${picture.album.id}"><img
+							id="pictures_min"
+							src="images/${extUser.email}/${picture.album.title}/${picture.name}"
+							align="left"></a>
 					</c:forEach>
 				</div>
 
@@ -104,138 +88,106 @@
 				</p>
 			</div>
 
-
-		</div>
-		<div id="center_col">
-			<div id="new_post">
-				<div id="post_content">
-					<div id="image_space">
-						<a href="#"><img id="prof_pic_post" src="images/default.png"
-							align="left"> </img></a>
-						<p id="post_info">
-							<a href="#">User Name Here</a> </br> Time Here!
-						</p>
-					</div>
-					<p id="post_text">Ius id vidit volumus mandamus, vide veritus
-						democritum te nec, ei eos debet libris consulatu. No mei ferri
-						graeco dicunt, ad cum veri accommodare. Sed at malis omnesque
-						delicata, usu et iusto zzril meliore. Dicunt maiorum eloquentiam
-						cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos has,
-						ea dicit voluptua eloquentiam pro, ad sit quas qualisque. Eos
-						vocibus deserunt quaestio ei. Blandit incorrupte quaerendum in
-						quo, nibh impedit id vis, vel no nullam semper audiam. Ei populo
-						graeci consulatu mei, has ea stet modus phaedrum. Inani oblique ne
-						has, duo et veritus detraxit. Tota ludus oratio ea mel, offendit
-						persequeris ei vim. Eos dicat oratio partem ut, id cum ignota
-						senserit intellegat. Sit inani ubique graecis ad, quando graecis
-						liberavisse et cum, dicit option eruditi at duo. Homero salutatus
-						suscipiantur eum id, tamquam voluptaria expetendis ad sed, nobis
-						feugiat similique usu ex. Eum hinc argumentum te, no sit percipit
-						adversarium, ne qui feugiat persecuti. Odio omnes scripserit ad
-						est, ut vidit lorem maiestatis his, putent mandamus gloriatur ne
-						pro. Oratio iriure rationibus ne his, ad est corrumpit splendide.
-						Ad duo appareat moderatius, ei falli tollit denique eos. Dicant
-						evertitur mei in, ne his deserunt perpetua sententiae, ea sea
-						omnes similique vituperatoribus. Ex mel errem intellegebat
-						comprehensam, vel ad tantas antiopam delicatissimi, tota ferri
-						affert eu nec. Legere expetenda pertinacia ne pro, et pro impetus
-						persius assueverit.</p>
-					<img id="post_img" src="images/default3.png" align="center">
-					<div id="panel">
-						<div class="icon_div">
-							<a href="#"><img class="face_icon" src="images/like.png"
-								align="left" alt="Alt text">Likes</a>
-						</div>
-						<div class="icon_div">
-							<a href="#"><img class="face_icon" src="images/Comment.png"
-								align="left">Comment</a>
-						</div>
-						<div class="icon_div">
-							<a href="#"><img class="face_icon" src="images/share.png"
-								align="left">Share</a>
-						</div>
-					</div>
-					<div id="input-group">
-						<img id="prof_pic_post" src="images/default.png" align="left">
-						<input class="form-comment" placeholder="Add a comment"
-							type="text">
-					</div>
+			<div class="panel panel-white panel-shadow">
+				<div id="image_space">
+					<a href="./friends"><img id="prof_pic_post"
+						src="images/friends.png" align="left"> </a>
+				</div>
+				<div id="left_name">
+					<p>
+						<a class="name_left" href="./friends">&nbsp;Friends</a>
+					</p>
 				</div>
 
-				<ul class="comments-list">
-					<li class="comment">
-						<div id="post_content2">
-							<div id="image_space">
-								<a href="#"><img id="prof_pic_post" src="images/default.png"
-									align="left"> </img></a>
-								<p id="post_info">
-									<a href="#">User Name Here</a> </br> Time Here!
-								</p>
-							</div>
-							<p id="post_text">Ius id vidit volumus mandamus, vide veritus
-								democritum te nec, ei eos debet libris consulatu. No mei ferri
-								graeco dicunt, ad cum veri accommodare. Sed at malis omnesque
-								delicata, usu et iusto zzril meliore. Dicunt maiorum eloquentiam
-								cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos
-								has, ea dicit voluptua eloquentiam pro, ad sit quas qualisque.
-								Eos vocibus deserunt quaestio ei.</p>
-							<img id="post_img" src="images/background-1.jpg" align="center">
-							<div id="panel">
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/like.png"
-										align="left" alt="Alt text">Likes</a>
-								</div>
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/Comment.png"
-										align="left">Comment</a>
-								</div>
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/share.png"
-										align="left">Share</a>
-								</div>
-							</div>
-						</div>
-						<p>
-							</br>&nbsp;</br>
-						</p>
-					</li>
-					<li class="comment">
-						<div id="post_content2">
-							<div id="image_space">
-								<a href="#"><img id="prof_pic_post" src="images/default.png"
-									align="left"> </img></a>
-								<p id="post_info">
-									<a href="#">User Name Here</a> </br> Time Here!
-								</p>
-							</div>
-							<p id="post_text">Ius id vidit volumus mandamus, vide veritus
-								democritum te nec, ei eos debet libris consulatu. No mei ferri
-								graeco dicunt, ad cum veri accommodare. Sed at malis omnesque
-								delicata, usu et iusto zzril meliore. Dicunt maiorum eloquentiam
-								cum cu, sit summo dolor essent te. Ne quodsi nusquam legendos
-								has, ea dicit voluptua eloquentiam pro, ad sit quas qualisque.
-								Eos vocibus deserunt quaestio ei.</p>
-							<div id="panel">
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/like.png"
-										align="left" alt="Alt text">Likes</a>
-								</div>
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/Comment.png"
-										align="left">Comment</a>
-								</div>
-								<div class="icon_div">
-									<a href="#"><img class="face_icon" src="images/share.png"
-										align="left">Share</a>
-								</div>
-							</div>
-						</div>
-						<p>
-							</br>&nbsp;</br>
-						</p>
-					</li>
-				</ul>
+				<div id="photo_container">
+					<c:forEach begin="0" end="8" var="friend" items="${friends}">
+						<a href="./extProfile/${friend.id}"><img id="pictures_min"
+							src="${friend.profilePath}" align="left"></a>
+					</c:forEach>
+				</div>
+
+				<p>
+					</br>&nbsp;</br>
+				</p>
 			</div>
+		</div>
+
+		<div id="center_col">
+			<!-- posts -->
+			<c:forEach var="post" items="${posts}">
+				<div class="panel panel-white post panel-shadow" style="width: 95%">
+					<div class="post-heading">
+						<div class="pull-left image">
+							<a href="#"><img src="${post.owner.profilePath}"
+								class="img-circle avatar" alt="user profile image"></a>
+						</div>
+						<div class="pull-left meta">
+							<div class="title h5">
+								<a href="#"><b>${post.owner.firstName}
+										${post.owner.lastName}</b></a> made a post.
+							</div>
+							<h6 class="text-muted time">${post.created}</h6>
+						</div>
+					</div>
+					<div class="post-description">
+						<p>${post.text}</p>
+						<c:if test="${not empty post.picture.name}">
+							<img id="post_img" src="${post.picturePath}" align="middle">
+						</c:if>
+
+						<div class="stats">
+							<form method="post" action="./likePost">
+								<input name="likedPost" type="hidden" value="${post.id}">
+								<div id="${post.id}"
+									class="${cssClass} btn btn-default stat-item">
+									<span class="fa fa-thumbs-up icon">
+										${fn:length(post.likes)}</span> <input type="submit"
+										style="opacity: 0; position: absolute;">
+								</div>
+							</form>
+							<form:form method="post" action="./sharePost">
+								<input type="hidden" name="sharedPost" value="${post.id}">
+								<div class="btn btn-default stat-item">
+									<span class="fa fa-share icon"> 12</span> <input type="submit"
+										style="opacity: 0; position: absolute;">
+								</div>
+							</form:form>
+						</div>
+					</div>
+
+					<div class="post-footer">
+						<form action="commentPost" method="post">
+							<div class="input-group" style="width: 100% !important">
+								<input type="hidden" name="commentedPost" value="${post.id}">
+								<input type="text" name="commentText" required maxlength="60"
+									placeholder="Add a comment" class="form-control"> <span
+									class="input-group-btn">
+									<div class="btn commentButton">
+										<span>Comment</span> <input type="submit" class="commentForm" />
+									</div>
+								</span>
+							</div>
+						</form>
+						<ul class="comments-list">
+
+							<c:forEach var="postComment" items="${post.comments}">
+								<li class="comment"><a class="pull-left" href="#"> <img
+										class="avatar" src="${postComment.owner.profilePath}"
+										alt="avatar">
+								</a>
+									<div class="comment-body">
+										<div class="comment-heading">
+											<h4 class="user">${postComment.owner.firstName}
+												${postComment.owner.firstName}</h4>
+											<h5 class="time">${postComment.created}</h5>
+										</div>
+										<p>${postComment.text}</p>
+									</div></li>
+							</c:forEach>
+						</ul>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 
 		<div id="right_col">
@@ -243,8 +195,6 @@
 			<jsp:include page="may-know.jsp"></jsp:include>
 
 		</div>
-
-
 	</div>
 
 	<script

@@ -31,7 +31,7 @@ public class ProfileController {
 		request.getSession().setAttribute("userInfo", userInfo);
 		prepareSuggestions(model, currentUser);
 		prepareFriends(model, currentUser);
-		
+		preparePics(model,currentUser);
 		return "profile";
 	}
 	

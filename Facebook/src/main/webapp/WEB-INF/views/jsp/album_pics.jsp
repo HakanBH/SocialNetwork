@@ -33,7 +33,7 @@
 			</div>
 			<h1 class="text_title">${selectedAlbum.title}</h1>
 		</div>
-		<div class="pic_container2 panel panel-white panel-shadow"">
+		<div class="pic_container2 panel panel-white panel-shadow">
 			<c:forEach var="pic" items="${selectedAlbum.pictures}">
 				<div class="responsive">
 					<div class="img">
