@@ -37,6 +37,8 @@ public class UserDAO implements IUserDAO {
 			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 			String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
 			user.setPassword(encryptedPassword);
+			
+			System.err.println("AAAAAAAAAaaaaaa");
 			session.persist(user);
 				
 			session.getTransaction().commit();

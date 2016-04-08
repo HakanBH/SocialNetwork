@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "pictures")
 
 public class Picture extends BaseEntity {
-	@Column(name = "name", columnDefinition = "VARCHAR(255)")
+	@Column(name = "name", columnDefinition = "VARCHAR(100)")
 	private String name;
 
 	@ManyToOne

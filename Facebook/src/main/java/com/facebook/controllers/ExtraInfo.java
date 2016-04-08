@@ -32,6 +32,7 @@ public class ExtraInfo {
 	public String uploadInfo(HttpServletRequest request, @ModelAttribute("userInfo") 
 			UserInfo userInfo){
 		User user = (User) request.getSession().getAttribute("currentUser");
+		user.setUserInfo(userInfo);
 		IUserDAO.getUserDAO().updateUserInfo(user, userInfo);	
 		return "redirect:/main";
 	}

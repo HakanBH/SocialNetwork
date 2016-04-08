@@ -7,16 +7,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/post.css">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'	rel='stylesheet' type='text/css'>
+<link href="css/post.css" rel="stylesheet">
 <link href="css/lightbox.css" rel="stylesheet">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/customStyle.css">
-<link rel="stylesheet" href="css/imageUpload.css">
+<link href="css/bootstrap.css"rel="stylesheet">
+<link href="css/customStyle.css" rel="stylesheet" >
+<link href="css/imageUpload.css"rel="stylesheet" >
 <title>Asocialen.com</title>
 </head>
 <body>

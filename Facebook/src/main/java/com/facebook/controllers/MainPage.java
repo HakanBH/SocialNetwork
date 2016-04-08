@@ -32,16 +32,6 @@ public class MainPage {
 			model.addAttribute("posts",posts);
 		}
 		
-		Integer postId = (Integer) request.getSession().getAttribute("post");
-		Comment comment = (Comment) request.getSession().getAttribute("comment");
-		
-		for(Post p: currentUser.getPosts()){
-			if(p.getId() == postId){
-				p.addComment(comment);
-			}
-		}
-		
-		
 		return "main";
 	}
 

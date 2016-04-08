@@ -18,7 +18,7 @@ public class UserTests {
 //			System.out.println(u);
 //		}
 //	}
-
+//	
 //	@Test
 //	public void setProfilePictureTest(){
 //		Picture pic = IAlbumDAO.getAlbumDAO().getPicById(2);
@@ -30,10 +30,11 @@ public class UserTests {
 
 //	@Test
 //	public void userInsertion() throws Exception {
-//		User user = new User("martin@gmail.com", "1234", "Martin", "Fanev");
+//		User user = new User("martina@gmail.com", "1234", "Martin", "Fanev");
 //		User user1 = new User("bojo@gmail.com", "1234", "Bojil", "Bojilov");
 //		User user2 = new User("angel@gmail.com", "1234", "Angel", "Angelov");
 //		User user3 = new User("svetlio@gmail.com", "1234", "Svetoslav", "Brumchev");
+//
 //
 //		userDAO.insertUser(user);
 //		userDAO.insertUser(user1);
@@ -57,13 +58,13 @@ public class UserTests {
 //		System.out.println(wasDeleted);
 //	}
 	
-//	@Test
-//	public void deleteAllUsers() throws Exception{
-//		for(User u: IUserDAO.getUserDAO().getAllUsers()){
-//			System.err.println(u);
-//			IUserDAO.getUserDAO().deleteUser(u.getId());
-//		}
-//	}
+	@Test
+	public void deleteAllUsers() throws Exception{
+		for(User u: IUserDAO.getUserDAO().getAllUsers()){
+			System.err.println(u);
+			IUserDAO.getUserDAO().deleteUser(u.getId());
+		}
+	}
 
 //	@Test
 //	public void loginTest() throws Exception  {

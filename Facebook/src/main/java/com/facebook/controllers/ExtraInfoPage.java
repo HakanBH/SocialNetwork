@@ -21,7 +21,7 @@ public class ExtraInfoPage {
 	@RequestMapping(method = RequestMethod.POST)		
 	public String postMethod(Model model) {
 		UserInfo userInfo = new UserInfo();
-
+		
 		model.addAttribute("userInfo", userInfo);
 		return "extraInfo";
 	}

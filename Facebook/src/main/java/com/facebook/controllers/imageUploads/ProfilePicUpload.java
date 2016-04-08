@@ -92,7 +92,7 @@ public class ProfilePicUpload {
 					return "forward:/extraInfo";
 				}
 				// Write the file
-				file = new File(filePath + "profile_pic." + (album.getPictures().size() + 1) + "." + extension);
+				file = new File(filePath + "profile_pic" + (album.getPictures().size() + 1) + "." + extension);
 				fi.write(file);
 			}
 		}

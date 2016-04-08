@@ -36,7 +36,6 @@ public class PostUpload {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
 		if (isMultipart) {
-
 			Album album = IAlbumDAO.getAlbumDAO().getAlbum(currentUser, PICTURE_FOLDER);
 			if (album == null) {
 				album = new Album(PICTURE_FOLDER, currentUser);

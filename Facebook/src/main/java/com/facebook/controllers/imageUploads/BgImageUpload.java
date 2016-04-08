@@ -90,7 +90,7 @@ public class BgImageUpload {
 					return "forward:/extraInfo";
 				}
 				// Write the file
-				file = new File(filePath + "background-pic." + (album.getPictures().size() + 1) + "." + extension);
+				file = new File(filePath + "background-pic" + (album.getPictures().size() + 1) + "." + extension);
 				fi.write(file);
 			}
 		}

@@ -26,15 +26,14 @@ public class PostController {
 
 		Post commentedPost = IPostDAO.getPostDAO().getPostById(id);
 		Comment comment = new Comment(currentUser, commentedPost, commentText);
-
-		commentedPost.addComment(comment);
-		currentUser.addComment(comment);
 		
-		request.getSession().setAttribute("post", commentedPost.getId());
-		request.getSession().setAttribute("comment", comment);
+		for(Post p: currentUser.getPosts()){
+			if(p.getId() == commentedPost.getId()){
+				p.addComment(comment);
+			}
+		}
 		
 		IPostDAO.getPostDAO().commentPost(commentedPost, currentUser, comment);
-		
 		return "redirect:/main";
 	}
 }
