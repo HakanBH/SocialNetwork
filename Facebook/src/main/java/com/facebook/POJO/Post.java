@@ -88,7 +88,7 @@ public class Post extends BaseEntity {
 	}
 
 	public Set<User> getLikes() {
-		return likes;
+		return Collections.unmodifiableSet(likes);
 	}
 
 	public User getOwner() {
@@ -116,7 +116,7 @@ public class Post extends BaseEntity {
 	}
 
 	public Set<User> getShares() {
-		return shares;
+		return Collections.unmodifiableSet(shares);
 	}
 	
 	@Override
@@ -128,7 +128,6 @@ public class Post extends BaseEntity {
 
 	@Override
 	public boolean equals(Object o1) {
-
 		if (Integer.valueOf(this.getId()).equals(Integer.valueOf(((Post) o1).getId()))) {
 			return true;
 		}
@@ -137,7 +136,6 @@ public class Post extends BaseEntity {
 
 	@Override
 	public int hashCode() {
-
 		return Integer.valueOf(this.getId());
 	}
 }

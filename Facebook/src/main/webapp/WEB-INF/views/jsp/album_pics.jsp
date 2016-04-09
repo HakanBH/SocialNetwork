@@ -7,13 +7,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'	rel='stylesheet' type='text/css'>
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
+	rel='stylesheet' type='text/css'>
 <link href="css/post.css" rel="stylesheet">
 <link href="css/lightbox.css" rel="stylesheet">
-<link href="css/bootstrap.css"rel="stylesheet">
-<link href="css/customStyle.css" rel="stylesheet" >
-<link href="css/imageUpload.css"rel="stylesheet" >
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/customStyle.css" rel="stylesheet">
+<link href="css/imageUpload.css" rel="stylesheet">
 <title>Asocialen.com</title>
 </head>
 <body>
@@ -31,24 +34,30 @@
 			<h1 class="text_title">${selectedAlbum.title}</h1>
 		</div>
 		<div class="pic_container2 panel panel-white panel-shadow">
-			<c:forEach var="pic" items="${selectedPictures}">
-				<div class="responsive">
-					<div class="img">
-						<a  id="basic" href= "images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
-							data-lightbox="album" pic-id="${pic.id}"
-							style="text-decoration: none; color: black;"> <img
-							class="album_pic" src= "images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
-							alt="${pic.name} Pic Not Found" width="300" height="200">
-							<div class="desc">
-								${pic.name}
-							</div>
-						</a>
+			<c:choose>
+				<c:when test="${empty selectedPictures}">
+					<div style="margin-left: 20px; height: 300px">
+						<h2>This album is empty.</h2>
 					</div>
-				</div>
-			</c:forEach>
-
-
-
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="pic" items="${selectedPictures}">
+						<div class="responsive">
+							<div class="img">
+								<a id="basic"
+									href="images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
+									data-lightbox="album" pic-id="${pic.id}"
+									style="text-decoration: none; color: black;"> <img
+									class="album_pic"
+									src="images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
+									alt="${pic.name} Pic Not Found" width="300" height="200">
+									<div class="desc">${pic.name}</div>
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
 		<div id="upload_pic" class="panel panel-white panel-shadow">
@@ -80,12 +89,12 @@
 					value="currentAlbum" name="currentAlbum">
 				<button id="post_button2" type="submit">Rename!</button>
 			</form>
-			
+
 			<form class="upload_form" method="post" action="./deleteAlbum"
 				name="deleteAlbumForm" style="margin-top: 50px;">
 				<h3 style="font-weight: bold;">Delete this album</h3>
-				<input id="country" type="hidden" name="albumToDelete" value="${selectedAlbum.id}"
-					placeholder="New Name"> 
+				<input id="country" type="hidden" name="albumToDelete"
+					value="${selectedAlbum.id}" placeholder="New Name">
 				<button id="post_button2" type="submit">Delete Album!</button>
 			</form>
 		</div>

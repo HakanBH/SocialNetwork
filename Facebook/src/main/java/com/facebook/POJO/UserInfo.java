@@ -41,7 +41,6 @@ public class UserInfo {
 
 	@Column
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 
 	@Column(columnDefinition="VARCHAR(10)")
@@ -117,7 +116,9 @@ public class UserInfo {
 	}
 
 	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+		if(birthday != null){
+			this.birthday = birthday;
+		}
 	}
 
 	public void setGender(String gender) {

@@ -31,11 +31,7 @@ public class MainPage {
 		if(!posts.isEmpty()){
 			model.addAttribute("posts",posts);
 		}
-		
-		for(int i=0;i<100;i++){
-			System.out.println(currentUser.getSharedPosts());
-		}
-		
+
 		return "main";
 	}
 

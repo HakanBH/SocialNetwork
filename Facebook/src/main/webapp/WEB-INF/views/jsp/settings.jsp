@@ -4,7 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page errorPage="error.jsp" %>
+<%@ page errorPage="error.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,7 +27,8 @@
 	<div id="main_container">
 		<jsp:include page="prof-pics.jsp"></jsp:include>
 
-		<div class="panel panel-white panel-shadow" style="padding-left: 20px; width:100%">
+		<div class="panel panel-white panel-shadow"
+			style="padding-left: 20px; width: 100%">
 			<div id="image_space">
 				<a href="#"><img id="prof_pic_post" src="images/set.png"
 					align="left"> </a>
@@ -35,7 +36,7 @@
 			<h1 class="text_title">SETTINGS</h1>
 		</div>
 
-		<div class="container pic_container3 panel panel-white panel-shadow"  >
+		<div class="container pic_container3 panel panel-white panel-shadow">
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8">
 					<div class="form-group2">
@@ -76,7 +77,8 @@
 						</h4>
 						<div class="row">
 							<div class="col-md-8">
-								<form:form method="post" enctype="multipart/form-data" action="ImageUpload">
+								<form:form method="post" enctype="multipart/form-data"
+									action="ImageUpload">
 									<div class="input-group image-preview">
 										<input type="text" class="form-control image-preview-filename"
 											disabled="disabled"> <span class="input-group-btn">
@@ -108,7 +110,8 @@
 						</div>
 					</c:if>
 
-					<form:form action="modifyInfo" id="modifyInfo" commandName="userInfo">
+					<form:form action="modifyInfo" id="modifyInfo"
+						commandName="userInfo">
 						<div class="row">
 							<div class="col-md-5">
 								<div class="form-group2">

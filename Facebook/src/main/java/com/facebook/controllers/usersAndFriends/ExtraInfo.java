@@ -22,11 +22,10 @@ import com.facebook.POJO.User;
 public class ExtraInfo {
 
 	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    binder.registerCustomEditor(Date.class, new CustomDateEditor(
-	            dateFormat, false));
-	}
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(
+                new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String uploadInfo(HttpServletRequest request, @ModelAttribute("userInfo") 

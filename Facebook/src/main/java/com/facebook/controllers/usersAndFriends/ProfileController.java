@@ -30,7 +30,9 @@ public class ProfileController {
 		prepareSuggestions(model, currentUser);
 		prepareFriends(model, currentUser);
 		preparePics(model,currentUser);
-	
+		for(int i=0;i<100;i++){
+			System.err.println(currentUser.getUserInfo().getBirthday());
+		}
 		return "profile";
 	}
 	

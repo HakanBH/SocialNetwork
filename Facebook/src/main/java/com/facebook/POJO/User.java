@@ -61,7 +61,6 @@ public class User extends BaseEntity {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "shares")
 	private Set<Post> sharedPosts = new HashSet<Post>();
 
-	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "friendships", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
 	private Set<User> friends = new TreeSet<User>();
@@ -69,13 +68,14 @@ public class User extends BaseEntity {
 	@ManyToMany(mappedBy = "friends")
 	private Set<User> befriendedBy = new HashSet<User>();
 
-	@OneToMany(fetch=FetchType.EAGER, mappedBy = "owner")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Comment> userComments;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private UserInfo userInfo;
 
-	public User() {}
+	public User() {
+	}
 
 	public User(User u) {
 		this(u.getEmail(), u.getPassword(), u.getFirstName(), u.getLastName());
@@ -116,19 +116,19 @@ public class User extends BaseEntity {
 		albums.add(a);
 	}
 
-	public void removeAlbum(Album a){
+	public void removeAlbum(Album a) {
 		albums.remove(a);
 	}
-	
-	public void likePost(Post p){
+
+	public void likePost(Post p) {
 		likedPosts.add(p);
 	}
-	
-	public void unlikePost(Post p){
+
+	public void unlikePost(Post p) {
 		likedPosts.remove(p);
 	}
-	
-	public void sharePost(Post p){
+
+	public void sharePost(Post p) {
 		sharedPosts.add(p);
 	}
 
@@ -199,6 +199,10 @@ public class User extends BaseEntity {
 		return this.password;
 	}
 
+	public Set<Album> getAlbums() {
+		return Collections.unmodifiableSet(this.albums);
+	}
+
 	public Set<User> getFriends() {
 		return Collections.unmodifiableSet(friends);
 	}
@@ -206,9 +210,9 @@ public class User extends BaseEntity {
 	public Set<Post> getLikedPosts() {
 		return Collections.unmodifiableSet(likedPosts);
 	}
-	
+
 	public Set<Post> getSharedPosts() {
-		return sharedPosts;
+		return Collections.unmodifiableSet(sharedPosts);
 	}
 
 	public Set<Post> getOwnedPosts() {
@@ -216,7 +220,7 @@ public class User extends BaseEntity {
 			return o2.getCreated().compareTo(o1.getCreated());
 		});
 		result.addAll(this.ownedPosts);
-	
+
 		return Collections.unmodifiableSet(result);
 	}
 
@@ -291,10 +295,6 @@ public class User extends BaseEntity {
 		} else {
 			return "images/" + this.email + "/BgPictures/" + this.bgPicture.getName();
 		}
-	}
-	
-	public Set<Album> getAlbums() {
-		return Collections.unmodifiableSet(this.albums);
 	}
 
 	public void removeLike(Post p) {

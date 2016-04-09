@@ -1,5 +1,7 @@
 package com.facebook.controllers.albumsAndPictures;
 
+import java.util.Iterator; 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -14,19 +16,26 @@ import com.facebook.POJO.User;
 @Controller
 @RequestMapping("/deleteAlbum")
 public class DeleteAlbum {
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public String mainController(Model model, HttpServletRequest request){
-			int albumId = Integer.parseInt(request.getParameter("albumToDelete"));
-			
-			User currentUser = (User) request.getSession().getAttribute("currentUser");
-			
-			Album album = IAlbumDAO.getAlbumDAO().getAlbumById(albumId);				
-			IAlbumDAO.getAlbumDAO().deleteAlbum(albumId);
-			currentUser.removeAlbum(album);
-			
-			model.addAttribute("albums",currentUser.getAlbums());
-			
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String mainController(Model model, HttpServletRequest request) {
+		String albumToDelete = request.getParameter("albumToDelete");
+		int albumId = Integer.parseInt(albumToDelete);
+
+		IAlbumDAO.getAlbumDAO().deleteAlbum(albumId);
+		
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
+
+		Iterator<Album> it = currentUser.getAlbums().iterator();
+
+		Album toDelete = null;
+		while(it.hasNext()){
+			toDelete = it.next();
+			if(toDelete.getId() == albumId){
+				break;
+			}
+		}
+		currentUser.removeAlbum(toDelete);
 		return "redirect:/album";
 	}
 

@@ -33,28 +33,37 @@
 		</div>
 
 		<div class="pic_container panel panel-white panel-shadow">
-			<c:forEach var="album" items="${albums}">
-				<div class="polaroid" align="left">
-					<a href="./pictures/${album.id}"
-						style="text-decoration: none; color: black;"> <c:choose>
-							<c:when test="${not empty album.pictures[0]}">
-								<img class="album"
-									src="images/${currentUser.email}/${album.title}/${album.pictures[0].name}"
-									alt="${album.title}">
-							</c:when>
-							<c:otherwise>
-								<h1 style="height: 90px; text-align: center; margin-top: 100px; font-weight: bold;">Empty album</h1>
-							</c:otherwise>
-						</c:choose>
+			<c:choose>
+				<c:when test="${empty albums}">
+					<div style="margin-left:20px; height: 300px">
+						<h2>No albums to show.</h2>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="album" items="${albums}">
+						<div class="polaroid" align="left">
+							<a href="./pictures/${album.id}"
+								style="text-decoration: none; color: black;"> <c:choose>
+									<c:when test="${not empty album.pictures[0]}">
+										<img class="album"
+											src="images/${currentUser.email}/${album.title}/${album.pictures[0].name}"
+											alt="${album.title}">
+									</c:when>
+									<c:otherwise>
+										<h1
+											style="height: 90px; text-align: center; margin-top: 100px; font-weight: bold;">Empty
+											album</h1>
+									</c:otherwise>
+								</c:choose>
 
-						<div class="desc">
-							<p style="text-decoration: none;">${album.title}</p>
+								<div class="desc">
+									<p style="text-decoration: none;">${album.title}</p>
+								</div>
+							</a>
 						</div>
-					</a>
-				</div>
-			</c:forEach>
-
-
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
 		<div id="new_album" class="panel panel-white panel-shadow"

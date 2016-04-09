@@ -35,22 +35,23 @@
 
 		<div class="pic_container3">
 
-<c:forEach var="friend" items="${currentUser.friends}">
-			<div class="friend_container">
-				<div class="friend_pic">
-					<a href="#"><img id="friend_pic_size" src="${friend.profilePath}"
-						align="left"></a>
+			<c:forEach var="friend" items="${currentUser.friends}">
+				<div class="friend_container">
+					<div class="friend_pic">
+						<a href="#"><img id="friend_pic_size"
+							src="${friend.profilePath}" align="left"></a>
+					</div>
+					<div class="friend_name">
+						<a href="#" class="name_friend">${friend.firstName}
+							${friend.lastName}</a>
+					</div>
+					<div class="friend_button">
+						<form action="./unfollowUser" method="POST">
+							<input name="userToRemove" type="hidden" value="${friend.id}">
+							<input type="submit" id="post_button2" value="Unfollow!">
+						</form>
+					</div>
 				</div>
-				<div class="friend_name">
-					<a href="#" class="name_friend">${friend.firstName} ${friend.lastName}</a>
-				</div>
-				<div class="friend_button">
-					<form action="friends/removeFriend" method="GET">
-					<input name="userToRemove" type="hidden" value="${friend.id}"> 
-					<input type="submit" id="post_button2" value="Unfollow!">
-				</form>
-				</div>
-			</div>
 			</c:forEach>
 
 

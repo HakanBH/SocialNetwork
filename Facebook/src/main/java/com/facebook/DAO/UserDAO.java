@@ -248,8 +248,30 @@ public class UserDAO implements IUserDAO {
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
-			user.removeFriend(friend);
-			session.merge(friend);
+			
+			Query query = session.createQuery("from User u INNER JOIN u.friends f"
+					+ " where u.id = :userId");
+			session.update(friend);
+
+			session.getTransaction().commit();
+		} finally {
+			session.close();
+		}
+	}
+	
+	@Override
+	public void removeFriend(int userId, int friendId) {
+		Session session = SessionDispatcher.getSession();
+		try {
+			session.beginTransaction();
+			
+//			Query query = session.createQuery("from User u INNER JOIN u.friends f"
+//					+ " where u.id = :userId");
+			User u = (User) session.load(User.class,userId);
+			User f = (User) session.load(User.class, friendId);
+			
+			u.removeFriend(f);
+			session.update(u);
 
 			session.getTransaction().commit();
 		} finally {

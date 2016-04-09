@@ -45,7 +45,7 @@
 						status: ${userInfo.relationshipStatus}</p>
 
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday:
-						${userInfo.birthday	}</p>
+						${userInfo.birthday}</p>
 
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender:
 						${userInfo.gender}</p>
@@ -53,8 +53,6 @@
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">City:
 						${userInfo.city}</p>
 					<br>
-
-
 				</div>
 			</div>
 

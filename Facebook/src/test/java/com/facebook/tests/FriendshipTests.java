@@ -24,21 +24,22 @@ public class FriendshipTests {
 //	
 //	}	
 	
-//	@Test
-//	public void removeFriendshipTest(){
-//		User user1 = userDAO.getUserById(1);
-//		User user2 = userDAO.getUserById(2);
-//		
-//		userDAO.removeFriend(user1, user2);
-//		
-//		System.out.println(user1.getFriends());
-//	}
-
 	@Test
-	public void getFrindsOfFriendsTest(){
-		User user = userDAO.getUserById(1);
-		for(User u : user.getFriendsOfFriends()){
-			System.out.println(u);
-		}
+	public void removeFriendshipTest(){
+		User user1 = userDAO.getUserById(13);
+		User user2 = userDAO.getUserById(14);
+		
+		userDAO.removeFriend(14, 13);
+//		userDAO.removeFriend(user1, user2);
+		
+		System.out.println(user1.getFriends());
 	}
+
+	//	@Test
+//	public void getFrindsOfFriendsTest(){
+//		User user = userDAO.getUserById(1);
+//		for(User u : user.getFriendsOfFriends()){
+//			System.out.println(u);
+//		}
+//	}
 }
