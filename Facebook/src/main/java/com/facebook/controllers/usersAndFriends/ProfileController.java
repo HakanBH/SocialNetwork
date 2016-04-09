@@ -30,6 +30,7 @@ public class ProfileController {
 		prepareSuggestions(model, currentUser);
 		prepareFriends(model, currentUser);
 		preparePics(model,currentUser);
+	
 		return "profile";
 	}
 	

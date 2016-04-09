@@ -58,6 +58,10 @@ public class User extends BaseEntity {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "likes")
 	private Set<Post> likedPosts = new HashSet<Post>();
 
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "likes")
+	private Set<Post> sharedPosts = new HashSet<Post>();
+
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "friendships", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
 	private Set<User> friends = new TreeSet<User>();

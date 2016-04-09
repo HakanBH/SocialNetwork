@@ -76,8 +76,7 @@
 						</h4>
 						<div class="row">
 							<div class="col-md-8">
-								<form:form method="post" enctype="multipart/form-data"
-									action="ImageUpload">
+								<form:form method="post" enctype="multipart/form-data" action="ImageUpload">
 									<div class="input-group image-preview">
 										<input type="text" class="form-control image-preview-filename"
 											disabled="disabled"> <span class="input-group-btn">

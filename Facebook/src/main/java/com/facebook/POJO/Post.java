@@ -34,6 +34,12 @@ public class Post extends BaseEntity {
 		inverseJoinColumns = { @JoinColumn(name = "user_id") })
 	private Set<User> likes = new HashSet<User>();
 
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinTable(name = "shares", joinColumns = { @JoinColumn(name = "post_id") }, 
+		inverseJoinColumns = { @JoinColumn(name = "user_id") })
+	private Set<User> shares = new HashSet<User>();
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "post")
 	private List<Comment> comments = new ArrayList<Comment>();
 
