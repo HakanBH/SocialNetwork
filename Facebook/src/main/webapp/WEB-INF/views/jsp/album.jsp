@@ -23,7 +23,8 @@
 
 		<jsp:include page="prof-pics.jsp"></jsp:include>
 
-		<div class="panel panel-white panel-shadow" style="width:100%; padding-left: 20px;" >
+		<div class="panel panel-white panel-shadow"
+			style="width: 100%; padding-left: 20px;">
 			<div id="image_space">
 				<a href="#"><img id="prof_pic_post" src="images/pic.png"
 					align="left"> </a>
@@ -35,10 +36,16 @@
 			<c:forEach var="album" items="${currentUser.albums}">
 				<div class="polaroid" align="left">
 					<a href="./pictures/${album.id}"
-						style="text-decoration: none; color: black;"> <img
-						class="album"
-						src="images/${currentUser.email}/${album.title}/${album.pictures[0].name}"
-						alt="${album.title}">
+						style="text-decoration: none; color: black;"> <c:choose>
+							<c:when test="${not empty album.pictures[0]}">
+								<img class="album"
+									src="images/${currentUser.email}/${album.title}/${album.pictures[0].name}"
+									alt="${album.title}">
+							</c:when>
+							<c:otherwise>
+								<h1 style="height: 90px; text-align: center; margin-top: 100px; font-weight: bold;">Empty album</h1>
+							</c:otherwise>
+						</c:choose>
 
 						<div class="desc">
 							<p style="text-decoration: none;">${album.title}</p>
@@ -50,7 +57,8 @@
 
 		</div>
 
-		<div id="new_album" class="panel panel-white panel-shadow" style="height: 130px;">
+		<div id="new_album" class="panel panel-white panel-shadow"
+			style="height: 130px;">
 
 			<form class="upload_form" method="post" action="./NewAlbum"
 				name="albumName">
