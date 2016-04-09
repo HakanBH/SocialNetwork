@@ -60,7 +60,7 @@
 		<div id="new_album" class="panel panel-white panel-shadow"
 			style="height: 130px;">
 
-			<form class="upload_form" method="post" action="./NewAlbum"
+			<form class="upload_form" method="post" action="./createAlbum"
 				name="albumName">
 				<h3 style="font-weight: bold;">Create a new album</h3>
 				<input id="country" type="text" name="newName"
