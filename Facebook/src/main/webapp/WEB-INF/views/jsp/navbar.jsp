@@ -43,7 +43,7 @@
 
 								</a></li>
 
-								<c:set var="uri" value="${request.requestURI}" />
+								<c:set var="uri" value="${pageContext.request.requestURI}" />
 
 								<li
 									<c:if test="${fn:contains(uri, 'main')}">class="active"</c:if>><a
