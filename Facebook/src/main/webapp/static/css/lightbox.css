@@ -198,9 +198,11 @@ body.lb-disable-scrolling {
   -o-transition: opacity 0.2s;
   transition: opacity 0.2s;
   font-size: 30px;
-  color:red;
+  color:#B71010;
 }
-
+.lb-delete:hover, .lbdelete:focus{
+	color: #1EA1A2;
+}
 .lb-like {
   display: block;
   float: right;

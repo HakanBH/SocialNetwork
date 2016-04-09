@@ -34,8 +34,8 @@
 			<c:forEach var="pic" items="${selectedPictures}">
 				<div class="responsive">
 					<div class="img">
-						<a href= "images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
-							data-lightbox="album"
+						<a  id="basic" href= "images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
+							data-lightbox="album" pic-id="${pic.id}"
 							style="text-decoration: none; color: black;"> <img
 							class="album_pic" src= "images/${currentUser.email}/${selectedAlbum.title}/${pic.name}"
 							alt="${pic.name} Pic Not Found" width="300" height="200">
