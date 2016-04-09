@@ -58,13 +58,13 @@ public class UserTests {
 //		System.out.println(wasDeleted);
 //	}
 	
-//	@Test
-//	public void deleteAllUsers() throws Exception{
-//		for(User u: IUserDAO.getUserDAO().getAllUsers()){
-//			System.err.println(u);
-//			IUserDAO.getUserDAO().deleteUser(u.getId());
-//		}
-//	}
+	@Test
+	public void deleteAllUsers() throws Exception{
+		for(User u: IUserDAO.getUserDAO().getAllUsers()){
+			System.err.println(u);
+			IUserDAO.getUserDAO().deleteUser(u.getId());
+		}
+	}
 
 //	@Test
 //	public void loginTest() throws Exception  {

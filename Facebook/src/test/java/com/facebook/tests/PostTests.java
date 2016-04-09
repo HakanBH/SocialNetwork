@@ -10,10 +10,10 @@ import com.facebook.DAO.IUserDAO;
 import com.facebook.DAO.PostDAO;
 import com.facebook.DAO.UserDAO;
 import com.facebook.POJO.*;
-
+ 
 public class PostTests {
 	IPostDAO postDao = IPostDAO.getPostDAO();
-//	
+
 //	@Test
 //	public void postInsertionTest() throws Exception {
 //		User user = IUserDAO.getUserDAO().getUserById(1);
@@ -60,8 +60,7 @@ public class PostTests {
 //	public void unlikePostTest(){
 //		IPostDAO.getPostDAO().unlikePost(8, 2);
 //	}
-
-	
+//	
 //	@Test
 //	public void deleteAllPosts() throws Exception{
 //		for(Post p: IPostDAO.getPostDAO().getAllPosts()){
@@ -69,7 +68,7 @@ public class PostTests {
 //			IPostDAO.getPostDAO().deletePost(p.getOwner(),p);
 //		}
 //	}
-//	
+
 //	@Test 
 //	public void commentPostTest(){
 //		IPostDAO.getPostDAO().commentPost(1, 2, "napisah komentar");
@@ -82,10 +81,29 @@ public class PostTests {
 //	}
 //	
 	
-	/*
+//	@Test
+//	public void getPostTest(){
+//		Post p = IPostDAO.getPostDAO().getPostById(1);
+//		System.out.println(p);
+//	}
+	
+//	@Test
+//	public void postShareTest(){
+//		Post p = IPostDAO.getPostDAO().getPostById(7);
+//		User u = IUserDAO.getUserDAO().getUserById(4);
+//		u.sharePost(p);
+//
+//		IPostDAO.getPostDAO().sharePost(p, u);
+//		
+//		System.err.println(u.getSharedPosts());
+//		
+//	}
+	
 	@Test
-	public void getPostTest(){
-		Post p = IPostDAO.getPostDAO().getPostById(1);
-		System.out.println(p);
-	}*/
+	public void getSharedPostsTest(){
+		User u = IUserDAO.getUserDAO().getUserById(11);
+		System.err.println(u);
+		System.err.println(IPostDAO.getPostDAO().getSharedPosts(u));
+		System.err.println(u.getSharedPosts());
+	}
 }

@@ -1,7 +1,5 @@
 package com.facebook.DAO;
 
-import java.util.Set;
-
 import com.facebook.POJO.Album;
 import com.facebook.POJO.Picture;
 import com.facebook.POJO.User;

@@ -30,7 +30,10 @@ public class MainPage {
 		Collection<Post> posts = currentUser.getPosts();
 		if(!posts.isEmpty()){
 			model.addAttribute("posts",posts);
-			model.addAttribute("likedPosts", currentUser.getLikedPosts());
+		}
+		
+		for(int i=0;i<100;i++){
+			System.out.println(currentUser.getSharedPosts());
 		}
 		
 		return "main";

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page errorPage="error.jsp"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -176,19 +176,35 @@
 									<form method="post" action="./likePost">
 										<input name="likedPost" type="hidden" value="${post.id}">
 										<div class="btn btn-default stat-item">
-											<span class="fa fa-thumbs-up icon">${fn:length(post.likes)}</span>
-											<input type="submit" class="stat">
+											<span class="fa fa-thumbs-up icon">
+												${fn:length(post.likes)}</span> <input type="submit" class="stat">
 										</div>
 									</form>
 								</c:otherwise>
 							</c:choose>
-							<form:form method="post" action="./sharePost">
-								<input type="hidden" name="sharedPost" value="${post.id}">
-								<div class="btn btn-default stat-item">
-									<span class="fa fa-share icon"> 12</span> <input type="submit"
-										class="stat">
-								</div>
-							</form:form>
+
+							<c:forEach var="shared" items="${currentUser.sharedPosts}">
+								<c:if test="${shared eq post}">
+									<c:set var="isShared" value="true"></c:set>
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${isShared eq true}">
+									<div class="btn btn-default stat-item" style="color: #1E7FC5">
+										<span class="fa fa-share icon">
+											${fn:length(post.shares)}</span> <input type="submit" class="stat">
+									</div>
+								</c:when>
+								<c:otherwise>
+									<form method="post" action="./sharePost">
+										<input type="hidden" name="sharedPost" value="${post.id}">
+										<div class="btn btn-default stat-item">
+											<span class="fa fa-share icon">
+												${fn:length(post.shares)} </span> <input type="submit" class="stat">
+										</div>
+									</form>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 

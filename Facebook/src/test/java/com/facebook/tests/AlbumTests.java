@@ -36,11 +36,6 @@ public class AlbumTests {
 //		IAlbumDAO.getAlbumDAO().removePicture(9);
 //	}
 	
-	@Test
-	public void deleteAlbumTest(){
-		IAlbumDAO.getAlbumDAO().deleteAlbum(3);
-	}
-	
 //	@Test
 //	public void getAlbum(){
 //		System.out.println(IAlbumDAO.getAlbumDAO().getAlbum(25, "profilePics"));
@@ -50,4 +45,19 @@ public class AlbumTests {
 //	public void getPictureTest(){
 //		System.out.println(IAlbumDAO.getAlbumDAO().getPicById(1));
 //	}
+
+//	@Test
+//	public void deleteAlbumTest(){
+//		IAlbumDAO.getAlbumDAO().deleteAlbum(3);
+//	}
+	
+	@Test
+	public void deleteAllAlbums(){
+		for(int i=0;i<100;i++){
+			Album a = IAlbumDAO.getAlbumDAO().getAlbumById(i);
+			if(a!=null){
+				IAlbumDAO.getAlbumDAO().deleteAlbum(a.getId());
+			}
+		}
+	}
 }

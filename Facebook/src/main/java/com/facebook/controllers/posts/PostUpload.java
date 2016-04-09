@@ -62,9 +62,7 @@ public class PostUpload {
 			currentUser.addPost(p);
 			IPostDAO.getPostDAO().insertPost(p);
 		}
-		
-		System.out.println(currentUser.getPosts());
-		
+				
 		model.addAttribute("posts", currentUser.getPosts());
 		
 		return "redirect:/main";

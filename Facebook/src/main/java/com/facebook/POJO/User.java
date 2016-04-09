@@ -58,7 +58,7 @@ public class User extends BaseEntity {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "likes")
 	private Set<Post> likedPosts = new HashSet<Post>();
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "likes")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "shares")
 	private Set<Post> sharedPosts = new HashSet<Post>();
 
 	
@@ -128,6 +128,10 @@ public class User extends BaseEntity {
 		likedPosts.remove(p);
 	}
 	
+	public void sharePost(Post p){
+		sharedPosts.add(p);
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + getId() + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
@@ -201,6 +205,10 @@ public class User extends BaseEntity {
 
 	public Set<Post> getLikedPosts() {
 		return Collections.unmodifiableSet(likedPosts);
+	}
+	
+	public Set<Post> getSharedPosts() {
+		return sharedPosts;
 	}
 
 	public Set<Post> getOwnedPosts() {

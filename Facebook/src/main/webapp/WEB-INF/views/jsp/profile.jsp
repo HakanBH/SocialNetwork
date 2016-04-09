@@ -40,7 +40,7 @@
 					</p>
 
 
-					</br>
+					<br>
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship
 						status: ${userInfo.relationshipStatus}</p>
 
@@ -52,7 +52,7 @@
 
 					<p id="post_text" style="font-weight: bold; font-size: 20px;">City:
 						${userInfo.city}</p>
-					</br>
+					<br>
 
 
 				</div>
@@ -79,7 +79,7 @@
 				</div>
 
 				<p>
-					</br>&nbsp;</br>
+					<br>&nbsp;<br>
 				</p>
 			</div>
 
@@ -102,7 +102,7 @@
 				</div>
 
 				<p>
-					</br>&nbsp;</br>
+					<br>&nbsp;<br>
 				</p>
 			</div>
 

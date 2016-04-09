@@ -1,8 +1,5 @@
 package com.facebook.DAO;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 

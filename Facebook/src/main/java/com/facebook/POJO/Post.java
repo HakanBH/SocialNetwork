@@ -43,8 +43,7 @@ public class Post extends BaseEntity {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "post")
 	private List<Comment> comments = new ArrayList<Comment>();
 
-	public Post() {
-	}
+	public Post() {}
 
 	public Post(User owner, Picture pic, String text) {
 		setOwner(owner);
@@ -71,7 +70,15 @@ public class Post extends BaseEntity {
 	public void removeComment(Comment c) {
 		comments.remove(c);
 	}
-
+	
+	public void addShare(User u){
+		shares.add(u);
+	}
+	
+	public void removeShare(User u){
+		shares.remove(u);
+	}
+	
 	public void addLike(User u) {
 		likes.add(u);
 	}
@@ -108,6 +115,10 @@ public class Post extends BaseEntity {
 		this.text = text;
 	}
 
+	public Set<User> getShares() {
+		return shares;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder("Post [id=" + this.getId() + ", user=" + owner.getEmail()

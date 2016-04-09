@@ -20,7 +20,7 @@ public class LikeController {
 		int id = Integer.parseInt(likedPostId);
 
 		Post likedPost = IPostDAO.getPostDAO().getPostById(id);
-		
+
 		for (Post p : currentUser.getPosts()) {
 			if (p.getId() == likedPost.getId()) {
 				p.addLike(currentUser);
