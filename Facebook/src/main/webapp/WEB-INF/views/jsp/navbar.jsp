@@ -30,20 +30,16 @@
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav navbar-right">
 								<li style="margin-top: 0.05cm; margin-right: 20px">
-								<div id=searchbox>
-			<form method="post" action="./searchUsers" id="search" align="right"
-				style="">
-				<input name="searchWord" type="text" size="40"
-					placeholder="Search user..." />
-			</form>
-		</div>
-<!-- 									<div class="search"> -->
-<!-- 										<form action="./searchUsers" method="post"> -->
-<!-- 											<input type="text" class="form-control input-sm" name="searchText" -->
-<!-- 												maxlength="24" placeholder="Search" /> -->
-<!-- 											<button type="submit" class="btn btn-search btn-primary btn-sm">Search</button> -->
-<!-- 										</form> -->
-<!-- 									</div> -->
+									<div id=searchbox>
+										<form method="post" action="./searchUsers" id="search"
+											align="right" style="">
+											<input name="searchWord" type="text" size="40"
+												placeholder="Search user..." />
+										</form>
+									</div> <!-- 									<div class="search"> --> <!-- 										<form action="./searchUsers" method="post"> -->
+									<!-- 											<input type="text" class="form-control input-sm" name="searchText" -->
+									<!-- 												maxlength="24" placeholder="Search" /> --> <!-- 											<button type="submit" class="btn btn-search btn-primary btn-sm">Search</button> -->
+									<!-- 										</form> --> <!-- 									</div> -->
 								</li>
 								<li><a href="./profile"> <img id="usr_pic_small"
 										src="${currentUser.profilePath}" align="left">
