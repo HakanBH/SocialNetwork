@@ -26,7 +26,7 @@ public class DeletePic {
 			
 			album.getPictures().remove(picToRemove);
 
-		System.err.println(album.getPictures().contains(picToRemove));
+		@SuppressWarnings("unchecked")
 		HashSet<Picture> set = (HashSet<Picture>) request.getSession().getAttribute("selectedPictures");
 		set.remove(picToRemove);
 			IAlbumDAO.getAlbumDAO().removePicture(picToRemove.getId());

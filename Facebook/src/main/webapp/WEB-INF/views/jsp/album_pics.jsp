@@ -80,6 +80,14 @@
 					value="currentAlbum" name="currentAlbum">
 				<button id="post_button2" type="submit">Rename!</button>
 			</form>
+			
+			<form class="upload_form" method="post" action="./deleteAlbum"
+				name="deleteAlbumForm" style="margin-top: 50px;">
+				<h3 style="font-weight: bold;">Delete this album</h3>
+				<input id="country" type="hidden" name="albumToDelete" value="${selectedAlbum.id}"
+					placeholder="New Name"> 
+				<button id="post_button2" type="submit">Delete Album!</button>
+			</form>
 		</div>
 
 		<div class="corte"></div>

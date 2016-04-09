@@ -33,7 +33,7 @@
 		</div>
 
 		<div class="pic_container panel panel-white panel-shadow">
-			<c:forEach var="album" items="${currentUser.albums}">
+			<c:forEach var="album" items="${albums}">
 				<div class="polaroid" align="left">
 					<a href="./pictures/${album.id}"
 						style="text-decoration: none; color: black;"> <c:choose>
