@@ -62,29 +62,38 @@
 		</div>
 
 		<div id="upload_pic" class="panel panel-white panel-shadow">
-		
-	
+
+
 			<h3 style="font-weight: bold; margin-left: 20px;">Upload a
 				picture</h3>
-			<form:form method="POST" action="./albumFileUpload/${selectedAlbum.id}"
-		enctype="multipart/form-data">
-		<input type="file" name="file" />
-		<input type="submit" value="upload" />
-		
+			<form:form method="POST"
+				action="./albumFileUpload/${selectedAlbum.id}"
+				enctype="multipart/form-data">
+				<div class="btn btn-primary" style="height:34px; margin-left:25px; ">
+					<input type="file" style="opacity:0; margin-top: -3px; height: 100%; width: 130px;"
+						name="file"/>
+						<p style="margin-top: -18px;">Choose file</p>
 
-	</form:form>
+				</div>
+				<input type="submit" class="btn btn-primary"
+					style="margin-top: -1px;; width: 100px" value="Upload!" />
 
-				</span>
-			
-			
+
+			</form:form>
+
+			</span>
+
+
 
 			<form class="upload_form" method="post" action="./renameAlbum"
 				name="albumName" style="margin-top: 50px;">
 				<h3 style="font-weight: bold;">Rename your album</h3>
-				<input id="country" type="text" name="newName" value="${selectedAlbum.title}"
-					placeholder="New Name"> <input type="hidden"
-					value="${selectedAlbum.id}" name="albumToRename">
-				<button id="post_button2" type="submit">Rename!</button>
+				<input id="country" type="text" name="newName"
+					style="margin-top: 7px; height: 34px"
+					value="${selectedAlbum.title}" placeholder="New Name"> <input
+					type="hidden" value="${selectedAlbum.id}" name="albumToRename">
+				<button id="post_button2" class="btn btn-primary"
+					style="margin-top: -3px;; width: 100px" type="submit">Rename!</button>
 			</form>
 
 			<form class="upload_form" method="post" action="./deleteAlbum"
@@ -92,14 +101,16 @@
 				<h3 style="font-weight: bold;">Delete this album</h3>
 				<input id="country" type="hidden" name="albumToDelete"
 					value="${selectedAlbum.id}" placeholder="New Name">
-				<button id="post_button2" type="submit">Delete Album!</button>
+				<button id="post_button2" class="btn btn-primary"
+					style="margin-top: -3px;; width: 130px," type="submit">Delete
+					Album!</button>
 			</form>
 		</div>
-		
+
 
 		<div class="corte"></div>
 	</div>
-</div>
+	</div>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

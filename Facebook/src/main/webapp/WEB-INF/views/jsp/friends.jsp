@@ -49,7 +49,7 @@
 					<div class="friend_button">
 						<form action="./unfollowUser" method="POST">
 							<input name="userToRemove" type="hidden" value="${friend.id}">
-							<input type="submit" id="post_button2" value="Unfollow!">
+							<input type="submit" id="post_button2" class="btn btn-primary" style="margin-top:-3px; ; width:100px" value="Unfollow!">
 						</form>
 					</div>
 				</div>

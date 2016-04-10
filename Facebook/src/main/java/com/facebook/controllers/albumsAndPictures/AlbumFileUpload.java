@@ -33,8 +33,7 @@ public class AlbumFileUpload{
 		Album thisAlbum = IAlbumDAO.getAlbumDAO().getAlbumById(id);
 		
 		
-		for(int i=0; i<100;i++)
-			System.err.println("00000000000000000000000000000000" + id + "00" );
+		
 		User user = (User) request.getSession().getAttribute("currentUser");
 
 		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + thisAlbum.getTitle() + File.separator;
@@ -95,7 +94,6 @@ public class AlbumFileUpload{
 				}
 				// Write the file
 				file = new File(filePath + album.getTitle() + (album.getPictures().size() + 1) + "." + extension);
-				System.err.println("09999999999" + file );
 				fi.write(file);
 			}
 		}

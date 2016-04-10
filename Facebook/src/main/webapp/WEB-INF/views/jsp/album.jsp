@@ -73,8 +73,9 @@
 				name="albumName">
 				<h3 style="font-weight: bold;">Create a new album</h3>
 				<input id="country" type="text" name="newName"
-					placeholder="Album Name">
-				<button id="post_button2" type="submit">Create!</button>
+					placeholder="Album Name" style="margin-top:7px; height:34px">
+				<button id="post_button2"  class="btn btn-primary" style="margin-top:-3px; ; width:100px"
+				type="submit">Create!</button>
 			</form>
 		</div>
 	</div>
