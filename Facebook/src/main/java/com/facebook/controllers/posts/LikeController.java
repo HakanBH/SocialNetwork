@@ -19,6 +19,9 @@ public class LikeController {
 		String likedPostId = (String) request.getParameter("likedPost");
 		int id = Integer.parseInt(likedPostId);
 
+		String currentPage = request.getHeader("referer");
+		currentPage=currentPage.substring(currentPage.lastIndexOf("/"));
+
 		Post likedPost = IPostDAO.getPostDAO().getPostById(id);
 
 		for (Post p : currentUser.getPosts()) {
@@ -29,7 +32,7 @@ public class LikeController {
 			}
 		}
 
-		return "redirect:/main";
+		return "redirect:" + currentPage;
 	}
 
 }

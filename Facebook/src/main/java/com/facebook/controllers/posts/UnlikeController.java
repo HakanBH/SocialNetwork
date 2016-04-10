@@ -18,17 +18,20 @@ public class UnlikeController {
 		String unlikedPostId = (String) request.getParameter("unlikedPost");
 
 		int id = Integer.parseInt(unlikedPostId);
+		
+		String currentPage = request.getHeader("referer");
+		currentPage = currentPage.substring(currentPage.lastIndexOf("/"));
 
 		Post unlikedPost = IPostDAO.getPostDAO().getPostById(id);
-		
+
 		for (Post p : currentUser.getPosts()) {
 			if (p.getId() == unlikedPost.getId()) {
 				p.removeLike(currentUser);
 				currentUser.unlikePost(p);
-				IPostDAO.getPostDAO().unlikePost(unlikedPost.getId(), currentUser.getId());				
+				IPostDAO.getPostDAO().unlikePost(unlikedPost.getId(), currentUser.getId());
 			}
 		}
 
-		return "redirect:/main";
+		return "redirect:" + currentPage;
 	}
 }
