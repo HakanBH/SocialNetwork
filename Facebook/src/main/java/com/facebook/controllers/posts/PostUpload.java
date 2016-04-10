@@ -28,7 +28,7 @@ public class PostUpload {
 	private static final int BUFFER_SIZE = 1024 * 1024;
 	private static final String PICTURE_FOLDER = "PostPictures";
 	private String postText;
-
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public String uploadPost(Model model, HttpServletRequest request) {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
@@ -37,6 +37,10 @@ public class PostUpload {
 		// Check that we have a file upload request
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
+		String currentPage = request.getHeader("referer");
+		currentPage = currentPage.substring(currentPage.lastIndexOf("/"));
+
+		
 		if (isMultipart) {
 			Album album = IAlbumDAO.getAlbumDAO().getAlbum(currentUser, PICTURE_FOLDER);
 			if (album == null) {
@@ -51,7 +55,7 @@ public class PostUpload {
 				return "redirect:/main";
 			} catch (Exception e) {
 				request.setAttribute("imageError", "Error uploading image.");
-				return "redirect:/main";
+				return "redirect:" + currentPage;
 			} 
 			
 			Picture postPicture = new Picture(picName);
@@ -65,7 +69,7 @@ public class PostUpload {
 				
 		model.addAttribute("posts", currentUser.getPosts());
 		
-		return "redirect:/main";
+		return "redirect:" + currentPage;
 	}
 
 	public String uploadPic(HttpServletRequest request, String filePath, Album album) throws Exception   {

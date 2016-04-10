@@ -23,12 +23,13 @@ public class AlbumTests {
 //	}
 
 //	
-//	@Test 
-//	public void addPicturesTest () throws InterruptedException{
-//		Album album = IAlbumDAO.getAlbumDAO().getAlbumById(1);
-//		IAlbumDAO.getAlbumDAO().uploadImage(new Picture("pic1.jpg"), album);
-//		IAlbumDAO.getAlbumDAO().uploadImage(new Picture("pic2.jpg"), album);
-//	}
+	@Test 
+	public void addPicturesTest () throws InterruptedException{
+		Album album = IAlbumDAO.getAlbumDAO().getAlbumById(18);
+		Picture pic = new Picture("name");
+		
+		IAlbumDAO.getAlbumDAO().uploadImage(pic, album);
+	}
 	
 //	@Test
 //	public void removePictureTest(){
@@ -51,13 +52,19 @@ public class AlbumTests {
 //		IAlbumDAO.getAlbumDAO().deleteAlbum(3);
 //	}
 	
-	@Test
-	public void deleteAllAlbums(){
-		for(int i=0;i<100;i++){
-			Album a = IAlbumDAO.getAlbumDAO().getAlbumById(i);
-			if(a!=null){
-				IAlbumDAO.getAlbumDAO().deleteAlbum(a.getId());
-			}
-		}
-	}
+//	@Test
+//	public void deleteAllAlbums(){
+//		for(int i=0;i<100;i++){
+//			Album a = IAlbumDAO.getAlbumDAO().getAlbumById(i);
+//			if(a!=null){
+//				IAlbumDAO.getAlbumDAO().deleteAlbum(a.getId());
+//			}
+//		}
+//	}
+	
+//	@Test 
+//	public void setTitleTest(){
+//		Album a = IAlbumDAO.getAlbumDAO().getAlbumById(21);
+//		IAlbumDAO.getAlbumDAO().updateTitle(a, "new title 1");
+//	}
 }

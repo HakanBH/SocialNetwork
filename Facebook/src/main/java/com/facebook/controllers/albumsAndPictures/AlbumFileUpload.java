@@ -47,9 +47,11 @@ public class AlbumFileUpload{
 					album = new Album(thisAlbum.getTitle(), user);
 					IAlbumDAO.getAlbumDAO().insertAlbum(user,album);
 				}
+				
 				fileName = createFile(request, filePath, album);
-				Picture bgPic = new Picture(fileName);
-				IAlbumDAO.getAlbumDAO().uploadImage(bgPic, album);
+				Picture pic = new Picture(fileName);
+				IAlbumDAO.getAlbumDAO().uploadImage(pic, album);
+				album.addPicture(pic);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

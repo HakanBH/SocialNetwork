@@ -21,4 +21,6 @@ public interface IAlbumDAO {
 
 	Picture getPicById(int id);
 
+	void updateTitle(Album a, String newTitle);
+
 }

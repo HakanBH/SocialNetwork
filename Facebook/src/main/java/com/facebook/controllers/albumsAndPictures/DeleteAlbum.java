@@ -27,7 +27,6 @@ public class DeleteAlbum {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 
 		Iterator<Album> it = currentUser.getAlbums().iterator();
-
 		Album toDelete = null;
 		while(it.hasNext()){
 			toDelete = it.next();

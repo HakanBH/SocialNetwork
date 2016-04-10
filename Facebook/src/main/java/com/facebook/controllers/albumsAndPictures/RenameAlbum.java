@@ -40,8 +40,9 @@ public class RenameAlbum {
 				oldFolder.renameTo(new File(newFilePath));
 			}
 			
-			IAlbumDAO.getAlbumDAO().getAlbumById(albumId).setTitle(newTitle);
-
+			Album album = IAlbumDAO.getAlbumDAO().getAlbumById(albumId);
+			IAlbumDAO.getAlbumDAO().updateTitle(album, newTitle);
+			
 			Iterator<Album> it = currentUser.getAlbums().iterator();
 
 			Album toRename = null;

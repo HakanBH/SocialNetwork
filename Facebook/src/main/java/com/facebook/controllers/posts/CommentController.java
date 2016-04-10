@@ -18,6 +18,9 @@ public class CommentController {
 
 	@RequestMapping(value = "/commentPost", method = RequestMethod.POST)
 	public String commentPost(Model model , HttpServletRequest request) {
+		String currentPage = request.getHeader("referer");
+		currentPage = currentPage.substring(currentPage.lastIndexOf("/"));
+
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		String commentedPostId = (String) request.getParameter("commentedPost");
 		int id = Integer.parseInt(commentedPostId);
@@ -34,6 +37,6 @@ public class CommentController {
 		}
 		
 		IPostDAO.getPostDAO().commentPost(commentedPost, currentUser, comment);
-		return "redirect:/main";
+		return "redirect:" + currentPage;
 	}
 }

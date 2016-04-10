@@ -149,6 +149,7 @@
 							</div>
 							<h6 class="text-muted time">${post.created}</h6>
 						</div>
+						
 					</div>
 					<div class="post-description">
 						<p>${post.text}</p>
@@ -232,7 +233,7 @@
 										<div class="comment-heading">
 											<a href="./extProfile/${postComment.owner.id}">
 												<h4 class="user">${postComment.owner.firstName}
-													${postComment.owner.firstName}</h4>
+													${postComment.owner.lastName}</h4>
 											</a>
 
 											<h5 class="time">${postComment.created}</h5>

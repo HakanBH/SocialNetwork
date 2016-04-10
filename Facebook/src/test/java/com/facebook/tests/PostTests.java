@@ -40,11 +40,11 @@ public class PostTests {
 //	}
 //	
 	
-//	@Test
-//	public void removePostTest() throws Exception {
-//		IPostDAO.getPostDAO().removePost(1);	
-//	}
-//	
+	@Test
+	public void removePostTest() throws Exception {
+		IPostDAO.getPostDAO().removePost(28);	
+	}
+	
 	
 //
 //	@Test 
@@ -99,11 +99,11 @@ public class PostTests {
 //		
 //	}
 	
-	@Test
-	public void getSharedPostsTest(){
-		User u = IUserDAO.getUserDAO().getUserById(11);
-		System.err.println(u);
-		System.err.println(IPostDAO.getPostDAO().getSharedPosts(u));
-		System.err.println(u.getSharedPosts());
-	}
+//	@Test
+//	public void getSharedPostsTest(){
+//		User u = IUserDAO.getUserDAO().getUserById(11);
+//		System.err.println(u);
+//		System.err.println(IPostDAO.getPostDAO().getSharedPosts(u));
+//		System.err.println(u.getSharedPosts());
+//	}
 }

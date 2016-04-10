@@ -25,7 +25,6 @@ public class LikeController {
 
 		if (currentPage.contains("extProfile")) {
 			User extUser = likedPost.getOwner();
-
 			
 			for (Post p : extUser.getOwnedPosts()) {
 				System.err.println(p);

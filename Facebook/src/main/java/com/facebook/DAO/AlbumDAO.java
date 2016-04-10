@@ -52,9 +52,9 @@ public class AlbumDAO implements IAlbumDAO {
 
 			album.addPicture(pic);
 			pic.setAlbum(album);
-
 			session.persist(pic);
-
+			session.update(album);
+			
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,5 +137,24 @@ public class AlbumDAO implements IAlbumDAO {
 			}
 		}
 		return pic;
+	}
+	
+	@Override
+	public void updateTitle(Album a, String newTitle){
+		Session session = null;
+		Picture pic = null;
+		try {
+			session = SessionDispatcher.getSession();
+			session.beginTransaction();
+			
+			a.setTitle(newTitle);
+			session.update(a);
+			
+			session.getTransaction().commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
 }

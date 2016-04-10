@@ -232,7 +232,7 @@
 										<div class="comment-heading">
 											<a href="./extProfile/${postComment.owner.id}">
 												<h4 class="user">${postComment.owner.firstName}
-													${postComment.owner.firstName}</h4>
+													${postComment.owner.lastName}</h4>
 											</a>
 
 											<h5 class="time">${postComment.created}</h5>

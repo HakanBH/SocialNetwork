@@ -188,6 +188,14 @@
 							</div>
 							<h6 class="text-muted time">${post.created}</h6>
 						</div>
+						<div align="right">
+							<form action="./deletePost" method="POST">
+								<input type="hidden" name="postToDelete" value="${post.id}">
+								<div class="glyphicon glyphicon-remove">
+									<input type="submit" style="margin-left: -50px; opacity: 0">
+								</div>
+							</form>
+						</div>
 					</div>
 					<div class="post-description">
 						<p>${post.text}</p>
@@ -271,7 +279,7 @@
 										<div class="comment-heading">
 											<a href="./extProfile/${postComment.owner.id}">
 												<h4 class="user">${postComment.owner.firstName}
-													${postComment.owner.firstName}</h4>
+													${postComment.owner.lastName}</h4>
 											</a>
 
 											<h5 class="time">${postComment.created}</h5>

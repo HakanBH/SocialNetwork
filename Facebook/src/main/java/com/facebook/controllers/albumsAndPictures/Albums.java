@@ -15,7 +15,6 @@ public class Albums {
 	@RequestMapping( method=RequestMethod.GET)
 	public String mainController(Model model, HttpServletRequest request){
 			User currentUser = (User) request.getSession().getAttribute("currentUser");
-			model.addAttribute("albums",currentUser.getAlbums());
 		return "/album";
 	}
 }
