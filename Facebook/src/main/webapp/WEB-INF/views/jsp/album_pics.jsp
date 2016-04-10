@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page errorPage="error.jsp"%>
 
 <!DOCTYPE html>
@@ -61,25 +62,21 @@
 		</div>
 
 		<div id="upload_pic" class="panel panel-white panel-shadow">
+		
+	
 			<h3 style="font-weight: bold; margin-left: 20px;">Upload a
 				picture</h3>
-			<div class="input-group image-preview" align="left"
-				style="margin-top: 20px; margin-left: 22px;">
-				<span class="input-group-btn"> <!-- image-preview-clear button -->
-					<button type="button" class="btn btn-default image-preview-clear"
-						style="display: none;">
-						<span class="glyphicon glyphicon-remove"></span> Clear
-					</button> <!-- image-preview-input -->
-					<div class="btn btn-default image-preview-input">
-						<span class="glyphicon glyphicon-picture"></span> <span
-							class="image-preview-input-title">Upload a picture</span> <input
-							type="file" accept="image/png, image/jpeg, image/gif"
-							name="picture" />
-						<!-- rename it -->
-					</div> <input class="btn btn-primary post image-preview-input"
-					type="submit" value="Upload">
+			<form:form method="POST" action="./albumFileUpload/${selectedAlbum.id}"
+		enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<input type="submit" value="upload" />
+		
+
+	</form:form>
+
 				</span>
-			</div>
+			
+			
 
 			<form class="upload_form" method="post" action="./renameAlbum"
 				name="albumName" style="margin-top: 50px;">
@@ -98,10 +95,11 @@
 				<button id="post_button2" type="submit">Delete Album!</button>
 			</form>
 		</div>
+		
 
 		<div class="corte"></div>
 	</div>
-
+</div>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

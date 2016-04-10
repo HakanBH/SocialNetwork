@@ -118,7 +118,7 @@
 										<label class="control-label" for="date">Your birthday:</label>
 									</h4>
 									<form:input path="birthday" type="date" id="birthday"
-										class="form-control" value="${userInfo.birthday}" />
+										class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-5">

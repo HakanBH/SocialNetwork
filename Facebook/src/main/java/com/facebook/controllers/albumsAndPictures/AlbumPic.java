@@ -21,7 +21,7 @@ import com.facebook.POJO.UserInfo;
 @Controller
 
 public class AlbumPic {
-	@RequestMapping(value="/pictures/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/pictures/{id}", method={RequestMethod.GET, RequestMethod.POST})
 	public String mainController(@PathVariable(value="id") Integer id, HttpServletRequest request){
 			User currentUser = (User) request.getSession().getAttribute("currentUser");
 			Album selectedAlbum =  (Album)IAlbumDAO.getAlbumDAO().getAlbumById(id);
@@ -33,7 +33,7 @@ public class AlbumPic {
 	}
 	
 		
-		@RequestMapping(value="/pictures", method=RequestMethod.GET)
+		@RequestMapping(value="/pictures", method={RequestMethod.GET, RequestMethod.POST})
 		public String cont(Model model, HttpServletRequest request){
 			Album selectedAlbum = (Album) request.getSession().getAttribute("selectedAlbum");
 			request.getSession().getAttribute("selectedPictures");
