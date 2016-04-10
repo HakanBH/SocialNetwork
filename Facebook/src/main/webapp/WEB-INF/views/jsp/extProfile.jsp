@@ -52,17 +52,19 @@
 					</p>
 
 					</br>
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship
-						status: ${extUser.userInfo.relationshipStatus}</p>
+						<c:if test="${ not empty extUser.userInfo.relationshipStatus}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship
+						status: ${extUser.userInfo.relationshipStatus}</p></c:if>
 
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday:
-						${extUser.userInfo.birthday	}</p>
+					<c:if test="${ not empty extUser.userInfo.birthday}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday:
+						${extUser.userInfo.birthday}</p></c:if>
 
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender:
-						${extUser.userInfo.gender}</p>
+					<c:if test="${ not empty extUser.userInfo.gender}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Gender:
+						${extUser.userInfo.gender}</p></c:if>
 
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">City:
-						${extUser.userInfo.city}</p>
+					<c:if test="${ not empty extUser.userInfo.city}"><p id="post_text" style="font-weight: bold; font-size: 20px;">City:
+						${extUser.userInfo.city}</p></c:if>
+					<c:if test="${ not empty extUser.userInfo.country}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Country:
+						${extUser.userInfo.country}</p></c:if>
 					</br>
 
 

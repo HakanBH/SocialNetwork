@@ -300,4 +300,14 @@ public class User extends BaseEntity {
 	public void removeLike(Post p) {
 		likedPosts.remove(p);
 	}
+	
+	public boolean checkAlbumByTitle(String title){
+		for(Album a : this.albums){
+			if(a.getTitle().equals(title)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

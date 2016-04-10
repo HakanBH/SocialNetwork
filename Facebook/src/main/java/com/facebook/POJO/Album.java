@@ -49,7 +49,9 @@ public class Album extends BaseEntity {
 	}
 
 	public void setTitle(String title) {
+		if(title != null && title.length() > 0){
 		this.title = title;
+		}
 	}
 
 	public String getTitle() {
@@ -63,9 +65,28 @@ public class Album extends BaseEntity {
 	public User getOwner() {
 		return owner;
 	}
+	
 
 	@Override
 	public String toString() {
 		return "Album [title=" + title + ", owner=" + owner + ", pictures=" + pictures + "]";
 	}
+	
+	 @Override
+	    public boolean equals(Object o1) {
+
+
+	        if(this.getTitle().equals(((Album) o1).getTitle()) && 
+	        		this.getOwner().equals(((Album) o1).getOwner()) ){
+	                return true;
+	        }
+	        return false;
+	    }
+	 
+	    @Override
+	    public int hashCode() {
+
+	        
+	        return Integer.valueOf(this.getId());
+	    }
 }
