@@ -59,8 +59,8 @@ public class PostUpload {
 			IAlbumDAO.getAlbumDAO().uploadImage(postPicture, album);
 
 			Post p = new Post(currentUser, postPicture, this.postText);
-			currentUser.addPost(p);
 			IPostDAO.getPostDAO().insertPost(p);
+			currentUser.addPost(p);
 		}
 				
 		model.addAttribute("posts", currentUser.getPosts());
