@@ -96,7 +96,7 @@ public class PostDAO implements IPostDAO {
 			user.sharePost(post);
 
 			session.update(post);
-			session.update(user);
+			
 
 			session.getTransaction().commit();
 		} finally {

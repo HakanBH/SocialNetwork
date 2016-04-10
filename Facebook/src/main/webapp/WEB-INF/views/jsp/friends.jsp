@@ -39,11 +39,11 @@
 			<c:forEach var="friend" items="${currentUser.friends}">
 				<div class="friend_container">
 					<div class="friend_pic">
-						<a href="#"><img id="friend_pic_size"
+						<a href="./extProfile/${friend.id}"><img id="friend_pic_size"
 							src="${friend.profilePath}" align="left"></a>
 					</div>
 					<div class="friend_name">
-						<a href="#" class="name_friend">${friend.firstName}
+						<a href="./extProfile/${friend.id}" class="name_friend">${friend.firstName}
 							${friend.lastName}</a>
 					</div>
 					<div class="friend_button">
