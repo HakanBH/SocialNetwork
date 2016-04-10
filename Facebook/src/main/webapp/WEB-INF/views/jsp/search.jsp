@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/customStyle.css">
 <link rel="stylesheet" href="css/imageUpload.css">
 
-<title>Search results for " "</title>
+<title>Search results for ${searchingFor}</title>
 </head>
 <body>
 
@@ -80,6 +80,7 @@
 				<c:choose>
 					<c:when test="${not empty searchResults}">
 						<c:forEach var="user" items="${searchResults}">
+							<c:if test="${currentUser ne user}">
 							<div class="panel-body">
 								<div class="search-result" style="height: 140px">
 									<div style="padding-left: 7px; padding-top: 5px">
@@ -87,23 +88,25 @@
 									</div>
 									<div style="padding-left: 140px;">
 										<h3>${user.firstName} ${user.lastName}</h3>
-										<p>${user.userInfo.city},
-											${user.userInfo.relationshipStatus }</p>
+										<p>${user.userInfo.city}</p>
+										<p>${user.userInfo.relationshipStatus}</p>
+										<p>${user.userInfo.gender}</p>
 									</div>
 									<div style="position: relative">
 										<form action="main/addFriend" method="GET">
-											<input name="userToAdd" type="hidden" value="4"> <input
+											<input name="userToAdd" type="hidden" value="${user.id}"> <input
 												type="submit" style="position: absolute; margin-left: 260px"
 												class="btn btn-primary" value="Follow">
 										</form>
 									</div>
 								</div>
 							</div>
+							</c:if>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<div class="panel-body">
-							<h2>No results found for {}</h2>
+							<h2>No results found for ${searchingFor}</h2>
 						</div>
 					</c:otherwise>
 				</c:choose>

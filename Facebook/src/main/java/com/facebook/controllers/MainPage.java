@@ -44,6 +44,7 @@ public class MainPage {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		IUserDAO.getUserDAO().addFriend(currentUser, userToAdd);
 		
+		
 		return "redirect:/main";
 	}
 	

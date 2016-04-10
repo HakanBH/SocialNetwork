@@ -24,18 +24,19 @@ public class FriendshipTests {
 //	
 //	}	
 	
+//	@Test
+//	public void removeFriendshipTest(){
+//		userDAO.removeFriend(14, 13);
+//		
+//		System.out.println(user1.getFriends());
+//	}
+	
 	@Test
-	public void removeFriendshipTest(){
-		User user1 = userDAO.getUserById(13);
-		User user2 = userDAO.getUserById(14);
-		
-		userDAO.removeFriend(14, 13);
-//		userDAO.removeFriend(user1, user2);
-		
-		System.out.println(user1.getFriends());
+	public void removeAllFriends() throws Exception{
+		userDAO.deleteUser(26);
 	}
-
-	//	@Test
+	
+//	@Test
 //	public void getFrindsOfFriendsTest(){
 //		User user = userDAO.getUserById(1);
 //		for(User u : user.getFriendsOfFriends()){

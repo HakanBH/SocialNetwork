@@ -63,7 +63,9 @@ public class User extends BaseEntity {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "friendships", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
-	private Set<User> friends = new TreeSet<User>();
+	private Set<User> friends = new TreeSet<User>((o1,o2)->{
+		return o1.getFirstName().compareTo(o2.getFirstName());
+	});
 
 	@ManyToMany(mappedBy = "friends")
 	private Set<User> befriendedBy = new HashSet<User>();
@@ -301,6 +303,12 @@ public class User extends BaseEntity {
 		likedPosts.remove(p);
 	}
 	
+	public void removeAllFriends(){
+		friends.clear();
+	}
+	public void removeAllFollowers(){
+		befriendedBy.clear();
+	}
 	public boolean checkAlbumByTitle(String title){
 		for(Album a : this.albums){
 			if(a.getTitle().equals(title)){

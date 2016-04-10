@@ -18,19 +18,23 @@ import com.facebook.POJO.User;
 
 @Controller
 public class DeletePic {
-	
-	@RequestMapping(value="/deletePic/{id}", method=RequestMethod.GET)
-	public String mainController(@PathVariable(value="id") Integer id, HttpServletRequest request){
-			Picture picToRemove = (Picture) IAlbumDAO.getAlbumDAO().getPicById(id);
-			Album album = picToRemove.getAlbum();
-			
-			album.getPictures().remove(picToRemove);
 
-		@SuppressWarnings("unchecked")
-		HashSet<Picture> set = (HashSet<Picture>) request.getSession().getAttribute("selectedPictures");
-		set.remove(picToRemove);
-			IAlbumDAO.getAlbumDAO().removePicture(picToRemove.getId());
-		return "redirect:/pictures";
+	@RequestMapping(value = "/deletePic/{id}", method = RequestMethod.GET)
+	public String mainController(@PathVariable(value = "id") Integer id, HttpServletRequest request) {
+		Picture picToRemove = (Picture) IAlbumDAO.getAlbumDAO().getPicById(id);
+		Album album = picToRemove.getAlbum();
+		
+		Iterator<Picture> it = album.getPictures().iterator();
+		
+		IAlbumDAO.getAlbumDAO().removePicture(id);
+		Picture toDelete = null;
+		while(it.hasNext()){
+			toDelete = it.next();
+			if(toDelete.getId() == id){
+				break;
+			}
+		}
+		album.removePicture(toDelete);
+		return "redirect:/pictures/"+album.getId();
 	}
-
 }

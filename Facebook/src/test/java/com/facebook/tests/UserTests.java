@@ -54,10 +54,10 @@ public class UserTests {
 
 //	@Test
 //	public void deleteUserById() throws Exception  {
-//		boolean wasDeleted = IUserDAO.getUserDAO().deleteUser(1);
+//		boolean wasDeleted = IUserDAO.getUserDAO().deleteUser(34);
 //		System.out.println(wasDeleted);
 //	}
-	
+//	
 	@Test
 	public void deleteAllUsers() throws Exception{
 		for(User u: IUserDAO.getUserDAO().getAllUsers()){

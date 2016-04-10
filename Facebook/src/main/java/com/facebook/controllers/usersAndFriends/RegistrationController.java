@@ -17,21 +17,17 @@ import com.facebook.POJO.UserInfo;
 public class RegistrationController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String registerUser(@ModelAttribute("user") User user, HttpServletRequest request) {
-		try {	
-			if (!IUserDAO.getUserDAO().isEmailTaken(user.getEmail())) {
-				
-				User registered = new User(user.getEmail(), user.getPassword(), user.getFirstName(),
-						user.getLastName());
+		try {
+			if(!IUserDAO.getUserDAO().isEmailTaken(user.getEmail())) {
+				User registered = new User(user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName());
 				IUserDAO.getUserDAO().insertUser(registered);
-					
 				request.getSession().setAttribute("currentUser", registered);
-
 				return "forward:/extraInfo";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		request.setAttribute("regError", "An account with such email already exists.");
 		return "forward:/index";
 	}

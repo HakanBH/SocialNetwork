@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -29,8 +30,8 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/js/**").addResourceLocations("/static/js/");
 		registry.addResourceHandler("/images/**").addResourceLocations("file:///C:/images/users/").addResourceLocations("/static/images/");
     }
-	
-	@Bean
+    
+    @Bean
 	public InternalResourceViewResolver getInternalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setViewClass(JstlView.class);

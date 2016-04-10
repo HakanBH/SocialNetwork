@@ -55,17 +55,33 @@ public class UserDAO implements IUserDAO {
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
+			
 			User u = (User) session.get(User.class, id);
-			UserInfo info = (UserInfo) session.get(UserInfo.class, id);
-			session.delete(info);
+
+			Query followers = session.createQuery("select f from User u INNER JOIN u.befriendedBy f where u.id = :userId");
+			followers.setInteger("userId", u.getId());
+			List<User> uFollowers = followers.list();
+			for(int i =0;i<10;i++){
+				System.err.println(uFollowers);
+			}
+			for(User user: uFollowers){
+				user.removeFriend(u);
+				session.update(u);
+			}
+			
+			u.removeAllFriends();
+			session.update(u);
 			session.delete(u);
 
+			Query deleteUserInfo = session.createQuery("delete from UserInfo where user_id = :userId");
+			deleteUserInfo.setInteger("userId", u.getId());
+//			
 			session.getTransaction().commit();
-
-			File userDir = new File(User.STORAGE_PATH + File.separator + u.getEmail() + File.separator);
-
-			FileDeleteStrategy.FORCE.delete(userDir);
-			userDir.delete();
+//
+//			File userDir = new File(User.STORAGE_PATH + File.separator + u.getEmail() + File.separator);
+//
+//			FileDeleteStrategy.FORCE.delete(userDir);
+//			userDir.delete();
 
 			return true;
 		} catch (Exception e) {
@@ -87,7 +103,7 @@ public class UserDAO implements IUserDAO {
 
 			userToUpdate.copy(user);
 			infoToUpdate.copy(info);
-
+			
 			session.update(userToUpdate);
 			session.update(infoToUpdate);
 
@@ -287,7 +303,7 @@ public class UserDAO implements IUserDAO {
 			session.beginTransaction();
 			
 			List<User> result = new ArrayList<User>();
-			Query query = session.createQuery("SELECT u from User u where firstName like :string");
+			Query query = session.createQuery("SELECT u from User u where concat(firstName, ' ', lastName) like :string");
 
 			query.setString("string", "%"+str+"%");
 			result = query.list();

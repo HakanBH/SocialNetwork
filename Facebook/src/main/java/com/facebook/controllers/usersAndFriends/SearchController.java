@@ -25,7 +25,7 @@ public class SearchController {
 		prepareSuggestions(model, currentUser);
 		List<User> searchResults = IUserDAO.getUserDAO().searchUsers(string);
 		model.addAttribute("searchResults", searchResults);
-		
+		model.addAttribute("searchingFor", string);
 		return "search";
 	}
 }
