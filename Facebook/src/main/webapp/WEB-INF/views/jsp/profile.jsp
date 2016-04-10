@@ -41,17 +41,20 @@
 
 
 					<br>
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship
-						status: ${userInfo.relationshipStatus}</p>
+					<c:if test="${ not empty userInfo.relationshipStatus}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship
+						status: ${userInfo.relationshipStatus}</p></c:if>
 
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday:
-						${userInfo.birthday}</p>
+					<c:if test="${ not empty userInfo.birthday}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday:
+						${userInfo.birthday}</p></c:if>
 
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender:
-						${userInfo.gender}</p>
+					<c:if test="${ not empty userInfo.gender}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Gender:
+						${userInfo.gender}</p></c:if>
 
-					<p id="post_text" style="font-weight: bold; font-size: 20px;">City:
-						${userInfo.city}</p>
+					<c:if test="${ not empty userInfo.city}"><p id="post_text" style="font-weight: bold; font-size: 20px;">City:
+						${userInfo.city}</p></c:if>
+					<c:if test="${ not empty userInfo.country}"><p id="post_text" style="font-weight: bold; font-size: 20px;">City:
+						${userInfo.country}</p></c:if>
+						
 					<br>
 				</div>
 			</div>
