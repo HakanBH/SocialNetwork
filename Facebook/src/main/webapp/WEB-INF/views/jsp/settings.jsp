@@ -71,30 +71,29 @@
 						</div>
 					</div>
 
-					<div class="form-group2">
+				<div class="form-group2">
 						<h4>
 							<label> Upload a new picture.</label>
 						</h4>
 						<div class="row">
 							<div class="col-md-8">
-								<form:form method="post" enctype="multipart/form-data"
-									action="ImageUpload">
-									<div class="input-group image-preview">
-										<input type="text" class="form-control image-preview-filename"
+								<form:form method="post" enctype="multipart/form-data" action="ImageUpload">
+									<div class="input-group image-preview1">
+										<input type="text" class="form-control image-preview-filename1"
 											disabled="disabled"> <span class="input-group-btn">
 											<!-- image-preview-clear button -->
 											<button type="button"
-												class="btn btn-default image-preview-clear"
+												class="btn btn-default image-preview-clear1"
 												style="display: none;">
 												<span class="glyphicon glyphicon-remove"></span> Clear
 											</button> <!-- image-preview-input -->
-											<div class="btn btn-default image-preview-input">
+											<div class="btn btn-default image-preview-input1">
 												<span class="glyphicon glyphicon-folder-open"></span> <span
-													class="image-preview-input-title">Browse</span> <input
+													class="image-preview-input-title1">Browse</span> <input
 													type="file" accept="image/png, image/jpeg, image/gif"
-													name="picture" />
+													name="picture1" />
 												<!-- rename it -->
-											</div> <input class="btn btn-info image-preview-input"
+											</div> <input class="btn btn-info image-preview-input1"
 											type="submit" value="Save">
 										</span>
 									</div>
