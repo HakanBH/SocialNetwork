@@ -30,7 +30,10 @@ public class ShareController {
 		
 		Post sharedPost = IPostDAO.getPostDAO().getPostById(id);
 		User postOwner = sharedPost.getOwner();
-		String picName = sharedPost.getPicture().getName();
+		String picName = null;
+		if(sharedPost.getPicture() != null){
+			picName = sharedPost.getPicture().getName();
+		}
 		Album album = IAlbumDAO.getAlbumDAO().getAlbum(currentUser, "PostPictures");
 		
 		if(album == null){
@@ -38,27 +41,31 @@ public class ShareController {
 			IAlbumDAO.getAlbumDAO().insertAlbum(currentUser, album);
 		}
 		
-		// get shared picture location
-		String source = User.STORAGE_PATH + postOwner.getEmail() + File.separator + "PostPictures" + File.separator;
-		File sourceImage = new File(source + sharedPost.getPicture().getName());
-		
+
 		// generate new picture location an name
-		String extension = picName.substring(picName.lastIndexOf("."));
-		picName="post-pic" + (album.getPictures().size() + 1) + extension;
-		String destination = User.STORAGE_PATH + currentUser.getEmail() + File.separator + "PostPictures" + File.separator;
-		new File(destination).mkdirs();
-		File destImage = new File(destination + picName);
-		
-		try {
-			FileUtils.copyFile(sourceImage, destImage);
-		} catch (IOException e) {
-			e.printStackTrace();
+		Picture pic=null;
+		if(picName!=null){
+			// get shared picture location
+			String source = User.STORAGE_PATH + postOwner.getEmail() + File.separator + "PostPictures" + File.separator;
+			File sourceImage = new File(source + sharedPost.getPicture().getName());
+			String extension = picName.substring(picName.lastIndexOf("."));
+			picName="post-pic" + (album.getPictures().size() + 1) + extension;
+			String destination = User.STORAGE_PATH + currentUser.getEmail() + File.separator + "PostPictures" + File.separator;
+			new File(destination).mkdirs();
+			File destImage = new File(destination + picName);
+			
+			try {
+				FileUtils.copyFile(sourceImage, destImage);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			pic = new Picture(picName);
+			IAlbumDAO.getAlbumDAO().uploadImage(pic, album);
+			
 		}
-		
-		Picture pic = new Picture(picName);
-		
-		IAlbumDAO.getAlbumDAO().uploadImage(pic, album);
-		
+
+	
 		Post newPost = new Post(currentUser, pic, sharedPost.getText());
 		IPostDAO.getPostDAO().insertPost(newPost);
 		IPostDAO.getPostDAO().sharePost(sharedPost, currentUser);
