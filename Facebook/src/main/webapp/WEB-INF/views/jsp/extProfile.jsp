@@ -52,19 +52,29 @@
 					</p>
 
 					</br>
-						<c:if test="${ not empty extUser.userInfo.relationshipStatus}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship
-						status: ${extUser.userInfo.relationshipStatus}</p></c:if>
+					<c:if test="${ not empty extUser.userInfo.relationshipStatus}">
+						<p id="post_text" style="font-weight: bold; font-size: 20px;">Relationship
+							status: ${extUser.userInfo.relationshipStatus}</p>
+					</c:if>
 
-					<c:if test="${ not empty extUser.userInfo.birthday}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday:
-						${extUser.userInfo.birthday}</p></c:if>
+					<c:if test="${ not empty extUser.userInfo.birthday}">
+						<p id="post_text" style="font-weight: bold; font-size: 20px;">Birthday:
+							${extUser.userInfo.birthday}</p>
+					</c:if>
 
-					<c:if test="${ not empty extUser.userInfo.gender}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Gender:
-						${extUser.userInfo.gender}</p></c:if>
+					<c:if test="${ not empty extUser.userInfo.gender}">
+						<p id="post_text" style="font-weight: bold; font-size: 20px;">Gender:
+							${extUser.userInfo.gender}</p>
+					</c:if>
 
-					<c:if test="${ not empty extUser.userInfo.city}"><p id="post_text" style="font-weight: bold; font-size: 20px;">City:
-						${extUser.userInfo.city}</p></c:if>
-					<c:if test="${ not empty extUser.userInfo.country}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Country:
-						${extUser.userInfo.country}</p></c:if>
+					<c:if test="${ not empty extUser.userInfo.city}">
+						<p id="post_text" style="font-weight: bold; font-size: 20px;">City:
+							${extUser.userInfo.city}</p>
+					</c:if>
+					<c:if test="${ not empty extUser.userInfo.country}">
+						<p id="post_text" style="font-weight: bold; font-size: 20px;">Country:
+							${extUser.userInfo.country}</p>
+					</c:if>
 					</br>
 
 
@@ -123,11 +133,12 @@
 		<div id="center_col">
 			<!-- posts -->
 			<c:forEach var="post" items="${extUser.ownedPosts}">
-				<div class="panel panel-white post panel-shadow" style="width: 95%">
+				<div class="panel panel-white post panel-shadow">
 					<div class="post-heading">
 						<div class="pull-left image">
-							<a href="./extProfile/${post.owner.id}"><img src="${post.owner.profilePath}"
-								class="img-circle avatar" alt="user profile image"></a>
+							<a href="./extProfile/${post.owner.id}"><img
+								src="${post.owner.profilePath}" class="img-circle avatar"
+								alt="user profile image"></a>
 						</div>
 						<div class="pull-left meta">
 							<div class="title h5">
@@ -144,22 +155,54 @@
 						</c:if>
 
 						<div class="stats">
-							<form method="post" action="./likePost">
-								<input name="likedPost" type="hidden" value="${post.id}">
-								<div id="${post.id}"
-									class="${cssClass} btn btn-default stat-item">
-									<span class="fa fa-thumbs-up icon">
-										${fn:length(post.likes)}</span> <input type="submit"
-										style="opacity: 0; position: absolute;">
-								</div>
-							</form>
-							<form:form method="post" action="./sharePost">
-								<input type="hidden" name="sharedPost" value="${post.id}">
-								<div class="btn btn-default stat-item">
-									<span class="fa fa-share icon"> 12</span> <input type="submit"
-										style="opacity: 0; position: absolute;">
-								</div>
-							</form:form>
+							<c:forEach var="liked" items="${currentUser.likedPosts}">
+								<c:if test="${liked eq post}">
+									<c:set var="isLiked" value="true"></c:set>
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${isLiked eq true}">
+									<form method="post" action="./unlikePost">
+										<input name="unlikedPost" type="hidden" value="${post.id}">
+										<div class="btn btn-default stat-item" style="color: green">
+											<span class="fa fa-thumbs-up icon">
+												${fn:length(post.likes)}</span> <input type="submit" class="stat">
+										</div>
+									</form>
+								</c:when>
+								<c:otherwise>
+									<form method="post" action="./likePost">
+										<input name="likedPost" type="hidden" value="${post.id}">
+										<div class="btn btn-default stat-item">
+											<span class="fa fa-thumbs-up icon">
+												${fn:length(post.likes)}</span> <input type="submit" class="stat">
+										</div>
+									</form>
+								</c:otherwise>
+							</c:choose>
+
+							<c:forEach var="shared" items="${currentUser.sharedPosts}">
+								<c:if test="${shared eq post}">
+									<c:set var="isShared" value="true"></c:set>
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${isShared eq true}">
+									<div class="btn btn-default stat-item" style="color: #1E7FC5">
+										<span class="fa fa-share icon">
+											${fn:length(post.shares)}</span> <input type="submit" class="stat">
+									</div>
+								</c:when>
+								<c:otherwise>
+									<form method="post" action="./sharePost">
+										<input type="hidden" name="sharedPost" value="${post.id}">
+										<div class="btn btn-default stat-item">
+											<span class="fa fa-share icon">
+												${fn:length(post.shares)} </span> <input type="submit" class="stat">
+										</div>
+									</form>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 
@@ -177,16 +220,19 @@
 							</div>
 						</form>
 						<ul class="comments-list">
-
 							<c:forEach var="postComment" items="${post.comments}">
-								<li class="comment"><a class="pull-left" href="./extProfile/${postComment.owner.id}"> <img
+								<li class="comment"><a class="pull-left"
+									href="./extProfile/${postComment.owner.id}"> <img
 										class="avatar" src="${postComment.owner.profilePath}"
 										alt="avatar">
 								</a>
 									<div class="comment-body">
 										<div class="comment-heading">
-											<a href="./extProfile/${postComment.owner.id}"><h4 class="user">${postComment.owner.firstName}
-												${postComment.owner.firstName}</h4></a>
+											<a href="./extProfile/${postComment.owner.id}">
+												<h4 class="user">${postComment.owner.firstName}
+													${postComment.owner.firstName}</h4>
+											</a>
+
 											<h5 class="time">${postComment.created}</h5>
 										</div>
 										<p>${postComment.text}</p>
