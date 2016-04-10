@@ -33,12 +33,14 @@ public class Post extends BaseEntity {
 	private String text;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JsonIgnore
 	@JoinTable(name = "likes", joinColumns = { @JoinColumn(name = "post_id") }, 
 		inverseJoinColumns = { @JoinColumn(name = "user_id") })
 	private Set<User> likes = new HashSet<User>();
 
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JsonIgnore
 	@JoinTable(name = "shares", joinColumns = { @JoinColumn(name = "post_id") }, 
 		inverseJoinColumns = { @JoinColumn(name = "user_id") })
 	private Set<User> shares = new HashSet<User>();
@@ -83,11 +85,15 @@ public class Post extends BaseEntity {
 	}
 	
 	public void addLike(User u) {
-		likes.add(u);
+		synchronized(likes){
+			likes.add(u);
+		}
 	}
 
 	public void removeLike(User u) {
-		likes.remove(u);
+		synchronized(likes){
+			likes.remove(u);
+		}
 	}
 
 	public Set<User> getLikes() {

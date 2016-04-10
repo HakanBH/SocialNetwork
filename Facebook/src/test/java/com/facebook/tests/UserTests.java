@@ -12,13 +12,14 @@ import com.facebook.POJO.User;
 
 public class UserTests {
 	IUserDAO userDAO = IUserDAO.getUserDAO();
+
 //	@Test 
 //	public void getAllUsersTest(){
 //		for(User u : IUserDAO.getUserDAO().getAllUsers()){
 //			System.out.println(u);
 //		}
 //	}
-//	
+
 //	@Test
 //	public void setProfilePictureTest(){
 //		Picture pic = IAlbumDAO.getAlbumDAO().getPicById(2);
@@ -26,7 +27,7 @@ public class UserTests {
 //		
 //		IUserDAO.getUserDAO().setProfilePicture(pic, user);
 //	}
-//	
+
 
 //	@Test
 //	public void userInsertion() throws Exception {
@@ -57,7 +58,7 @@ public class UserTests {
 //		boolean wasDeleted = IUserDAO.getUserDAO().deleteUser(34);
 //		System.out.println(wasDeleted);
 //	}
-//	
+
 	@Test
 	public void deleteAllUsers() throws Exception{
 		for(User u: IUserDAO.getUserDAO().getAllUsers()){
@@ -88,7 +89,7 @@ public class UserTests {
 //		User updateUser = IUserDAO.getUserDAO().getUserById(10);
 //		System.out.println(updateUser);
 //	}
-//	
+	
 //	@Test
 //	public void searchUsers() {
 //		System.err.println(userDAO.searchUsers(""));

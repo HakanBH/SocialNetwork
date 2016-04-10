@@ -2,6 +2,8 @@ package com.facebook.POJO;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="comments")
 public class Comment extends BaseEntity{
@@ -10,10 +12,12 @@ public class Comment extends BaseEntity{
 	private String text;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="post", nullable=false)
 	private Post post;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="owner", nullable=false)
 	private User owner;
 	

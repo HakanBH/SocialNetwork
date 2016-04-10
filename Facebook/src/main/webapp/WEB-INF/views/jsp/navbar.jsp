@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page errorPage="error.jsp"%>
 
 <link rel="stylesheet" href="css/style.css">
@@ -11,6 +12,9 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
 	rel='stylesheet' type='text/css'>
+<spring:message code="label.about" var="about" />
+<spring:message code="label.help" var="help" />
+<spring:message code="label.title" var="title" />
 
 <c:choose>
 	<c:when test="${not empty sessionScope.currentUser}">
@@ -89,11 +93,11 @@
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav navbar-right">
 								<li class="active"><a href="index.jsp"><span>
-											Home <span class="border"></span>
+											${title} <span class="border"></span>
 									</span></a></li>
-								<li><a href="#"><span> About <span
+								<li><a href="#"><span> ${about} <span
 											class="border"></span></span></a></li>
-								<li><a href="#"><span> Help <span class="border"></span></span></a></li>
+								<li><a href="#"><span> ${help} <span class="border"></span></span></a></li>
 							</ul>
 						</div>
 					</div>

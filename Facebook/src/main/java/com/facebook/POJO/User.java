@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.naming.spi.DirStateFactory.Result;
 import javax.persistence.*;
@@ -51,36 +52,42 @@ public class User extends BaseEntity {
 	@OneToOne
 	@JoinColumn(name = "bg_pic")
 	private Picture bgPicture;
-
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+	@JsonIgnore
 	private Set<Album> albums = new HashSet<Album>();
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+	@JsonIgnore
 	private List<Post> ownedPosts = new ArrayList<Post>();
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "likes")
+	@JsonIgnore
 	private Set<Post> likedPosts = new HashSet<Post>();
-
+	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "shares")
+	@JsonIgnore
 	private Set<Post> sharedPosts = new HashSet<Post>();
 
 	@ManyToMany(fetch = FetchType.EAGER)
+	@JsonIgnore
 	@JoinTable(name = "friendships", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
 	private Set<User> friends = new TreeSet<User>((o1,o2)->{
 		return o1.getFirstName().compareTo(o2.getFirstName());
 	});
 
 	@ManyToMany(mappedBy = "friends")
+	@JsonIgnore
 	private Set<User> befriendedBy = new HashSet<User>();
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+	@JsonIgnore
 	private List<Comment> userComments;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)  	
 	private UserInfo userInfo;
 
-	public User() {
-	}
+	public User() {}
 
 	public User(User u) {
 		this(u.getEmail(), u.getPassword(), u.getFirstName(), u.getLastName());
@@ -126,7 +133,9 @@ public class User extends BaseEntity {
 	}
 
 	public void likePost(Post p) {
-		likedPosts.add(p);
+		synchronized(likedPosts){
+			likedPosts.add(p);
+		}
 	}
 
 	public void unlikePost(Post p) {
@@ -157,6 +166,7 @@ public class User extends BaseEntity {
 		return false;
 	}
 
+	@JsonIgnore
 	public List<User> getFriendsOfFriends() {
 		List<User> all = new ArrayList<User>();
 		for (User friend : friends) {
@@ -173,8 +183,9 @@ public class User extends BaseEntity {
 		}
 		return all.subList(0, NUMBER_OF_FRIEND_SUGGESTIONS);
 	}
-
-	public Collection<Post> getPosts() {
+	
+	@JsonIgnore
+	public Set<Post> getPosts() {
 		Set<Post> result = new TreeSet<Post>((o1, o2) -> {
 			return o2.getCreated().compareTo(o1.getCreated());
 		});
@@ -295,7 +306,7 @@ public class User extends BaseEntity {
 	}
 
 	public String getBgPath() {
-		if (this.bgPicture == null || this.bgPicture.getName().equals("./images/backgrounds/background-1.jpg")) {
+		if (this.bgPicture == null || this.bgPicture.getName().equals("./images/backgrounds/background-5.jpg")) {
 			return "./images/backgrounds/background-1.jpg";
 		} else {
 			return "images/" + this.email + "/BgPictures/" + this.bgPicture.getName();
@@ -309,6 +320,7 @@ public class User extends BaseEntity {
 	public void removeAllFriends(){
 		friends.clear();
 	}
+	
 	public void removeAllFollowers(){
 		befriendedBy.clear();
 	}

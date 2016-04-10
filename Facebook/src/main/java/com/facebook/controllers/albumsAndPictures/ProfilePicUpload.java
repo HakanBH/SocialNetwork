@@ -22,6 +22,7 @@ import com.facebook.POJO.Album;
 import com.facebook.POJO.Picture;
 import com.facebook.POJO.User;
 import com.facebook.POJO.UserInfo;
+import com.facebook.exceptions.UploadException;
 
 @Controller
 @RequestMapping(value = "/ImageUpload")
@@ -89,7 +90,7 @@ public class ProfilePicUpload {
 				if (!isImage || fi.getSize() > BUFFER_SIZE) {
 					request.setAttribute("imageError",
 							"File must be an image with size less than " + BUFFER_SIZE + " bytes.");
-					return "forward:/extraInfo";
+					throw new UploadException();
 				}
 				// Write the file
 				file = new File(filePath + "profile_pic" + (album.getPictures().size() + 1) + "." + extension);

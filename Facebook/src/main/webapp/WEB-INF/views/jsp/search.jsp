@@ -86,16 +86,16 @@
 									<div style="padding-left: 7px; padding-top: 5px">
 										<img id="prof_pici" src="${user.profilePath}">
 									</div>
-									<div style="padding-left: 140px;">
+									<div style="margin-top:-13px; padding-left: 140px;">
 										<h3>${user.firstName} ${user.lastName}</h3>
 										<p>${user.userInfo.city}</p>
 										<p>${user.userInfo.relationshipStatus}</p>
 										<p>${user.userInfo.gender}</p>
 									</div>
-									<div style="position: relative">
+									<div>
 										<form action="main/addFriend" method="GET">
 											<input name="userToAdd" type="hidden" value="${user.id}"> <input
-												type="submit" style="position: absolute; margin-left: 260px"
+												type="submit" style="margin-right: 10px; margin-top:-40px; float:right"
 												class="btn btn-primary" value="Follow">
 										</form>
 									</div>

@@ -188,10 +188,10 @@
 								<div class="form-group">
 									<h4>
 										<label class="control-label" for="gender">Gender: </label> <label
-											class="radio-inline" for="man"> <form:radiobutton
-												path="gender" id="man" value="man" /> Man
-										</label> <label class="radio-inline" for="woman"> <form:radiobutton
-												path="gender" id="woman" value="woman" /> Woman
+											class="radio-inline" for="male"> <form:radiobutton
+												path="gender" id="male" value="Male" /> Male
+										</label> <label class="radio-inline" for="female"> <form:radiobutton
+												path="gender" id="female" value="Female" /> Female
 										</label>
 									</h4>
 								</div>

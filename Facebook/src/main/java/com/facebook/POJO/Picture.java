@@ -2,6 +2,8 @@ package com.facebook.POJO;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "pictures")
 
@@ -11,6 +13,7 @@ public class Picture extends BaseEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "album_id", nullable=false)
+	@JsonIgnore
 	private Album album;
 	
 	public Picture() {}

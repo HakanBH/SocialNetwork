@@ -36,11 +36,10 @@ public class PostUpload {
 		new File(filePath).mkdirs();
 		// Check that we have a file upload request
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-
+		
 		String currentPage = request.getHeader("referer");
 		currentPage = currentPage.substring(currentPage.lastIndexOf("/"));
 
-		
 		if (isMultipart) {
 			Album album = IAlbumDAO.getAlbumDAO().getAlbum(currentUser, PICTURE_FOLDER);
 			if (album == null) {
@@ -52,7 +51,7 @@ public class PostUpload {
 			try {
 				picName = uploadPic(request, filePath, album);
 			} catch (UploadException e) {
-				return "redirect:/main";
+				return "redirect:" + currentPage;
 			} catch (Exception e) {
 				request.setAttribute("imageError", "Error uploading image.");
 				return "redirect:" + currentPage;
