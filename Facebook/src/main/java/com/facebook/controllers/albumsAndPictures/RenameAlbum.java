@@ -27,7 +27,7 @@ public class RenameAlbum {
 		
 		String oldTitle = IAlbumDAO.getAlbumDAO().getAlbumById(albumId).getTitle();
 		if (newTitle != null && newTitle.length() > 0 && !oldTitle.equals("ProfilePictures")
-				&& !oldTitle.equals("PostPictures") && !oldTitle.equals("BgPictures")) {
+				&& !oldTitle.equals("PostPictures") && !oldTitle.equals("BgPictures") && !currentUser.checkAlbumByTitle(newTitle)) {
 			
 
 			String filePath = User.STORAGE_PATH + currentUser.getEmail() + File.separator + oldTitle + File.separator;

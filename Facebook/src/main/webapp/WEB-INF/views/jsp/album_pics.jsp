@@ -84,7 +84,7 @@
 			<form class="upload_form" method="post" action="./renameAlbum"
 				name="albumName" style="margin-top: 50px;">
 				<h3 style="font-weight: bold;">Rename your album</h3>
-				<input id="country" type="text" name="newName" value="OldName"
+				<input id="country" type="text" name="newName" value="${selectedAlbum.title}"
 					placeholder="New Name"> <input type="hidden"
 					value="${selectedAlbum.id}" name="albumToRename">
 				<button id="post_button2" type="submit">Rename!</button>
