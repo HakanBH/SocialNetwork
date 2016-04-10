@@ -52,7 +52,7 @@
 
 					<c:if test="${ not empty userInfo.city}"><p id="post_text" style="font-weight: bold; font-size: 20px;">City:
 						${userInfo.city}</p></c:if>
-					<c:if test="${ not empty userInfo.country}"><p id="post_text" style="font-weight: bold; font-size: 20px;">City:
+					<c:if test="${ not empty userInfo.country}"><p id="post_text" style="font-weight: bold; font-size: 20px;">Country:
 						${userInfo.country}</p></c:if>
 						
 					<br>
