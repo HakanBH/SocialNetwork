@@ -16,6 +16,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
 import com.facebook.DAO.SessionDispatcher;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
@@ -25,8 +26,10 @@ public class User extends BaseEntity {
 	public static final int NUMBER_OF_FRIEND_SUGGESTIONS = 4;
 
 	@Transient
+	@JsonIgnore
 	private String profilePath;
 	@Transient
+	@JsonIgnore
 	private String bgPath;
 
 	@Column(name = "first_name", columnDefinition = "VARCHAR(32)", nullable = false)

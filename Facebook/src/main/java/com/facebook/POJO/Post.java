@@ -11,6 +11,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "posts")
 public class Post extends BaseEntity {
@@ -19,6 +21,7 @@ public class Post extends BaseEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "post_owner", nullable = false)
+	@JsonIgnore
 	private User owner;
 
 	@OneToOne

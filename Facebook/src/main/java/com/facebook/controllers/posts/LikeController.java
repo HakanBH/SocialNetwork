@@ -18,21 +18,36 @@ public class LikeController {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		String likedPostId = (String) request.getParameter("likedPost");
 		int id = Integer.parseInt(likedPostId);
-
-		String currentPage = request.getHeader("referer");
-		currentPage=currentPage.substring(currentPage.lastIndexOf("/"));
-
 		Post likedPost = IPostDAO.getPostDAO().getPostById(id);
 
-		for (Post p : currentUser.getPosts()) {
-			if (p.getId() == likedPost.getId()) {
-				p.addLike(currentUser);
-				currentUser.likePost(p);
-				IPostDAO.getPostDAO().likePost(likedPost, currentUser);
+		String currentPage = request.getHeader("referer");
+		currentPage = currentPage.substring(currentPage.lastIndexOf("/"));
+
+		if (currentPage.contains("extProfile")) {
+			User extUser = likedPost.getOwner();
+
+			
+			for (Post p : extUser.getOwnedPosts()) {
+				System.err.println(p);
+				if (p.getId() == id) {
+					p.addLike(currentUser);
+					currentUser.likePost(p);
+					IPostDAO.getPostDAO().likePost(likedPost, currentUser);
+				}
 			}
+			return "redirect:" + currentPage;
+
+		} else {
+			for (Post p : currentUser.getPosts()) {
+				if (p.getId() == likedPost.getId()) {
+					p.addLike(currentUser);
+					currentUser.likePost(p);
+					IPostDAO.getPostDAO().likePost(likedPost, currentUser);
+				}
+			}
+			return "redirect:" + currentPage;
 		}
 
-		return "redirect:" + currentPage;
 	}
 
 }

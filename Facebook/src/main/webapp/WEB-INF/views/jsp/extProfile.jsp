@@ -94,10 +94,12 @@
 
 				<div id="photo_container">
 					<c:forEach begin="0" end="8" var="picture" items="${pictures}">
-						<a href="./pictures/${picture.album.id}"><img
-							id="pictures_min"
-							src="images/${extUser.email}/${picture.album.title}/${picture.name}"
-							align="left"></a>
+						<c:if test="${not empty picture.name}">
+							<a href="./pictures/${picture.album.id}"><img
+								id="pictures_min"
+								src="images/${extUser.email}/${picture.album.title}/${picture.name}"
+								align="left"></a>
+						</c:if>
 					</c:forEach>
 				</div>
 

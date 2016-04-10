@@ -32,9 +32,7 @@ public class AlbumFileUpload{
 	public String uploadImage(@PathVariable(value="id") Integer id, HttpServletRequest request) {
 		Album thisAlbum = IAlbumDAO.getAlbumDAO().getAlbumById(id);
 		
-		
-		for(int i=0; i<100;i++)
-			System.err.println("00000000000000000000000000000000" + id + "00" );
+
 		User user = (User) request.getSession().getAttribute("currentUser");
 
 		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + thisAlbum.getTitle() + File.separator;
@@ -49,7 +47,6 @@ public class AlbumFileUpload{
 					album = new Album(thisAlbum.getTitle(), user);
 					IAlbumDAO.getAlbumDAO().insertAlbum(user,album);
 				}
-				System.err.println("09999999999" + filePath + "req " + request + "album " + album );
 				fileName = createFile(request, filePath, album);
 				Picture bgPic = new Picture(fileName);
 				IAlbumDAO.getAlbumDAO().uploadImage(bgPic, album);
@@ -95,7 +92,6 @@ public class AlbumFileUpload{
 				}
 				// Write the file
 				file = new File(filePath + album.getTitle() + (album.getPictures().size() + 1) + "." + extension);
-				System.err.println("09999999999" + file );
 				fi.write(file);
 			}
 		}

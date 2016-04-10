@@ -12,14 +12,13 @@ import com.facebook.POJO.User;
 
 @RestController
 public class UsersService {
-	@RequestMapping(value = "/allUsers", method = RequestMethod.GET)
-	List<User> getUsers() {
-		return IUserDAO.getUserDAO().getAllUsers();
-	}
+//	@RequestMapping(value = "/allUsers", method = RequestMethod.GET)
+//	List<User> getUsers() {
+//		return IUserDAO.getUserDAO().getAllUsers();
+//	}
 
 	@RequestMapping(value ="/allUsers/{id}", method = RequestMethod.GET)
 	User getUser(@PathVariable("id") Integer userId){
 		return IUserDAO.getUserDAO().getUserById(userId);
 	}
-
 }
