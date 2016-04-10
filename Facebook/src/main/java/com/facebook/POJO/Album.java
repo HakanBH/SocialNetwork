@@ -49,7 +49,9 @@ public class Album extends BaseEntity {
 	}
 
 	public void setTitle(String title) {
+		if(title != null && title.length() > 0){
 		this.title = title;
+		}
 	}
 
 	public String getTitle() {

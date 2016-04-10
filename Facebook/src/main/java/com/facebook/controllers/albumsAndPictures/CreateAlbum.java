@@ -1,5 +1,6 @@
 package com.facebook.controllers.albumsAndPictures;
 
+import java.io.File;
 import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,9 @@ public class CreateAlbum {
 	public String mainController(HttpServletRequest request){
 			String title = request.getParameter("newName");
 			if(title != null && title.length() > 0){
+				User user = (User) request.getSession().getAttribute("currentUser");
+				String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + title + File.separator;
+				new File(filePath).mkdirs();
 			User currentUser = (User) request.getSession().getAttribute("currentUser");
 			Album newAlbum = new Album(title, currentUser);
 			IAlbumDAO.getAlbumDAO().insertAlbum(currentUser, newAlbum);
