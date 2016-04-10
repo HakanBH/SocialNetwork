@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page errorPage="error.jsp"%>
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/searchBar.css">
 <link
