@@ -77,9 +77,8 @@ public class Album extends BaseEntity {
 
 	@Override
 	public boolean equals(Object o1) {
-
-		if (this.getTitle().equals(((Album) o1).getTitle()) && this.getOwner().equals(((Album) o1).getOwner())) {
-			return true;
+		if(o1 instanceof Album){
+			return (this.getTitle().equals(((Album) o1).getTitle()) && this.getOwner().equals(((Album) o1).getOwner()));
 		}
 		return false;
 	}

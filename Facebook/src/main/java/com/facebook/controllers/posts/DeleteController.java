@@ -31,9 +31,13 @@ public class DeleteController {
 			}
 		}
 		
-		currentUser.removePost(toDelete);
-		IPostDAO.getPostDAO().removePost(id);
-		
+		try {
+			currentUser.removePost(toDelete);
+			IPostDAO.getPostDAO().removePost(id);
+		} catch (Exception e) {
+            return "redirect:/profile";
+		}
+
 		return "redirect:/profile";
 	}
 }

@@ -4,11 +4,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <%@ page errorPage="error.jsp"%>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Cache-Control" content="no-store" />
+
 <link
 	href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500'
 	rel='stylesheet' type='text/css'>

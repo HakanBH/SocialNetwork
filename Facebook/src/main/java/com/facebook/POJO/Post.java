@@ -26,7 +26,7 @@ public class Post extends BaseEntity {
 	private User owner;
 
 	@OneToOne
-	@OnDelete(action=OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "picture", referencedColumnName = "id")
 	private Picture picture;
 
@@ -35,21 +35,21 @@ public class Post extends BaseEntity {
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JsonIgnore
-	@JoinTable(name = "likes", joinColumns = { @JoinColumn(name = "post_id") }, 
-		inverseJoinColumns = { @JoinColumn(name = "user_id") })
+	@JoinTable(name = "likes", joinColumns = { @JoinColumn(name = "post_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "user_id") })
 	private Set<User> likes = new HashSet<User>();
-
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JsonIgnore
-	@JoinTable(name = "shares", joinColumns = { @JoinColumn(name = "post_id") }, 
-		inverseJoinColumns = { @JoinColumn(name = "user_id") })
+	@JoinTable(name = "shares", joinColumns = { @JoinColumn(name = "post_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "user_id") })
 	private Set<User> shares = new HashSet<User>();
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "post")
 	private List<Comment> comments = new ArrayList<Comment>();
 
-	public Post() {}
+	public Post() {
+	}
 
 	public Post(User owner, Picture pic, String text) {
 		setOwner(owner);
@@ -76,23 +76,23 @@ public class Post extends BaseEntity {
 	public void removeComment(Comment c) {
 		comments.remove(c);
 	}
-	
-	public void addShare(User u){
+
+	public void addShare(User u) {
 		shares.add(u);
 	}
-	
-	public void removeShare(User u){
+
+	public void removeShare(User u) {
 		shares.remove(u);
 	}
-	
+
 	public void addLike(User u) {
-		synchronized(likes){
+		synchronized (likes) {
 			likes.add(u);
 		}
 	}
 
 	public void removeLike(User u) {
-		synchronized(likes){
+		synchronized (likes) {
 			likes.remove(u);
 		}
 	}
@@ -128,7 +128,7 @@ public class Post extends BaseEntity {
 	public Set<User> getShares() {
 		return Collections.unmodifiableSet(shares);
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder("Post [id=" + this.getId() + ", user=" + owner.getEmail()
@@ -138,8 +138,9 @@ public class Post extends BaseEntity {
 
 	@Override
 	public boolean equals(Object o1) {
-		if (Integer.valueOf(this.getId()).equals(Integer.valueOf(((Post) o1).getId()))) {
-			return true;
+		if (o1 instanceof Post) {
+			Post p = (Post) o1;
+			return this.getId() == p.getId();
 		}
 		return false;
 	}

@@ -75,13 +75,13 @@ public class UserDAO implements IUserDAO {
 
 			Query deleteUserInfo = session.createQuery("delete from UserInfo where user_id = :userId");
 			deleteUserInfo.setInteger("userId", u.getId());
-//			
+			
 			session.getTransaction().commit();
-//
-//			File userDir = new File(User.STORAGE_PATH + File.separator + u.getEmail() + File.separator);
-//
-//			FileDeleteStrategy.FORCE.delete(userDir);
-//			userDir.delete();
+
+			File userDir = new File(User.STORAGE_PATH + File.separator + u.getEmail() + File.separator);
+
+			FileDeleteStrategy.FORCE.delete(userDir);
+			userDir.delete();
 
 			return true;
 		} catch (Exception e) {

@@ -1,5 +1,7 @@
 package com.facebook.DAO;
 
+import java.io.IOException;
+
 import com.facebook.POJO.Album;
 import com.facebook.POJO.Picture;
 import com.facebook.POJO.User;

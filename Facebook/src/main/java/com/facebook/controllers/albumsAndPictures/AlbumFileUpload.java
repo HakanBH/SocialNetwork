@@ -31,7 +31,6 @@ public class AlbumFileUpload{
 	@RequestMapping(value = "/albumFileUpload/{id}", method = RequestMethod.POST)
 	public String uploadImage(@PathVariable(value="id") Integer id, HttpServletRequest request) {
 		Album thisAlbum = IAlbumDAO.getAlbumDAO().getAlbumById(id);
-		
 
 		User user = (User) request.getSession().getAttribute("currentUser");
 

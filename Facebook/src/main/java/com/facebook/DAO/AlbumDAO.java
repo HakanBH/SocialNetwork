@@ -1,5 +1,9 @@
 package com.facebook.DAO;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileDeleteStrategy;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -27,16 +31,23 @@ public class AlbumDAO implements IAlbumDAO {
 	}
 
 	@Override
-	public void deleteAlbum(int albumId) {
+	public void deleteAlbum(int albumId){
 		Session session = SessionDispatcher.getSession();
 		try {
 			session.beginTransaction();
 
 			Album a = (Album) session.get(Album.class, albumId);
-
+		
 			session.delete(a);
+			
+			File albumFolder = new File(User.STORAGE_PATH + File.separator + a.getOwner().getEmail() + File.separator + a.getTitle());
+
+			FileDeleteStrategy.FORCE.delete(albumFolder);
+			albumFolder.delete();
 
 			session.getTransaction().commit();
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -54,7 +65,7 @@ public class AlbumDAO implements IAlbumDAO {
 			pic.setAlbum(album);
 			session.persist(pic);
 			session.update(album);
-			
+
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,18 +149,18 @@ public class AlbumDAO implements IAlbumDAO {
 		}
 		return pic;
 	}
-	
+
 	@Override
-	public void updateTitle(Album a, String newTitle){
+	public void updateTitle(Album a, String newTitle) {
 		Session session = null;
 		Picture pic = null;
 		try {
 			session = SessionDispatcher.getSession();
 			session.beginTransaction();
-			
+
 			a.setTitle(newTitle);
 			session.update(a);
-			
+
 			session.getTransaction().commit();
 		} finally {
 			if (session != null) {

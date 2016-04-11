@@ -12,11 +12,12 @@ public class Picture extends BaseEntity {
 	private String name;
 
 	@ManyToOne
-	@JoinColumn(name = "album_id", nullable=false)
+	@JoinColumn(name = "album_id", nullable = false)
 	@JsonIgnore
 	private Album album;
-	
-	public Picture() {}
+
+	public Picture() {
+	}
 
 	public Picture(String name) {
 		setName(name);
@@ -37,22 +38,18 @@ public class Picture extends BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	 @Override
-	    public boolean equals(Object o1) {
 
+	@Override
+	public boolean equals(Object o1) {
+		if (o1 instanceof Picture) {
+			return this.getName().equals(((Picture) o1).getName());
+		}
+		return false;
+	}
 
-	        if(this.getName().equals(((Picture) o1).getName())){
-	                return true;
-	        }
-	        return false;
-	    }
+	@Override
+	public int hashCode() {
 
-
-	    @Override
-	    public int hashCode() {
-
-	        
-	        return Integer.valueOf(this.getId());
-	    }
+		return Integer.valueOf(this.getId());
+	}
 }

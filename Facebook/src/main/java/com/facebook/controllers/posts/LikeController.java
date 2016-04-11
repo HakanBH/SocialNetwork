@@ -27,7 +27,6 @@ public class LikeController {
 			User extUser = likedPost.getOwner();
 			
 			for (Post p : extUser.getOwnedPosts()) {
-				System.err.println(p);
 				if (p.getId() == id) {
 					p.addLike(currentUser);
 					currentUser.likePost(p);
@@ -46,7 +45,6 @@ public class LikeController {
 			}
 			return "redirect:" + currentPage;
 		}
-
 	}
 
 }
