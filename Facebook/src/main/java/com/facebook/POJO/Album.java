@@ -25,10 +25,11 @@ public class Album extends BaseEntity {
 	@JsonIgnore
 	private User owner;
 
-	@OneToMany(orphanRemoval=true, fetch = FetchType.EAGER, mappedBy = "album")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "album")
 	private List<Picture> pictures = new ArrayList<Picture>();
 
-	public Album() {}
+	public Album() {
+	}
 
 	public Album(String title, User owner) {
 		setTitle(title);
@@ -38,8 +39,8 @@ public class Album extends BaseEntity {
 	public void addPicture(Picture pic) {
 		pictures.add(pic);
 	}
-	
-	public void removePicture(Picture pic){
+
+	public void removePicture(Picture pic) {
 		pictures.remove(pic);
 	}
 
@@ -52,8 +53,8 @@ public class Album extends BaseEntity {
 	}
 
 	public void setTitle(String title) {
-		if(title != null && title.length() > 0){
-		this.title = title;
+		if (title != null && title.length() > 0) {
+			this.title = title;
 		}
 	}
 
@@ -68,28 +69,23 @@ public class Album extends BaseEntity {
 	public User getOwner() {
 		return owner;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "Album [title=" + title + ", owner=" + owner + ", pictures=" + pictures + "]";
 	}
-	
-	 @Override
-	    public boolean equals(Object o1) {
 
+	@Override
+	public boolean equals(Object o1) {
 
-	        if(this.getTitle().equals(((Album) o1).getTitle()) && 
-	        		this.getOwner().equals(((Album) o1).getOwner()) ){
-	                return true;
-	        }
-	        return false;
-	    }
-	 
-	    @Override
-	    public int hashCode() {
+		if (this.getTitle().equals(((Album) o1).getTitle()) && this.getOwner().equals(((Album) o1).getOwner())) {
+			return true;
+		}
+		return false;
+	}
 
-	        
-	        return Integer.valueOf(this.getId());
-	    }
+	@Override
+	public int hashCode() {
+		return Integer.valueOf(this.getId());
+	}
 }

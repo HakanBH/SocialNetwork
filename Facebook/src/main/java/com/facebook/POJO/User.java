@@ -2,21 +2,13 @@ package com.facebook.POJO;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.naming.spi.DirStateFactory.Result;
 import javax.persistence.*;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-
-import com.facebook.DAO.SessionDispatcher;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
