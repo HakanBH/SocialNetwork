@@ -36,30 +36,32 @@ public class ProfilePicUpload {
 
 		String filePath = User.STORAGE_PATH + user.getEmail() + File.separator + PICTURES_FOLDER + File.separator;
 		new File(filePath).mkdirs();
+		
+		String currentPage = request.getHeader("referer");
+		currentPage = currentPage.substring(currentPage.lastIndexOf("/"));
+
 		// Check that we have a file upload request
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			String fileName;
-			try {
-				Album album = IAlbumDAO.getAlbumDAO().getAlbum(user, PICTURES_FOLDER);
-				if (album == null) {
-					album = new Album(PICTURES_FOLDER, user);
-					IAlbumDAO.getAlbumDAO().insertAlbum(user,album);
-				}
-
-				fileName = createFile(request, filePath, album);
-				Picture profilePic = new Picture(fileName);
-				IAlbumDAO.getAlbumDAO().uploadImage(profilePic, album);
-				IUserDAO.getUserDAO().setProfilePicture(profilePic, user);
-			} catch (Exception e) {
-				e.printStackTrace();
+			Album album = IAlbumDAO.getAlbumDAO().getAlbum(user, PICTURES_FOLDER);
+			if (album == null) {
+				album = new Album(PICTURES_FOLDER, user);
+				IAlbumDAO.getAlbumDAO().insertAlbum(user, album);
 			}
+
+			try {
+				fileName = createFile(request, filePath, album);
+			} catch (Exception e) {
+				request.getSession().setAttribute("profImageError", "File must be an image with size less than " + BUFFER_SIZE + " bytes.");
+				return "forward:"+currentPage;
+			}
+			Picture profilePic = new Picture(fileName);
+			IAlbumDAO.getAlbumDAO().uploadImage(profilePic, album);
+			IUserDAO.getUserDAO().setProfilePicture(profilePic, user);
+
 		}
-		if (request.getHeader("referer").contains("settings")) {
-			return "redirect:/settings";
-		} else {
-			return "redirect:/extraInfo";
-		}
+		return "redirect:" + currentPage;
 	}
 
 	public String createFile(HttpServletRequest request, String filePath, Album album) throws Exception {

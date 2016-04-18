@@ -70,16 +70,22 @@
 							</div>
 						</div>
 					</div>
-
-				<div class="form-group2">
+					<c:if test="${not empty bgImageError}">
+						<div class="form-error" style="margin-top: -10px">
+							${bgImageError}
+						</div>
+					</c:if>
+					<div class="form-group2">
 						<h4>
 							<label> Upload a new picture.</label>
 						</h4>
 						<div class="row">
 							<div class="col-md-8">
-								<form:form method="post" enctype="multipart/form-data" action="ImageUpload">
+								<form:form method="post" enctype="multipart/form-data"
+									action="ImageUpload">
 									<div class="input-group image-preview1">
-										<input type="text" class="form-control image-preview-filename1"
+										<input type="text"
+											class="form-control image-preview-filename1"
 											disabled="disabled"> <span class="input-group-btn">
 											<!-- image-preview-clear button -->
 											<button type="button"
@@ -102,9 +108,9 @@
 						</div>
 					</div>
 
-					<c:if test="${not empty imageError}">
+					<c:if test="${not empty profImageError}">
 						<div class="form-error" style="margin-top: -10px">
-							<c:out value="${imageError}">
+							<c:out value="${profImageError}">
 							</c:out>
 						</div>
 					</c:if>

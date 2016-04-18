@@ -22,7 +22,7 @@ public class RegistrationController {
 				User registered = new User(user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName());
 				IUserDAO.getUserDAO().insertUser(registered);
 				request.getSession().setAttribute("currentUser", registered);
-				return "forward:/extraInfo";
+				return "redirect:/extraInfo";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

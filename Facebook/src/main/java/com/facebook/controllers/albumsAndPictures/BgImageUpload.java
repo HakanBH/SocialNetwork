@@ -22,6 +22,7 @@ import com.facebook.POJO.Album;
 import com.facebook.POJO.Picture;
 import com.facebook.POJO.User;
 import com.facebook.POJO.UserInfo;
+import com.facebook.exceptions.UploadException;
 
 @Controller
 @RequestMapping(value = "/BgImageUpload")
@@ -39,20 +40,21 @@ public class BgImageUpload {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			String fileName;
-			try {
-				Album album = IAlbumDAO.getAlbumDAO().getAlbum(user, PICTURES_FOLDER);
-				if (album == null) {
-					album = new Album(PICTURES_FOLDER, user);
-					IAlbumDAO.getAlbumDAO().insertAlbum(user,album);
-				}
-
-				fileName = createFile(request, filePath, album);
-				Picture bgPic = new Picture(fileName);
-				IAlbumDAO.getAlbumDAO().uploadImage(bgPic, album);
-				IUserDAO.getUserDAO().setBgPicture(bgPic, user);
-			} catch (Exception e) {
-				e.printStackTrace();
+			Album album = IAlbumDAO.getAlbumDAO().getAlbum(user, PICTURES_FOLDER);
+			if (album == null) {
+				album = new Album(PICTURES_FOLDER, user);
+				IAlbumDAO.getAlbumDAO().insertAlbum(user, album);
 			}
+			try {
+				fileName = createFile(request, filePath, album);
+			} catch (Exception e) {
+				request.getSession().setAttribute("bgImageError", "File must be an image with size less than " + BUFFER_SIZE + " bytes.");
+				return "forward:/settings";
+			}
+
+			Picture bgPic = new Picture(fileName);
+			IAlbumDAO.getAlbumDAO().uploadImage(bgPic, album);
+			IUserDAO.getUserDAO().setBgPicture(bgPic, user);
 		}
 
 		return "redirect:/settings";
@@ -60,7 +62,6 @@ public class BgImageUpload {
 	}
 
 	public String createFile(HttpServletRequest request, String filePath, Album album) throws Exception {
-
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// maximum size that will be stored in memory
 		factory.setSizeThreshold(BUFFER_SIZE);
@@ -84,10 +85,9 @@ public class BgImageUpload {
 				String extension = FilenameUtils.getExtension(fileName);
 
 				boolean isImage = extension.equals("gif") || extension.equals("jpg") || extension.equals("png");
-				if (!isImage || fi.getSize() > BUFFER_SIZE) {
-					request.setAttribute("imageError",
-							"File must be an image with size less than " + BUFFER_SIZE + " bytes.");
-					return "forward:/extraInfo";
+
+				if (!isImage || fi.getSize() > BUFFER_SIZE) {		
+					throw new UploadException("Invalid File");
 				}
 				// Write the file
 				file = new File(filePath + "background-pic" + (album.getPictures().size() + 1) + "." + extension);

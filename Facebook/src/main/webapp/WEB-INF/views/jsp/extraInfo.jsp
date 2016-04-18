@@ -79,9 +79,9 @@
 					</div>
 				</div>
 				
-				<c:if test="${not empty imageError}">
+				<c:if test="${not empty profImageError}">
 					<div class="form-error" style="margin-top:-10px">
-						<c:out value="${imageError}">
+						<c:out value="${profImageError}">
 						</c:out>
 					</div>
 				</c:if>

@@ -29,7 +29,6 @@ public class RenameAlbum {
 		if (newTitle != null && newTitle.length() > 0 && !oldTitle.equals("ProfilePictures")
 				&& !oldTitle.equals("PostPictures") && !oldTitle.equals("BgPictures") && !currentUser.checkAlbumByTitle(newTitle)) {
 			
-
 			String filePath = User.STORAGE_PATH + currentUser.getEmail() + File.separator + oldTitle + File.separator;
 			String newFilePath = User.STORAGE_PATH + currentUser.getEmail() + File.separator + newTitle + File.separator;
 			File oldFolder =new File(filePath);

@@ -51,9 +51,9 @@ public class PostUpload {
 			try {
 				picName = uploadPic(request, filePath, album);
 			} catch (UploadException e) {
+				request.setAttribute("postImageError", "Error uploading image.");
 				return "redirect:" + currentPage;
 			} catch (Exception e) {
-				request.setAttribute("imageError", "Error uploading image.");
 				return "redirect:" + currentPage;
 			} 
 			
@@ -97,6 +97,7 @@ public class PostUpload {
 				if(item.getSize()==0){
 					return null;
 				}
+				
 				if (!isImage || item.getSize() > BUFFER_SIZE) {
 					request.setAttribute("imageError", "File must be an image with size less than 1 MB.");
 					throw new UploadException();
